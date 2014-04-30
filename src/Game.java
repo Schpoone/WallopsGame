@@ -29,5 +29,6 @@ public class Game {
 		top.setBackground(Color.BLUE);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
+		//edited from the website
 	}
 }
