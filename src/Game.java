@@ -17,12 +17,15 @@ public class Game {
 	private KeyListener commandInput;
 	
 	public Game() {
+		//initialization
 		window = new JFrame();
 		top = new JPanel();
 		bottom = new JPanel();
 		inputSection = new JPanel();
 		hud = new JPanel();
 		commandHistory = new String[20];
+		for (int i = 0; i < commandHistory.length; i++)
+			commandHistory[i] = "";
 		commandPanes = new JTextArea[20];
 		for (int i = 0; i < commandPanes.length; i++)
 			commandPanes[i] = new JTextArea();
@@ -45,26 +48,27 @@ public class Game {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER)
 				{
-					addCommand(textField.getText());
-					textField.setText("");
+					addCommand(textField.getText().substring(1));
+					textField.setText(">");
 					for (int i = 0; i < commandPanes.length; i++)
 					{
-						commandPanes[i].setText(commandHistory[commandHistory.length - 1 - i]);
+						commandPanes[i].setText(/*">" + */commandHistory[commandHistory.length - 1 - i]);
 					}
 				}
 				
 			}
 		};
-		textField.addKeyListener(commandInput);
+		//window
 		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		window.setLayout(new GridLayout(2, 1));
+		//top half of window
 		window.add(top);
 		top.setBackground(Color.BLUE);
+		//bottom half of window
 		window.add(bottom);
 		bottom.setLayout(new GridLayout(1, 2));
+		//command input
 		bottom.add(inputSection);
-		bottom.add(hud);
-		hud.setBackground(Color.RED);
 		inputSection.setLayout(new GridLayout(commandPanes.length + 1, 1));
 		Color gray = new Color(170, 170, 170);
 		for (int i = 0; i < commandPanes.length; i++)
@@ -75,14 +79,14 @@ public class Game {
 			gray = new Color(gray.getRed() + 3, gray.getGreen() +3, gray.getBlue() + 3);
 		}
 		inputSection.add(textField);
+		textField.addKeyListener(commandInput);
+		textField.setText(">");
 		textField.setBackground(Color.WHITE);
+		//HUD
+		bottom.add(hud);
+		hud.setBackground(Color.RED);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
-	}
-	
-	public String getCommand()
-	{
-		return textField.getText();
 	}
 	
 	public void addCommand(String command)
