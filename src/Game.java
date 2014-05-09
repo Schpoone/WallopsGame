@@ -7,105 +7,130 @@ import javax.swing.*;
 
 public class Game {
 	private JFrame window;
-	private JPanel top;
-	private JPanel bottom;
+	private JPanel view;
 	private JPanel inputSection;
 	private JPanel hud;
-	private String[] commandHistory;
-	//private JTextArea[] commandPanes;
+	private ImageIcon health;
 	private JTextArea commandPane;
+	private ScrollPane scroll;
 	private JTextField textField;
 	private KeyListener commandInput;
 	
 	public Game() {
+		
+		initVars();
+		formatVars();
+		addComps();
+		
+		window.setVisible(true);
+	}
+	
+	public void formatVars() {
+		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		window.setSize(new Dimension(rect.width,rect.height));
+		
+		view.setPreferredSize(new Dimension(2*window.getWidth()/3, window.getHeight()));
+		view.setMaximumSize(view.getPreferredSize());
+		view.setMinimumSize(view.getPreferredSize());
+		view.setSize(view.getPreferredSize());
+		
+		textField.setPreferredSize(new Dimension(window.getWidth()/3, window.getHeight()/24));
+		textField.setMaximumSize(textField.getPreferredSize());
+		textField.setSize(textField.getPreferredSize());
+		
+		scroll.setPreferredSize(new Dimension(window.getWidth()/3, 43*window.getHeight()/96));
+		scroll.setMaximumSize(scroll.getPreferredSize());
+		scroll.setSize(scroll.getPreferredSize());
+		
+		inputSection.setPreferredSize(new Dimension(window.getWidth()/3, window.getHeight()/2));
+		inputSection.setMaximumSize(inputSection.getPreferredSize());
+		inputSection.setMinimumSize(inputSection.getPreferredSize());
+		inputSection.setSize(inputSection.getPreferredSize());
+		
+		hud.setPreferredSize(new Dimension(window.getWidth()/3, window.getHeight()/2));
+		hud.setMaximumSize(hud.getPreferredSize());
+		hud.setMinimumSize(hud.getPreferredSize());
+		hud.setSize(hud.getPreferredSize());
+		
+		
+		window.setLayout(new GridBagLayout());
+		hud.setLayout(new GridBagLayout());
+		inputSection.setLayout(new BoxLayout(inputSection, BoxLayout.PAGE_AXIS));
+		
+		view.setBackground(Color.BLUE);
+		hud.setBackground(Color.CYAN);
+		commandPane.setBackground(Color.WHITE);
+		textField.setBackground(Color.PINK);
+		
+		commandPane.setEditable(false);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public void addComps() {
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.weightx = 1.0;
+		c.weighty = 1.0;
+		
+		c.fill = GridBagConstraints.BOTH;
+		c.gridwidth = 1;
+		c.gridheight = 2;
+		c.gridx = 0;
+		c.gridy = 0;
+		window.add(view, c);
+		
+		c.gridwidth = 1;
+		c.gridheight = 1;
+		c.gridx = 1;
+		window.add(hud, c);
+		c.gridy = 1;
+		window.add(inputSection, c);
+		
+		textField.addKeyListener(commandInput);
+		
+		scroll.add(commandPane);
+		inputSection.add(scroll);
+		inputSection.add(textField);
+		
+		//hud.add(comp, constraints);
+	}
+	
+	public void initVars() {
 		window = new JFrame();
-		top = new JPanel();
-		bottom = new JPanel();
+		view = new JPanel();
 		inputSection = new JPanel();
 		hud = new JPanel();
-		commandHistory = new String[20];
+		health = new ImageIcon("health.jpg");
 		commandPane = new JTextArea();
-		commandPane.setBackground(Color.CYAN);
-		//commandPanes = new JTextArea[20];
-		//for (int i = 0; i < commandPanes.length; i++)
-		//	commandPanes[i] = new JTextArea();
 		textField = new JTextField();
+		scroll = new ScrollPane();
 		commandInput = new KeyListener() {
 			
 			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void keyTyped(KeyEvent e) {}
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
+				if (!textField.getText().isEmpty() && textField.getText().charAt(0) == ' ')
+					textField.setText("");
 			}
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER)
+				if (e.getKeyCode() == KeyEvent.VK_ENTER && !textField.getText().isEmpty())
 				{
-					//addCommand(">" + textField.getText());
-					/*for (int i = 0; i < commandPanes.length; i++)
-					{
-						commandPanes[i].setText(commandHistory[commandHistory.length - 1 - i]);
-					}*/
+					addCommand(textField.getText());
 					commandPane.setText(commandPane.getText() + "\n>" + textField.getText());
 					textField.setText("");
+					scroll.setScrollPosition(0, scroll.getVAdjustable().getMaximum()+5);
 				}
 				
 			}
 		};
-		
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		int xSize = ((int) tk.getScreenSize().getWidth());
-		int ySize = ((int) tk.getScreenSize().getHeight());
-		
-		textField.requestFocusInWindow();
-		textField.addKeyListener(commandInput);
-		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		window.setSize(new Dimension(xSize,ySize));
-		window.setLayout(new GridLayout(2, 1));
-		window.add(top);
-		top.setBackground(Color.BLUE);
-		window.add(bottom);
-		bottom.setLayout(new GridLayout(1, 2));
-		bottom.add(inputSection);
-		bottom.add(hud);
-		hud.setBackground(Color.RED);
-		inputSection.setLayout(new BoxLayout(inputSection, BoxLayout.PAGE_AXIS));
-		/*Color gray = new Color(170, 170, 170);
-		for (int i = 0; i < commandPanes.length; i++)
-		{
-			inputSection.add(commandPanes[i]);
-			commandPanes[i].setEditable(false);
-			commandPanes[i].setBackground(gray);
-			gray = new Color(gray.getRed() + 3, gray.getGreen() +3, gray.getBlue() + 3);
-		}*/
-		inputSection.add(commandPane);
-		inputSection.add(textField);
-		textField.setBackground(Color.PINK);
-		textField.setPreferredSize(new Dimension(window.getWidth()/2, window.getHeight()/24));
-		commandPane.setPreferredSize(new Dimension(window.getWidth()/2, 11 * window.getHeight()/24));
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setVisible(true);
-		
 	}
 	
-	public String getCommand()
-	{
-		return textField.getText();
-	}
-	
-	public void addCommand(String command)
-	{
-		for (int i = commandHistory.length - 1; i > 0; i--)
-		{
-			commandHistory[i] = commandHistory[i - 1];
-		}
-		commandHistory[0] = command;
+	public void addCommand(String command) {
+		if(command.equals("clear"))
+			commandPane.setText("");
 	}
 }
