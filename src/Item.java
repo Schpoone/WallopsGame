@@ -1,6 +1,7 @@
 import java.awt.Image;
 
 public class Item {
+	
 	private String name;
 	private Image image;
 	private String description;
