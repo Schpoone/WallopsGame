@@ -1,13 +1,20 @@
-import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
-public class Wallopsmon {
+
+public enum Wallopsmon {
+	MUD_DOG_WHELK("MudDogWhelk", Type.WATER, 1, 50, 10, 10, 10, 10, 10, Move.TACKLE, Move.NONE, Move.NONE, Move.NONE, "Meh"),
+	
+	;
 	
 	private String name;
-	private String type;
-	private Image mainImage;
-	private Image shinyImage;
-	private boolean isShiny;
+	private Type type;
+	private ImageIcon mainImage;
+	private ImageIcon shinyImage;
+	private boolean shiny;
 	private int level;
+	private int currentExp;
+	private int expToLevel;
 	private String status;
 	private int maxHealth;
 	private int currentHealth;
@@ -23,20 +30,22 @@ public class Wallopsmon {
 	private double speedMult;
 	private double evasion;
 	private double accuracy;
-	private Item holdItem;
+	//private Item holdItem;
 	private Move move1;
 	private Move move2;
 	private Move move3;
 	private Move move4;
 	private String description;
 	
-	public Wallopsmon() {
+	private Wallopsmon() {
 		name = null;
 		type = null;
 		mainImage = null;
 		shinyImage = null;
-		isShiny = false;
+		shiny = false;
 		level = 0;
+		currentExp = 0;
+		expToLevel = 0;
 		status = null;
 		maxHealth = 0;
 		currentHealth = 0;
@@ -52,7 +61,7 @@ public class Wallopsmon {
 		speedMult = 1;
 		evasion = 1;
 		accuracy = 1;
-		holdItem = null;
+		//holdItem = null;
 		move1 = null;
 		move2 = null;
 		move3 = null;
@@ -60,16 +69,18 @@ public class Wallopsmon {
 		description = null;
 	}
 	
-	public Wallopsmon(String n, String t, Image main, Image shiny, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, Item hold, Move one, Move two, Move three, Move four, String d) {
+	private Wallopsmon(String n, Type t, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four, String d) {
 		name = n;
 		type = t;
-		mainImage = main;
-		shinyImage = shiny;
+		mainImage = new ImageIcon("src/" + name + ".jpg");
+		shinyImage = new ImageIcon("src/Shiny" + name + ".jpg");
 		if (Math.random()*1000 < 1)
-			isShiny = true;
+			shiny = true;
 		else
-			isShiny = false;
+			shiny = false;
 		level = l;
+		currentExp = (4 * (int)Math.pow(level, 3) / 5);
+		expToLevel = (4 * (int)Math.pow(level + 1, 3) / 5) - currentExp;
 		status = null;
 		maxHealth = maxH;
 		currentHealth = maxH;
@@ -85,7 +96,7 @@ public class Wallopsmon {
 		speedMult = 1;
 		evasion = 1;
 		accuracy = 1;
-		holdItem = hold;
+		//holdItem = hold;
 		move1 = one;
 		move2 = two;
 		move3 = three;
@@ -97,22 +108,30 @@ public class Wallopsmon {
 		return name;
 	}
 	
-	public String getType() {
+	public Type getType() {
 		return type;
 	}
 	
-	public Image getImage() {
-		if (isShiny)
-			return shinyImage;
-		return mainImage;
+	public JLabel getImage() {
+		if (shiny)
+			return new JLabel(shinyImage);
+		return new JLabel(mainImage);
 	}
 	
-	public boolean getShiny() {
-		return isShiny;
+	public boolean isShiny() {
+		return shiny;
 	}
 	
 	public int getLevel() {
 		return level;
+	}
+	
+	public int getCurrentExp() {
+		return currentExp;
+	}
+
+	public int getExpToLevel() {
+		return expToLevel;
 	}
 	
 	public String getStatus() {
@@ -196,9 +215,9 @@ public class Wallopsmon {
 		return accuracy;
 	}
 	
-	public Item getHoldItem() {
+	/*public Item getHoldItem() {
 		return holdItem;
-	}
+	}*/
 	
 	public Move getMoveOne() {
 		return move1;
@@ -224,24 +243,32 @@ public class Wallopsmon {
 		name = n;
 	}
 	
-	public void setType(String t) {
+	public void setType(Type t) {
 		type = t;
 	}
 	
-	public void setMainImage(Image i) {
+	public void setMainImage(ImageIcon i) {
 		mainImage = i;
 	}
 	
-	public void setShinyImage(Image i) {
+	public void setShinyImage(ImageIcon i) {
 		shinyImage = i;
 	}
 	
 	public void setIsShiny(boolean s) {
-		isShiny = s;
+		shiny = s;
 	}
 	
 	public void setLevel(int l) {
 		level = l;
+	}
+	
+	public void setCurrentExp(int e) {
+		currentExp = e;
+	}
+
+	public void setExpToLevel(int e) {
+		expToLevel = e;
 	}
 	
 	public void setStatus(String s) {
@@ -304,9 +331,9 @@ public class Wallopsmon {
 		accuracy = a;
 	}
 	
-	public void setHoldItem(Item i) {
+	/*public void setHoldItem(Item i) {
 		holdItem = i;
-	}
+	}*/
 	
 	public void setMoveOne(Move o) {
 		move1 = o;
@@ -337,7 +364,7 @@ public class Wallopsmon {
 		evasion = 1;
 		accuracy = 1;
 	}
-	
+
 	public void fullyHeal() {
 		attackMult = 1;
 		defenseMult = 1;
@@ -348,5 +375,18 @@ public class Wallopsmon {
 		accuracy = 1;
 		status = null;
 		currentHealth = maxHealth;
+	}
+
+	public void updateExp() {
+		currentExp += calcExpGain();
+		expToLevel -= calcExpGain();
+		if (expToLevel <= 0) {
+			level++;
+			expToLevel = (4 * (int)Math.pow(level + 1, 3) / 5) - currentExp;
+		}
+	}
+
+	private int calcExpGain() {
+
 	}
 }
