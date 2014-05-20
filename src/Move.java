@@ -1,20 +1,23 @@
-public class Move {
+public enum Move {
+	NONE(),
+	TACKLE("Tackle", Type.FIRE, 10, 10, "Meow :3"),
+	;
 	
 	private String name;
-	private String type;
+	private Type type;
 	private int power;
 	private int accuracy;
 	private String description;
 	
-	public Move() {
-		name = null;
+	private Move() {
+		name = "";
 		type = null;
 		power = 0;
 		accuracy = 0;
 		description = null;
 	}
 	
-	public Move(String n, String t, int p, int a, String d) {
+	private Move(String n, Type t, int p, int a, String d) {
 		name = n;
 		type = t;
 		power = p;
@@ -26,7 +29,7 @@ public class Move {
 		return name;
 	}
 	
-	public String getType() {
+	public Type getType() {
 		return type;
 	}
 	
@@ -46,7 +49,7 @@ public class Move {
 		name = n;
 	}
 	
-	public void setType(String t) {
+	public void setType(Type t) {
 		type = t;
 	}
 	
