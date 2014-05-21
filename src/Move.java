@@ -7,6 +7,8 @@ public enum Move {
 	private Type type;
 	private int power;
 	private int accuracy;
+	private int maxPP;
+	private int currentPP;
 	private String description;
 	
 	private Move() {
@@ -41,6 +43,14 @@ public enum Move {
 		return accuracy;
 	}
 	
+	public int getMaxPP() {
+		return maxPP;
+	}
+	
+	public int getCurrentPP() {
+		return currentPP;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -59,6 +69,14 @@ public enum Move {
 	
 	public void setAccuracy(int a) {
 		accuracy = a;
+	}
+	
+	public void setMaxPP(int p) {
+		maxPP = p;
+	}
+	
+	public void setCurrentPP(int p) {
+		currentPP = p;
 	}
 	
 	public void setDescription(String d) {
