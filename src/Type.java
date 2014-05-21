@@ -2,7 +2,7 @@ import java.awt.Color;
 
 
 public enum Type {
-	FIRE(1, Color.ORANGE), WATER(2, Color.BLUE), GRASS(3, Color.GREEN);
+	FIRE(1, Color.ORANGE), WATER(2, Color.BLUE), GRASS(2, Color.GREEN);
 	
 	private int value;
 	private Color color;
