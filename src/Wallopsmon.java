@@ -72,9 +72,9 @@ public enum Wallopsmon {
 	private Wallopsmon(String n, Type t, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four, String d) {
 		name = n;
 		type = t;
-		mainImage = new ImageIcon("src/" + name + ".jpg");
-		shinyImage = new ImageIcon("src/Shiny" + name + ".jpg");
-		if (Math.random()*1000 < 1)
+		mainImage = new ImageIcon("img/" + name + ".jpg");
+		shinyImage = new ImageIcon("img/Shiny" + name + ".jpg");
+		if (Math.random()*8192 < 1)
 			shiny = true;
 		else
 			shiny = false;
@@ -377,16 +377,19 @@ public enum Wallopsmon {
 		currentHealth = maxHealth;
 	}
 
-	public void updateExp() {
-		//currentExp += calcExpGain();
-		//expToLevel -= calcExpGain();
+	public void updateExp(int fntLvl) {
+		currentExp += calcExpGain(fntLvl);
+		expToLevel -= calcExpGain(fntLvl);
 		if (expToLevel <= 0) {
 			level++;
 			expToLevel = (4 * (int)Math.pow(level + 1, 3) / 5) - currentExp;
 		}
 	}
 
-	/*private int calcExpGain() {
-		
-	}*/
+	private int calcExpGain(int fntLvl) {
+		int num = (int)(1.5 * 200 * fntLvl);
+		int denom = (int)(7 * 1);//the 1 will be the number of pokemon used in battle (alive)
+		int gain = (int)(num / denom);
+		return gain;
+	}
 }

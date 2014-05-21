@@ -14,6 +14,10 @@ public class Game {
 	private JButton button2;
 	private JButton button3;
 	private JButton button4;
+	private JButton desc;
+	private JButton swtch;
+	private JButton item;
+	private JButton run;
 	private int activeMon;
 	private Wallopsmon[] player;
 	private Wallopsmon opponent;
@@ -38,8 +42,9 @@ public class Game {
 		view.add(player[0].getImage());
 		
 		window.setLayout(new GridBagLayout());
-		
+
 		inputSection.setLayout(new GridLayout(2,2));
+		hud.setLayout(new GridLayout(2,2));
 		
 		view.setBackground(Color.BLUE);
 		hud.setBackground(Color.CYAN);
@@ -78,6 +83,10 @@ public class Game {
 		inputSection.add(button2);
 		inputSection.add(button3);
 		inputSection.add(button4);
+		hud.add(desc);
+		hud.add(swtch);
+		hud.add(item);
+		hud.add(run);
 	}
 	
 	public void initVars() {
@@ -92,5 +101,9 @@ public class Game {
 		button2 = new JButton(player[0].getMoveTwo().getName());
 		button3 = new JButton(player[0].getMoveThree().getName());
 		button4 = new JButton(player[0].getMoveFour().getName());
+		desc = new JButton("Description");
+		swtch = new JButton("Switch Wallopsmon");
+		item = new JButton("Use item");
+		run = new JButton("Run");
 	}
 }
