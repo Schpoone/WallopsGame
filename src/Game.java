@@ -6,10 +6,10 @@ import javax.swing.*;
 public class Game {
 	private JFrame window;
 	private JPanel view;
-	private JPanel oppHealth;
+	private JTextArea oppHealth;
 	private JPanel oppImage;
 	private JPanel playerImage;
-	private JPanel playerHealth;
+	private JTextArea playerHealth;
 	private JPanel inputSection;
 	private JPanel hud;
 	private JButton button1;
@@ -44,6 +44,9 @@ public class Game {
 		window.setLayout(new GridBagLayout());
 
 		view.setLayout(new GridLayout(2,2));
+		//oppHealth.setText("HP: " + opponent.getCurrentHealth() + "/" + opponent.getMaxHealth());
+		playerHealth.setText("HP: " + player[activeMon].getCurrentHealth() + "/" + player[activeMon].getMaxHealth()
+				+ "\nEXP: " + player[activeMon].getExpToLevel());
 		inputSection.setLayout(new GridLayout(2,2));
 		hud.setLayout(new GridLayout(2,2));
 		
@@ -98,10 +101,10 @@ public class Game {
 	public void initVars() {
 		window = new JFrame("Wallopsmon");
 		view = new JPanel();
-		oppHealth = new JPanel();
+		oppHealth = new JTextArea();
 		oppImage = new JPanel();
 		playerImage = new JPanel();
-		playerHealth = new JPanel();
+		playerHealth = new JTextArea();
 		inputSection = new JPanel();
 		hud = new JPanel();
 		player = new Wallopsmon[6];
