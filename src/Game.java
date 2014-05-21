@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
@@ -8,6 +6,10 @@ import javax.swing.*;
 public class Game {
 	private JFrame window;
 	private JPanel view;
+	private JPanel oppHealth;
+	private JPanel oppImage;
+	private JPanel playerImage;
+	private JPanel playerHealth;
 	private JPanel inputSection;
 	private JPanel hud;
 	private JButton button1;
@@ -39,10 +41,9 @@ public class Game {
 		setSize(inputSection, new Dimension(window.getWidth()/3, window.getHeight()/2));
 		setSize(hud, new Dimension(window.getWidth()/3, window.getHeight()/2));
 		
-		view.add(player[0].getImage());
-		
 		window.setLayout(new GridBagLayout());
 
+		view.setLayout(new GridLayout(2,2));
 		inputSection.setLayout(new GridLayout(2,2));
 		hud.setLayout(new GridLayout(2,2));
 		
@@ -79,6 +80,11 @@ public class Game {
 		c.gridy = 1;
 		window.add(inputSection, c);
 
+		view.add(oppHealth);
+		view.add(oppImage);
+		view.add(playerImage);
+		playerImage.add(player[activeMon].getImage());
+		view.add(playerHealth);
 		inputSection.add(button1);
 		inputSection.add(button2);
 		inputSection.add(button3);
@@ -92,6 +98,10 @@ public class Game {
 	public void initVars() {
 		window = new JFrame("Wallopsmon");
 		view = new JPanel();
+		oppHealth = new JPanel();
+		oppImage = new JPanel();
+		playerImage = new JPanel();
+		playerHealth = new JPanel();
 		inputSection = new JPanel();
 		hud = new JPanel();
 		player = new Wallopsmon[6];
@@ -107,12 +117,10 @@ public class Game {
 		if (!player[activeMon].getMoveThree().equals(Move.NONE))
 			button3.setBackground(player[activeMon].getMoveThree().getType().getColor());
 		button4 = new JButton(player[0].getMoveFour().getName());
-		
 		desc = new JButton("Description");
 		swtch = new JButton("Switch Wallopsmon");
 		item = new JButton("Use item");
 		run = new JButton("Run");
-		
 		if (!player[activeMon].getMoveFour().equals(Move.NONE))
 			button4.setBackground(player[activeMon].getMoveFour().getType().getColor());
 			
