@@ -75,7 +75,7 @@ public enum Wallopsmon {
 		type = t;
 		mainImage = new ImageIcon("src/" + name + ".jpg");
 		shinyImage = new ImageIcon("src/Shiny" + name + ".jpg");
-		if (Math.random()*1000 < 1)
+		if (Math.random()*8192 < 1)
 			shiny = true;
 		else
 			shiny = false;
