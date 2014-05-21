@@ -107,12 +107,12 @@ public class Game {
 		if (!player[activeMon].getMoveThree().equals(Move.NONE))
 			button3.setBackground(player[activeMon].getMoveThree().getType().getColor());
 		button4 = new JButton(player[0].getMoveFour().getName());
-<<<<<<< HEAD
+		
 		desc = new JButton("Description");
 		swtch = new JButton("Switch Wallopsmon");
 		item = new JButton("Use item");
 		run = new JButton("Run");
-=======
+		
 		if (!player[activeMon].getMoveFour().equals(Move.NONE))
 			button4.setBackground(player[activeMon].getMoveFour().getType().getColor());
 			
@@ -124,6 +124,5 @@ public class Game {
 		item.setBackground(Color.WHITE);
 		run = new JButton("Run");
 		run.setBackground(Color.WHITE);
->>>>>>> fb0c58e9766b65a0702e80081db4ba8516e5869b
 	}
 }
