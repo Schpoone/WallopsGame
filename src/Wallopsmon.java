@@ -378,15 +378,15 @@ public enum Wallopsmon {
 	}
 
 	public void updateExp() {
-		currentExp += calcExpGain();
-		expToLevel -= calcExpGain();
+		//currentExp += calcExpGain();
+		//expToLevel -= calcExpGain();
 		if (expToLevel <= 0) {
 			level++;
 			expToLevel = (4 * (int)Math.pow(level + 1, 3) / 5) - currentExp;
 		}
 	}
 
-	private int calcExpGain() {
-
-	}
+	/*private int calcExpGain() {
+		
+	}*/
 }
