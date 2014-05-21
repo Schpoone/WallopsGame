@@ -1,6 +1,6 @@
 public enum Move {
 	NONE(),
-	TACKLE("Tackle", Type.FIRE, 10, 10, "Meow :3"),
+	TACKLE("Tackle", Type.NORMAL, 10, 10, "Meow :3"),
 	;
 	
 	private String name;
