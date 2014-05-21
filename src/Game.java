@@ -111,8 +111,12 @@ public class Game {
 			button4.setBackground(player[activeMon].getMoveFour().getType().getColor());
 			
 		desc = new JButton("Description");
+		desc.setBackground(Color.WHITE);
 		swtch = new JButton("Switch Wallopsmon");
+		swtch.setBackground(Color.WHITE);
 		item = new JButton("Use item");
+		item.setBackground(Color.WHITE);
 		run = new JButton("Run");
+		run.setBackground(Color.WHITE);
 	}
 }
