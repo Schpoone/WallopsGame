@@ -4,7 +4,11 @@ import javax.swing.JLabel;
 
 public enum Wallopsmon {
 	//(String n, Type t, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four, String d)
-	MUD_DOG_WHELK("MudDogWhelk", Type.WATER, 1, 50, 10, 10, 10, 10, 10, Move.TACKLE, Move.NONE, Move.NONE, Move.NONE, "Meh"),
+	MUD_DOG_WHELK("MudDogWhelk", Type.WATER, 1, 50, 10, 10, 10, 10, 10, Move.TACKLE, Move.NONE, Move.NONE, Move.NONE, "The mud dog whelk (also called eastern mud nassa, eastern mud snail, mud basket shell, common mud snail) is about ¾ of an inch in length.\n"
+			+ "It has a chalky white shell, but is covered by a dark brown to red-brown periostracum.  It has 6 whirls and an operculum.\n"
+			+ "These snails form large clusters that tend to be divided into age groups. They are always found in large numbers, sometimes in the hundreds of thousands.\n"
+			+ "Mud snails are scavengers and can be attracted to bait or dead fish.\n"
+			+ "The snails leave a mucous trail as they glide along the bottom. The mucous is a chemical trail marker. Other snails will find the trail and follow it. The only time this does not seem to hold true is if one of the snails is sick or injured. The other snails will quickly abandon the unfortunate snail."),
 	
 	;
 	
@@ -73,8 +77,8 @@ public enum Wallopsmon {
 	private Wallopsmon(String n, Type t, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four, String d) {
 		name = n;
 		type = t;
-		mainImage = new ImageIcon("img/" + name + ".jpg");
-		shinyImage = new ImageIcon("img/Shiny" + name + ".jpg");
+		mainImage = new ImageIcon("src/" + name + ".jpg");
+		shinyImage = new ImageIcon("src/Shiny" + name + ".jpg");
 		if (Math.random()*8192 < 1)
 			shiny = true;
 		else
