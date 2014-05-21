@@ -98,12 +98,32 @@ public class Game {
 		activeMon = 0;
 		player[activeMon] = Wallopsmon.MUD_DOG_WHELK;
 		button1 = new JButton(player[0].getMoveOne().getName());
+		if (!player[activeMon].getMoveOne().equals(Move.NONE))
+			button1.setBackground(player[activeMon].getMoveOne().getType().getColor());
 		button2 = new JButton(player[0].getMoveTwo().getName());
+		if (!player[activeMon].getMoveTwo().equals(Move.NONE))
+			button2.setBackground(player[activeMon].getMoveTwo().getType().getColor());
 		button3 = new JButton(player[0].getMoveThree().getName());
+		if (!player[activeMon].getMoveThree().equals(Move.NONE))
+			button3.setBackground(player[activeMon].getMoveThree().getType().getColor());
 		button4 = new JButton(player[0].getMoveFour().getName());
+<<<<<<< HEAD
 		desc = new JButton("Description");
 		swtch = new JButton("Switch Wallopsmon");
 		item = new JButton("Use item");
 		run = new JButton("Run");
+=======
+		if (!player[activeMon].getMoveFour().equals(Move.NONE))
+			button4.setBackground(player[activeMon].getMoveFour().getType().getColor());
+			
+		desc = new JButton("Description");
+		desc.setBackground(Color.WHITE);
+		swtch = new JButton("Switch Wallopsmon");
+		swtch.setBackground(Color.WHITE);
+		item = new JButton("Use item");
+		item.setBackground(Color.WHITE);
+		run = new JButton("Run");
+		run.setBackground(Color.WHITE);
+>>>>>>> fb0c58e9766b65a0702e80081db4ba8516e5869b
 	}
 }

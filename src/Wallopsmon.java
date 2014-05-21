@@ -3,6 +3,7 @@ import javax.swing.JLabel;
 
 
 public enum Wallopsmon {
+	//(String n, Type t, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four, String d)
 	MUD_DOG_WHELK("MudDogWhelk", Type.WATER, 1, 50, 10, 10, 10, 10, 10, Move.TACKLE, Move.NONE, Move.NONE, Move.NONE, "Meh"),
 	
 	;
