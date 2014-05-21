@@ -8,9 +8,7 @@ public enum Wallopsmon {
 			+ "It has a chalky white shell, but is covered by a dark brown to red-brown periostracum.  It has 6 whirls and an operculum.\n"
 			+ "These snails form large clusters that tend to be divided into age groups. They are always found in large numbers, sometimes in the hundreds of thousands.\n"
 			+ "Mud snails are scavengers and can be attracted to bait or dead fish.\n"
-			+ "The snails leave a mucous trail as they glide along the bottom. The mucous is a chemical trail marker. Other snails will find the trail and follow it. The only time this does not seem to hold true is if one of the snails is sick or injured. The other snails will quickly abandon the unfortunate snail."),
-	
-	;
+			+ "The snails leave a mucous trail as they glide along the bottom. The mucous is a chemical trail marker. Other snails will find the trail and follow it. The only time this does not seem to hold true is if one of the snails is sick or injured. The other snails will quickly abandon the unfortunate snail.");
 	
 	private String name;
 	private Type type;
