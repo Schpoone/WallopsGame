@@ -45,8 +45,10 @@ public class Game {
 
 		view.setLayout(new GridLayout(2,2));
 		//oppHealth.setText("HP: " + opponent.getCurrentHealth() + "/" + opponent.getMaxHealth());
+		oppHealth.setEditable(false);
 		playerHealth.setText("HP: " + player[activeMon].getCurrentHealth() + "/" + player[activeMon].getMaxHealth()
 				+ "\nEXP: " + player[activeMon].getExpToLevel());
+		playerHealth.setEditable(false);
 		inputSection.setLayout(new GridLayout(2,2));
 		hud.setLayout(new GridLayout(2,2));
 		
@@ -120,13 +122,12 @@ public class Game {
 		if (!player[activeMon].getMoveThree().equals(Move.NONE))
 			button3.setBackground(player[activeMon].getMoveThree().getType().getColor());
 		button4 = new JButton(player[0].getMoveFour().getName());
-		if (!player[activeMon].getMoveFour().equals(Move.NONE))
-			button4.setBackground(player[activeMon].getMoveFour().getType().getColor());
-			
 		desc = new JButton("Description");
 		swtch = new JButton("Switch Wallopsmon");
 		item = new JButton("Use item");
 		run = new JButton("Run");
+		if (!player[activeMon].getMoveFour().equals(Move.NONE))
+			button4.setBackground(player[activeMon].getMoveFour().getType().getColor());
 			
 		desc = new JButton("Description");
 		desc.setBackground(Color.WHITE);
