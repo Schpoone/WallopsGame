@@ -52,7 +52,10 @@ public class Game {
 		oppHealth.setEditable(false);
 		playerHealth.setEditable(false);
 		
-		
+		oppHealth.setEditable(false);
+		playerHealth.setText("HP: " + player[activeMon].getCurrentHealth() + "/" + player[activeMon].getMaxHealth()
+				+ "\nEXP: " + player[activeMon].getExpToLevel());
+		playerHealth.setEditable(false);
 		
 		inputSection.setLayout(new GridLayout(2,2));
 		hud.setLayout(new GridLayout(2,2));
@@ -94,7 +97,9 @@ public class Game {
 		view.add(oppHealth);
 		view.add(oppImage);
 		view.add(playerImage);
+		
 		playerImage.add(player[activeMon].getResizedImage(playerImage.getSize()));
+
 		view.add(playerHealth);
 		inputSection.add(button1);
 		inputSection.add(button2);
@@ -130,7 +135,7 @@ public class Game {
 		button4 = new JButton(player[0].getMoveFour().getName());
 		if (!player[activeMon].getMoveFour().equals(Move.NONE))
 			button4.setBackground(player[activeMon].getMoveFour().getType().getColor());
-			
+		
 		desc = new JButton("Description");
 		swtch = new JButton("Switch Wallopsmon");
 		item = new JButton("Use item");
