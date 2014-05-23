@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
@@ -8,6 +6,10 @@ import javax.swing.*;
 public class Game {
 	private JFrame window;
 	private JPanel view;
+	private JTextArea oppHealth;
+	private JPanel oppImage;
+	private JPanel playerImage;
+	private JTextArea playerHealth;
 	private JPanel inputSection;
 	private JPanel hud;
 	private JButton button1;
@@ -38,11 +40,20 @@ public class Game {
 		setSize(view, new Dimension(2*window.getWidth()/3, window.getHeight()));
 		setSize(inputSection, new Dimension(window.getWidth()/3, window.getHeight()/2));
 		setSize(hud, new Dimension(window.getWidth()/3, window.getHeight()/2));
-		
-		view.add(player[0].getImage());
+		setSize(playerImage, new Dimension(view.getWidth()/2, view.getHeight()/2));
+		setSize(oppImage, new Dimension(view.getWidth()/2, view.getHeight()/2));
 		
 		window.setLayout(new GridBagLayout());
 
+		view.setLayout(new GridLayout(2,2));
+		//oppHealth.setText("HP: " + opponent.getCurrentHealth() + "/" + opponent.getMaxHealth());
+		playerHealth.setText("HP: " + player[activeMon].getCurrentHealth() + "/" + player[activeMon].getMaxHealth()
+				+ "\nEXP: " + player[activeMon].getExpToLevel());
+		oppHealth.setEditable(false);
+		playerHealth.setEditable(false);
+		
+		
+		
 		inputSection.setLayout(new GridLayout(2,2));
 		hud.setLayout(new GridLayout(2,2));
 		
@@ -57,6 +68,7 @@ public class Game {
 		c.setMaximumSize(d);
 		c.setMinimumSize(d);
 		c.setSize(d);
+		
 	}
 	
 	public void addComps() {
@@ -79,6 +91,11 @@ public class Game {
 		c.gridy = 1;
 		window.add(inputSection, c);
 
+		view.add(oppHealth);
+		view.add(oppImage);
+		view.add(playerImage);
+		playerImage.add(player[activeMon].getResizedImage(playerImage.getSize()));
+		view.add(playerHealth);
 		inputSection.add(button1);
 		inputSection.add(button2);
 		inputSection.add(button3);
@@ -92,6 +109,10 @@ public class Game {
 	public void initVars() {
 		window = new JFrame("Wallopsmon");
 		view = new JPanel();
+		oppHealth = new JTextArea();
+		oppImage = new JPanel();
+		playerImage = new JPanel();
+		playerHealth = new JTextArea();
 		inputSection = new JPanel();
 		hud = new JPanel();
 		player = new Wallopsmon[6];
@@ -107,14 +128,13 @@ public class Game {
 		if (!player[activeMon].getMoveThree().equals(Move.NONE))
 			button3.setBackground(player[activeMon].getMoveThree().getType().getColor());
 		button4 = new JButton(player[0].getMoveFour().getName());
-		
+		if (!player[activeMon].getMoveFour().equals(Move.NONE))
+			button4.setBackground(player[activeMon].getMoveFour().getType().getColor());
+			
 		desc = new JButton("Description");
 		swtch = new JButton("Switch Wallopsmon");
 		item = new JButton("Use item");
 		run = new JButton("Run");
-		
-		if (!player[activeMon].getMoveFour().equals(Move.NONE))
-			button4.setBackground(player[activeMon].getMoveFour().getType().getColor());
 			
 		desc = new JButton("Description");
 		desc.setBackground(Color.WHITE);

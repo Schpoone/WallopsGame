@@ -1,3 +1,10 @@
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -10,8 +17,8 @@ public enum Wallopsmon {
 	
 	private String name;
 	private Type type;
-	private ImageIcon mainImage;
-	private ImageIcon shinyImage;
+	private Image mainImage;
+	private Image shinyImage;
 	private boolean shiny;
 	private int level;
 	private int currentExp;
@@ -73,8 +80,14 @@ public enum Wallopsmon {
 	private Wallopsmon(String n, Type t, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four, String d) {
 		name = n;
 		type = t;
-		mainImage = new ImageIcon("img/" + name + ".jpg");
-		shinyImage = new ImageIcon("img/Shiny" + name + ".jpg");
+		
+		try {
+			mainImage = ImageIO.read(new File("img/" + name + ".jpg"));
+			shinyImage = ImageIO.read(new File("img/Shiny" + name + ".jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		if (Math.random()*8192 < 1)
 			shiny = true;
 		else
@@ -113,10 +126,14 @@ public enum Wallopsmon {
 		return type;
 	}
 	
-	public JLabel getImage() {
-		if (shiny)
-			return new JLabel(shinyImage);
-		return new JLabel(mainImage);
+	public JLabel getResizedImage(Dimension d) {
+		Image img = null;
+		if (shiny) 
+			img = shinyImage.getScaledInstance(d.width, d.height, Image.SCALE_SMOOTH);
+		else
+			img = mainImage.getScaledInstance(d.width, d.height, Image.SCALE_SMOOTH);
+				
+		return new JLabel(new ImageIcon(img));
 	}
 	
 	public boolean isShiny() {
@@ -248,11 +265,11 @@ public enum Wallopsmon {
 		type = t;
 	}
 	
-	public void setMainImage(ImageIcon i) {
+	public void setMainImage(BufferedImage i) {
 		mainImage = i;
 	}
 	
-	public void setShinyImage(ImageIcon i) {
+	public void setShinyImage(BufferedImage i) {
 		shinyImage = i;
 	}
 	
