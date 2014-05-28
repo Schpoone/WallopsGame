@@ -2,24 +2,23 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import java.util.Properties;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 
 public enum Wallopsmon {
-	//(String n, Type t, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four, String d)
-	MUD_DOG_WHELK("MudDogWhelk", Type.WATER, null, 1, 50, 10, 10, 10, 10, 10, Move.TACKLE, Move.NONE, Move.NONE, Move.NONE, "The mud dog whelk (also called eastern mud nassa, eastern mud snail, mud basket shell, common mud snail) is about of an inch in length.\n"
-			+ "It has a chalky white shell, but is covered by a dark brown to red-brown periostracum.  It has 6 whirls and an operculum.\n"
-			+ "These snails form large clusters that tend to be divided into age groups. They are always found in large numbers, sometimes in the hundreds of thousands.\n"
-			+ "Mud snails are scavengers and can be attracted to bait or dead fish.\n"
-			+ "The snails leave a mucous trail as they glide along the bottom. The mucous is a chemical trail marker. Other snails will find the trail and follow it. The only time this does not seem to hold true is if one of the snails is sick or injured. The other snails will quickly abandon the unfortunate snail.");
+	//(String n, Type t1, Type t2, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four, String d)
+	MUD_DOG_WHELK("MudDogWhelk", Type.WATER, null, 1, 50, 10, 10, 10, 10, 10, Move.TACKLE, Move.NONE, Move.NONE, Move.NONE),
+	;
 	
 	private String name;
-	private Type primType;
-	private Type secondType;
+	private Type type1;
+	private Type type2;
 	private Image mainImage;
 	private Image shinyImage;
 	private boolean shiny;
@@ -50,8 +49,8 @@ public enum Wallopsmon {
 	
 	private Wallopsmon() {
 		name = null;
-		primType = null;
-		secondType = null;
+		type1 = null;
+		type2 = null;
 		mainImage = null;
 		shinyImage = null;
 		shiny = false;
@@ -81,10 +80,11 @@ public enum Wallopsmon {
 		description = null;
 	}
 	
-	private Wallopsmon(String n, Type t, Type t2, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four, String d) {
+
+	private Wallopsmon(String n, Type t1, Type t2, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four) {
 		name = n;
-		primType = t;
-		secondType = t2;
+		type1 = t1;
+		type2 = t2;
 		
 		try {
 			mainImage = ImageIO.read(new File("img/" + name + ".jpg"));
@@ -120,19 +120,29 @@ public enum Wallopsmon {
 		move2 = two;
 		move3 = three;
 		move4 = four;
-		description = d;
+		Properties prop = new Properties();
+		try {
+			prop.load(new FileInputStream(new File("description.properties")));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		description = prop.getProperty(name);
+		System.out.println(description);
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public Type getPrimType() {
-		return primType;
+
+	public Type getType1() {
+		return type1;
 	}
 	
-	public Type getSecondType() {
-		return secondType;
+	public Type getType2() {
+		return type2;
 	}
 	
 	public JLabel getResizedImage(Dimension d) {
@@ -270,12 +280,13 @@ public enum Wallopsmon {
 		name = n;
 	}
 	
-	public void setPrimType(Type t) {
-		primType = t;
+
+	public void setType1(Type t) {
+		type1 = t;
 	}
 	
-	public void setSecondType(Type t) {
-		secondType = t;
+	public void setType2(Type t) {
+		type2 = t;
 	}
 	
 	public void setMainImage(BufferedImage i) {
