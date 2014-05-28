@@ -129,7 +129,6 @@ public enum Wallopsmon {
 			e.printStackTrace();
 		}
 		description = prop.getProperty(name);
-		System.out.println(description);
 	}
 	
 	public String getName() {
