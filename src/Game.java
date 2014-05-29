@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
@@ -125,7 +124,7 @@ public class Game {
 		activeMon = 0;
 		player[activeMon] = Wallopsmon.MUD_DOG_WHELK;
 		button1 = new JButton(player[0].getMoveOne().getName());
-		if (!player[activeMon].getMoveOne().equals(Move.NONE))
+		if (!player[activeMon].getMoveOne().equals(Move.NONE)) 
 			button1.setBackground(player[activeMon].getMoveOne().getType().getColor());
 		button2 = new JButton(player[0].getMoveTwo().getName());
 		if (!player[activeMon].getMoveTwo().equals(Move.NONE))
@@ -136,6 +135,10 @@ public class Game {
 		button4 = new JButton(player[0].getMoveFour().getName());
 		if (!player[activeMon].getMoveFour().equals(Move.NONE))
 			button4.setBackground(player[activeMon].getMoveFour().getType().getColor());
+		button1.setForeground(Color.WHITE);
+		button2.setForeground(Color.WHITE);
+		button3.setForeground(Color.WHITE);
+		button4.setForeground(Color.WHITE);
 		
 		desc = new JButton("Description");
 		swtch = new JButton("Switch Wallopsmon");
