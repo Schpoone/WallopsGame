@@ -14,9 +14,9 @@ import javax.swing.JLabel;
 public enum Wallopsmon {
 	NONE(),
 	//(name, type1, type2, level, maxH, att, def, specAtt, specDef, spd, /*Item hold,*/ Move one, Move two, Move three, Move four)
-	MUD_DOG_WHELK("MudDogWhelk", Type.WATER, null, 1, 50, 10, 10, 10, 10, 10, Move.TACKLE, Move.WITHDRAW, Move.NONE, Move.NONE),
+	MUD_DOG_WHELK("MudDogWhelk", Type.WATER, Type.NONE, 1, 50, 10, 10, 10, 10, 10, Move.TACKLE, Move.WITHDRAW, Move.NONE, Move.NONE),
 	//HORSESHOE_CRAB("HorseshoeCrab", Type.WATER, Type.GROUND, 1, 75, 10, 20, 8, 10, 8, Move.TACKLE, Move.WITHDRAW, Move.WATER_GUN, Move.DIG),
-	//SEA_PORK("SeaPork", Type.WATER, null, 1, 25, 5, 15, 5, 15, 5, Move.SPLASH, Move.NONE, Move.NONE, Move.NONE)
+	//SEA_PORK("SeaPork", Type.WATER, Type.NONE, 1, 25, 5, 15, 5, 15, 5, Move.SPLASH, Move.NONE, Move.NONE, Move.NONE)
 	;
 	
 	private String name;
