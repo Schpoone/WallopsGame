@@ -2,21 +2,10 @@ import java.awt.Color;
 
 
 public enum Type {
-	NONE(0, Color.WHITE),
-	FIRE(1, Color.RED),
-	WATER(2, Color.BLUE),
-	GRASS(3, Color.GREEN),
-	NORMAL(4, new Color(200, 200, 150)),
-	ELECTRIC(5, Color.YELLOW),
-	ICE(6, Color.CYAN),
-	DARK(7, Color.BLACK),
-	FIGHTING(8, new Color(200, 35, 15)),
-	FLYING(9, new Color(215, 190, 245)),
-	POISON(10, new Color(185, 10, 230)),
-	GROUND(11, new Color(240, 200, 115)),
-	ROCK(12, new Color(180, 155, 20)),
-	BUG(13, new Color(130, 190, 60)),
-	STEEL(14, Color.GRAY.brighter()),
+	FIRE(1, Color.RED), WATER(2, Color.BLUE), GRASS(3, Color.GREEN), NORMAL(4, new Color(200, 200, 150)),
+	ELECTRIC(5, Color.YELLOW), ICE(6, Color.CYAN), DARK(7, Color.BLACK), FIGHTING(8, new Color(200, 35, 15)),
+	FLYING(9, new Color(215, 190, 245)), POISON(10, new Color(185, 10, 230)), GROUND(11, new Color(240, 200, 115)),
+	ROCK(12, new Color(180, 155, 20)), BUG(13, new Color(130, 190, 60)), STEEL(14, Color.GRAY.brighter()),
 	DRAGON(15, new Color(90, 10, 200));
 	//this is missing psychic, ghost, and fairy
 	
