@@ -194,7 +194,7 @@ public class Game {
 		inputSection.setVisible(true);
 	}
 
-	public void playerAttack(Move m, Wallopsmon attacker, Wallopsmon defender) {
+	public void attack(Move m, Wallopsmon attacker, Wallopsmon defender) {
 		int damage;
 		int atk = 0;
 		int pwr = m.getPower();
@@ -424,6 +424,10 @@ public class Game {
 			break;
 		}
 		damage = (int)Math.round(((((2.0*lvl/5.0 + 2)*atk*pwr/def) / 50) + 2) *typeAdvantage * rand);
+		System.out.println(lvl);
+		System.out.println(atk);
+		System.out.println(pwr);
+		System.out.println(def);
 		System.out.println(typeAdvantage);
 		defender.setCurrentHealth(defender.getCurrentHealth() - damage);
 	}
