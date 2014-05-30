@@ -1,6 +1,8 @@
 
 public class HorseshoeCrab extends Wallopsmon {
 	public HorseshoeCrab() {
-		super("HorseshoeCrab", Type.WATER, Type.GROUND, 1, 75, 10, 20, 8, 10, 8, Move.TACKLE, Move.WITHDRAW, Move.WATER_GUN, Move.NONE);
+		super("HorseshoeCrab", Type.WATER, Type.GROUND, 1, 40, 65, 100, 45, 25, 40, Move.TACKLE, Move.WITHDRAW, Move.WATER_GUN, Move.NONE);
+		//base stats same as shellder
 	}
+
 }
