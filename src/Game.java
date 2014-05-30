@@ -173,10 +173,13 @@ public class Game {
 		button4.setText(player[0].getMoveFour().getName());
 
 		if(button1.getActionListeners().length == 0)
-		button1.addActionListener(new Act(player[activeMon].getMoveOne(), this));
-		button2.addActionListener(new Act(player[activeMon].getMoveTwo(), this));
-		button3.addActionListener(new Act(player[activeMon].getMoveThree(), this));
-		button4.addActionListener(new Act(player[activeMon].getMoveFour(), this));
+			button1.addActionListener(new Act(player[activeMon].getMoveOne(), this));
+		if(button2.getActionListeners().length == 0)
+			button2.addActionListener(new Act(player[activeMon].getMoveTwo(), this));
+		if(button3.getActionListeners().length == 0)
+			button3.addActionListener(new Act(player[activeMon].getMoveThree(), this));
+		if(button4.getActionListeners().length == 0)
+			button4.addActionListener(new Act(player[activeMon].getMoveFour(), this));
 		
 		button1.setOpaque(true);
 		button2.setOpaque(true);
@@ -202,6 +205,9 @@ public class Game {
 		int def = 0;
 		int rand = (int)(Math.random()*17+84);
 		int lvl = attacker.getLevel();
+		double stab = 1;
+		if(attacker.getType1().equals(m.getType()))
+			stab = 1.5;
 		double typeAdvantage = 1;
 		if(m.getCategory() == Move.PHYSICAL) {
 			atk = attacker.getAttack();
@@ -424,7 +430,7 @@ public class Game {
 			}
 			break;
 		}
-		damage = (int)Math.round(((((2.0*lvl/5.0 + 2)*atk*pwr/def) / 50) + 2) *typeAdvantage * rand/100);
+		damage = (int)Math.round(((((2.0*lvl/5.0 + 2)*atk*pwr/def) / 50) + 2)*stab*typeAdvantage*rand/100);
 		defender.setCurrentHealth(defender.getCurrentHealth() - damage);
 		update();
 	}
