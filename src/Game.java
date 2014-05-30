@@ -115,7 +115,7 @@ public class Game {
 		hud = new JPanel();
 		player = new Wallopsmon[6];
 		activeMon = 0;
-		player[activeMon] = Wallopsmon.MUD_DOG_WHELK;
+		player[activeMon] = new MudDogWhelk();
 		button1 = new JButton();
 		button2 = new JButton();
 		button3 = new JButton();
@@ -154,14 +154,14 @@ public class Game {
 				+ "\nEXP: " + player[activeMon].getExpToLevel());
 
 		if(playerImage.getComponentCount() != 0)
-			playerImage.removeAll();
+			playerImage.remove(0);
 		playerImage.add(player[activeMon].getResizedImage(playerImage.getSize()));
 		playerImage.setVisible(false);
 		playerImage.setVisible(true);
 
 		if(opponent != null) {
 			if(oppImage.getComponentCount() != 0)
-				playerImage.removeAll();
+				playerImage.remove(0);
 			oppImage.add(opponent.getResizedImage(oppImage.getSize()));
 			oppImage.setVisible(false);
 			oppImage.setVisible(true);
@@ -172,6 +172,7 @@ public class Game {
 		button3.setText(player[0].getMoveThree().getName());
 		button4.setText(player[0].getMoveFour().getName());
 
+		if(button1.getActionListeners().length == 0)
 		button1.addActionListener(new Act(player[activeMon].getMoveOne(), this));
 		button2.addActionListener(new Act(player[activeMon].getMoveTwo(), this));
 		button3.addActionListener(new Act(player[activeMon].getMoveThree(), this));
@@ -423,12 +424,8 @@ public class Game {
 			}
 			break;
 		}
-		damage = (int)Math.round(((((2.0*lvl/5.0 + 2)*atk*pwr/def) / 50) + 2) *typeAdvantage * rand);
-		System.out.println(lvl);
-		System.out.println(atk);
-		System.out.println(pwr);
-		System.out.println(def);
-		System.out.println(typeAdvantage);
+		damage = (int)Math.round(((((2.0*lvl/5.0 + 2)*atk*pwr/def) / 50) + 2) *typeAdvantage * rand/100);
 		defender.setCurrentHealth(defender.getCurrentHealth() - damage);
+		update();
 	}
 }

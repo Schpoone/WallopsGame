@@ -15,8 +15,6 @@ public class Act implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if(btnMv.getCategory() != Move.STATUS)
 			battle.attack(btnMv, battle.getActive(), battle.getOpponent());
-		System.out.println(battle.getOpponent().getCurrentHealth());
-		battle.update();
 	}
 
 }

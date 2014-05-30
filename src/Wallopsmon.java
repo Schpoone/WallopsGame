@@ -11,13 +11,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 
-public enum Wallopsmon {
-	NONE(),
+public class Wallopsmon {
 	//(String n, Type t1, Type t2, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four)
-	MUD_DOG_WHELK("MudDogWhelk", Type.WATER, Type.NONE, 1, 50, 10, 10, 10, 10, 10, Move.TACKLE, Move.WITHDRAW, Move.NONE, Move.NONE),
 	//HORSESHOE_CRAB("HorseshoeCrab", Type.WATER, Type.GROUND, 1, 75, 10, 20, 8, 10, 8, Move.TACKLE, Move.WITHDRAW, Move.WATER_GUN, Move.NONE),
 	//SEA_PORK("SeaPork", Type.WATER, Type.NONE, 1, 25, 5, 15, 5, 15, 5, Move.SPLASH, Move.NONE, Move.NONE, Move.NONE)
-	;
 	
 	private String name;
 	private Type type1;
@@ -50,7 +47,7 @@ public enum Wallopsmon {
 	private Move move4;
 	private String description;
 	
-	private Wallopsmon() {
+	public Wallopsmon() {
 		name = null;
 		type1 = null;
 		type2 = null;
@@ -84,7 +81,7 @@ public enum Wallopsmon {
 	}
 	
 
-	private Wallopsmon(String n, Type t1, Type t2, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four) {
+	public Wallopsmon(String n, Type t1, Type t2, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four) {
 		name = n;
 		type1 = t1;
 		type2 = t2;
