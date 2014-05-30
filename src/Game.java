@@ -97,6 +97,8 @@ public class Game {
 		inputSection.add(button2);
 		inputSection.add(button3);
 		inputSection.add(button4);
+		
+		run.addActionListener(new Nope(run));
 
 		hud.add(desc);
 		hud.add(swtch);
@@ -120,10 +122,6 @@ public class Game {
 		button2 = new JButton();
 		button3 = new JButton();
 		button4 = new JButton();
-		//		button1.setForeground(Color.WHITE);
-		//		button2.setForeground(Color.WHITE);
-		//		button3.setForeground(Color.WHITE);
-		//		button4.setForeground(Color.WHITE);
 
 		desc = new JButton("Description");
 		desc.setBackground(Color.WHITE);
@@ -148,10 +146,13 @@ public class Game {
 	}
 
 	public void update() {
+		if(opponent != null && opponent.getCurrentHealth() <= 0)
+			oppFaint();
 		if(opponent != null)
-			oppHealth.setText("HP: " + opponent.getCurrentHealth() + "/" + opponent.getMaxHealth());
+			oppHealth.setText("HP: " + opponent.getCurrentHealth() + "/" + opponent.getMaxHealth()  + "\nLevel: "
+		+ opponent.getLevel());
 		playerHealth.setText("HP: " + player[activeMon].getCurrentHealth() + "/" + player[activeMon].getMaxHealth()
-				+ "\nEXP: " + player[activeMon].getExpToLevel());
+				+ "\nEXP: " + player[activeMon].getExpToLevel() + "\nLevel: " + player[activeMon].getLevel());
 
 		if(playerImage.getComponentCount() != 0)
 			playerImage.remove(0);
@@ -196,6 +197,11 @@ public class Game {
 			button4.setBackground(player[activeMon].getMoveFour().getType().getColor());
 		inputSection.setVisible(false);
 		inputSection.setVisible(true);
+	}
+	
+	public void oppFaint() {
+		player[activeMon].updateExp(opponent.getLevel());
+		opponent = new HorseshoeCrab();
 	}
 
 	public void attack(Move m, Wallopsmon attacker, Wallopsmon defender) {

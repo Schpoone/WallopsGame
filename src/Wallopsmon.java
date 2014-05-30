@@ -419,7 +419,7 @@ public class Wallopsmon {
 	public void updateExp(int fntLvl) {
 		currentExp += calcExpGain(fntLvl);
 		expToLevel -= calcExpGain(fntLvl);
-		if (expToLevel <= 0) {
+		while (expToLevel <= 0) {
 			level++;
 			expToLevel = (4 * (int)Math.pow(level + 1, 3) / 5) - currentExp;
 		}
@@ -427,7 +427,7 @@ public class Wallopsmon {
 
 	private int calcExpGain(int fntLvl) {
 		int num = (int)(1.5 * 200 * fntLvl);
-		int denom = (int)(7 * 1);//the 1 will be the number of pokemon used in battle (alive)
+		int denom = (int)(7 * level);
 		int gain = (int)(num / denom);
 		return gain;
 	}
