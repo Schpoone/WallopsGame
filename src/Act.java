@@ -14,9 +14,7 @@ public class Act implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(btnMv.getCategory() != Move.STATUS)
-			battle.playerAttack(btnMv, battle.getActive(), battle.getOpponent());
-		System.out.println(battle.getOpponent().getCurrentHealth());
-		battle.update();
+			battle.attack(btnMv, battle.getActive(), battle.getOpponent());
 	}
 
 }
