@@ -10,6 +10,6 @@ If you want to download the project and work on it, this project is our eclipse 
 Legal Stuff
 ===========
 This is for educational, non-profit use only. Pokémon is a trademark held by Nintendo. We do not claim any rights to that.
-HOWEVER: the code had been written by the two of us, with help from publicly available formulas theoretically used in Pokémon.
+HOWEVER: the code had been written by the two of us, with help from publicly available formulas independantly derived from Pokémon.
 This project is protected under the Creative Common Liscence. 
 Additionally to what is declared in that document, if you do use any of this code, please give us credit. It would also be much preffered if you notified us, as we'd love to work with you and know that we helped someone!
