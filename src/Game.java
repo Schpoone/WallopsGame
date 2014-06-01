@@ -163,7 +163,7 @@ public class Game {
 
 		if(opponent != null) {
 			if(oppImage.getComponentCount() != 0)
-				playerImage.remove(0);
+				oppImage.remove(0);
 			oppImage.add(opponent.getResizedImage(oppImage.getSize()));
 			oppImage.setVisible(false);
 			oppImage.setVisible(true);
