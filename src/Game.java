@@ -9,6 +9,8 @@ public class Game {
 	private JTextArea oppHealth;
 	private JPanel oppImage;
 	private JPanel playerImage;
+	private JPanel playerStatus;
+	private JTextArea status;
 	private JTextArea playerHealth;
 	private JPanel inputSection;
 	private JPanel hud;
@@ -23,6 +25,7 @@ public class Game {
 	private int activeMon;
 	private Wallopsmon[] player;
 	private Wallopsmon opponent;
+	private int fntOpp;
 
 	public Game() {
 
@@ -37,7 +40,8 @@ public class Game {
 	public void formatVars() {
 		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		window.setSize(new Dimension(rect.width,rect.height));
-		
+
+		player[activeMon].setName("Fred the " + player[activeMon].getName());
 
 		setSize(view, new Dimension(2*window.getWidth()/3, window.getHeight()));
 		setSize(inputSection, new Dimension(window.getWidth()/3, window.getHeight()/2));
@@ -46,9 +50,13 @@ public class Game {
 		setSize(oppImage, new Dimension(view.getWidth()/2, view.getHeight()/2));
 
 		window.setLayout(new GridBagLayout());
-
+		playerStatus.setLayout(new GridLayout(2, 1));
 		view.setLayout(new GridLayout(2,2));
 
+
+		status.setEditable(false);
+		status.setLineWrap(true);
+		status.setWrapStyleWord(true);
 		oppHealth.setEditable(false);
 		playerHealth.setEditable(false);
 
@@ -89,16 +97,19 @@ public class Game {
 		c.gridy = 1;
 		window.add(inputSection, c);
 
+		playerStatus.add(playerHealth);
+		playerStatus.add(status);
+
 		view.add(oppHealth);
 		view.add(oppImage);
 		view.add(playerImage);
-		view.add(playerHealth);
+		view.add(playerStatus);
 
 		inputSection.add(button1);
 		inputSection.add(button2);
 		inputSection.add(button3);
 		inputSection.add(button4);
-		
+
 		desc.addActionListener(new OpenDesc(desc, this));
 		item.addActionListener(new UseItem(item));
 		run.addActionListener(new Nope(run));
@@ -110,6 +121,7 @@ public class Game {
 	}
 
 	public void initVars() {
+		fntOpp = 0;
 		window = new JFrame("Wallopsmon");
 		view = new JPanel();
 		oppHealth = new JTextArea();
@@ -117,6 +129,8 @@ public class Game {
 		playerImage = new JPanel();
 		playerHealth = new JTextArea();
 		inputSection = new JPanel();
+		playerStatus = new JPanel();
+		status = new JTextArea();
 		hud = new JPanel();
 		player = new Wallopsmon[6];
 		activeMon = 0;
@@ -143,7 +157,7 @@ public class Game {
 	public void setOpponent(Wallopsmon opponent) {
 		this.opponent = opponent;
 	}
-	
+
 	public Wallopsmon getActive() {
 		return player[activeMon];
 	}
@@ -151,10 +165,13 @@ public class Game {
 	public void update() {
 		if(opponent != null && opponent.getCurrentHealth() <= 0)
 			oppFaint();
-		if(opponent != null)
-			oppHealth.setText("HP: " + opponent.getCurrentHealth() + "/" + opponent.getMaxHealth()  + "\nLevel: "
-		+ opponent.getLevel());
-		playerHealth.setText("HP: " + player[activeMon].getCurrentHealth() + "/" + player[activeMon].getMaxHealth()
+		if(opponent != null) {
+			if(opponent.getName().indexOf("Wild ") != 0)
+					opponent.setName("Wild " + opponent.getName());
+			oppHealth.setText("Name: " + opponent.getName() + "\nHP: " + opponent.getCurrentHealth() + "/" + opponent.getMaxHealth()  + "\nLevel: "
+					+ opponent.getLevel());
+		}
+		playerHealth.setText("Name: " + player[activeMon].getName() + "\nHP: " + player[activeMon].getCurrentHealth() + "/" + player[activeMon].getMaxHealth()
 				+ "\nEXP: " + player[activeMon].getExpToLevel() + "\nLevel: " + player[activeMon].getLevel());
 
 		if(playerImage.getComponentCount() != 0)
@@ -184,7 +201,7 @@ public class Game {
 			button3.addActionListener(new Act(player[activeMon].getMoveThree(), this));
 		if(button4.getActionListeners().length == 0)
 			button4.addActionListener(new Act(player[activeMon].getMoveFour(), this));
-		
+
 		button1.setOpaque(true);
 		button2.setOpaque(true);
 		button3.setOpaque(true);
@@ -201,10 +218,19 @@ public class Game {
 		inputSection.setVisible(false);
 		inputSection.setVisible(true);
 	}
-	
+
 	public void oppFaint() {
+		fntOpp = fntOpp%3 + 1;
 		player[activeMon].updateExp(opponent.getLevel());
-		opponent = new HorseshoeCrab();
+		status.setText(opponent.getName() + " fainted!");
+		if(fntOpp == 1)		
+			opponent = new HorseshoeCrab();
+		if(fntOpp == 2)
+			opponent = new SeaPork();
+		if(fntOpp == 3)
+			opponent = new Tick();
+			
+		
 	}
 
 	public void attack(Move m, Wallopsmon attacker, Wallopsmon defender) {
@@ -441,6 +467,14 @@ public class Game {
 		}
 		damage = (int)Math.round(((((2.0*lvl/5.0 + 2)*atk*pwr/def) / 50) + 2)*stab*typeAdvantage*rand/100);
 		defender.setCurrentHealth(defender.getCurrentHealth() - damage);
+		if(attacker.getName().equals(opponent.getName()))
+			status.append("\n" + attacker.getName() + " used " + m.getName() +" and dealt " + defender.getName() + " " + damage + " damage!");
+		else
+			status.setText(attacker.getName() + " used " + m.getName() +" and dealt " + defender.getName() + " " + damage + " damage!");
 		update();
+	}
+	
+	public void status(Move m, Wallopsmon attacker, Wallopsmon defender) {
+		
 	}
 }

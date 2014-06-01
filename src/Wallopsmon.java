@@ -137,6 +137,8 @@ public class Wallopsmon {
 			actualName += words[i] + " ";
 		}
 		actualName = actualName.substring(0, actualName.length() - 1);
+		if(shiny)
+			actualName = "Shiny " + actualName;
 		return actualName;
 	}
 	

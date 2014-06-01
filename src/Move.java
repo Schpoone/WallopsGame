@@ -9,8 +9,8 @@ public enum Move {
 	//(name, type, category, pp, power, accuracy)
 	FLAMETHROWER("Flamethrower", Type.FIRE, Move.SPECIAL, 15, 90, 100),
 	WATER_GUN("Water_Gun", Type.WATER, Move.SPECIAL, 25, 40, 100),
-	WITHDRAW("Withdraw", Type.WATER, Move.STATUS, 40, 0, -1),
-	SPLASH("Splash", Type.WATER, Move.STATUS, 40, 0, -1),
+	WITHDRAW("Withdraw", Type.WATER, Move.STATUS_SELF, 40, 0, -1),
+	SPLASH("Splash", Type.WATER, Move.PHYSICAL, 40, 0, -1),
 	SOLAR_BEAM("Solar_Beam", Type.GRASS, Move.SPECIAL, 10, 120, 100),
 	TACKLE("Tackle", Type.NORMAL, Move.PHYSICAL, 35, 50, 100),
 	SLAM("Slam", Type.NORMAL, Move.PHYSICAL, 20, 80, 75),
@@ -20,7 +20,7 @@ public enum Move {
 	MACH_PUNCH("Mach_Punch", Type.FIGHTING, Move.PHYSICAL, 30, 40, 100),
 	FLY("Fly", Type.FLYING, Move.PHYSICAL, 15, 90, 95),
 	POISON_FANG("Poison_Fang", Type.POISON, Move.PHYSICAL, 15, 50, 100),
-	TOXIC("Toxic", Type.POISON, Move.STATUS, 10, 0, 90),
+	TOXIC("Toxic", Type.POISON, Move.STATUS_OPPONENT, 10, 0, 90),
 	DIG("Dig", Type.GROUND, Move.PHYSICAL, 10, 80, 100),
 	ROCK_THROW("Rock_Throw", Type.ROCK, Move.PHYSICAL, 15, 50, 90),
 	BUG_BITE("Bug_Bite", Type.BUG, Move.PHYSICAL, 20, 60, 100),
@@ -33,7 +33,8 @@ public enum Move {
 	
 	public static final int PHYSICAL = 1;
 	public static final int SPECIAL = 2;
-	public static final int STATUS = 3;
+	public static final int STATUS_OPPONENT = 3;
+	public static final int STATUS_SELF = 4;
 	
 	private String name;
 	private Type type;
