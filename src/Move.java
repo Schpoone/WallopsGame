@@ -8,24 +8,27 @@ public enum Move {
 	NONE(),
 	//(name, type, category, pp, power, accuracy)
 	FLAMETHROWER("Flamethrower", Type.FIRE, Move.SPECIAL, 15, 90, 100),
-	WATER_GUN("WaterGun", Type.WATER, Move.SPECIAL, 25, 40, 100),
+	WATER_GUN("Water_Gun", Type.WATER, Move.SPECIAL, 25, 40, 100),
 	WITHDRAW("Withdraw", Type.WATER, Move.STATUS, 40, 0, -1),
 	SPLASH("Splash", Type.WATER, Move.STATUS, 40, 0, -1),
-	SOLAR_BEAM("SolarBeam", Type.GRASS, Move.SPECIAL, 10, 120, 100),
+	SOLAR_BEAM("Solar_Beam", Type.GRASS, Move.SPECIAL, 10, 120, 100),
 	TACKLE("Tackle", Type.NORMAL, Move.PHYSICAL, 35, 50, 100),
 	SLAM("Slam", Type.NORMAL, Move.PHYSICAL, 20, 80, 75),
 	THUNDERBOLT("Thunderbolt", Type.ELECTRIC, Move.SPECIAL, 15, 90, 100),
 	BLIZZARD("Blizzard", Type.ICE, Move.SPECIAL, 5, 110, 70),
 	BITE("Bite", Type.DARK, Move.PHYSICAL, 25, 60, 100),
-	MACH_PUNCH("MachPunch", Type.FIGHTING, Move.PHYSICAL, 30, 40, 100),
+	MACH_PUNCH("Mach_Punch", Type.FIGHTING, Move.PHYSICAL, 30, 40, 100),
 	FLY("Fly", Type.FLYING, Move.PHYSICAL, 15, 90, 95),
+	POISON_FANG("Poison_Fang", Type.POISON, Move.PHYSICAL, 15, 50, 100),
 	TOXIC("Toxic", Type.POISON, Move.STATUS, 10, 0, 90),
 	DIG("Dig", Type.GROUND, Move.PHYSICAL, 10, 80, 100),
-	ROCK_THROW("RockThrow", Type.ROCK, Move.PHYSICAL, 15, 50, 90),
-	BUG_BITE("BugBite", Type.BUG, Move.PHYSICAL, 20, 60, 100),
-	BUG_BUZZ("BugBuzz", Type.BUG, Move.SPECIAL, 10, 90, 100),
-	IRON_HEAD("IronHead", Type.STEEL, Move.PHYSICAL, 15, 80, 100),
-	DRAGON_CLAW("DragonClaw", Type.DRAGON, Move.PHYSICAL, 15, 80, 100)
+	ROCK_THROW("Rock_Throw", Type.ROCK, Move.PHYSICAL, 15, 50, 90),
+	BUG_BITE("Bug_Bite", Type.BUG, Move.PHYSICAL, 20, 60, 100),
+	BUG_BUZZ("Bug_Buzz", Type.BUG, Move.SPECIAL, 10, 90, 100),
+	INFESTATION("Infestation", Type.BUG, Move.SPECIAL, 20, 20, 100),
+	LEECH_LIFE("Leech_Life", Type.BUG, Move.PHYSICAL, 15, 20, 100),
+	IRON_HEAD("Iron_Head", Type.STEEL, Move.PHYSICAL, 15, 80, 100),
+	DRAGON_CLAW("Dragon_Claw", Type.DRAGON, Move.PHYSICAL, 15, 80, 100)
 	;
 	
 	public static final int PHYSICAL = 1;
@@ -71,7 +74,13 @@ public enum Move {
 	}
 	
 	public String getName() {
-		return name;
+		String actualName = "";
+		String[] words = name.split("_");
+		for (int i = 0; i < words.length; i++) {
+			actualName += words[i] + " ";
+		}
+		actualName = actualName.substring(0, actualName.length() - 1);
+		return actualName;
 	}
 	
 	public Type getType() {
