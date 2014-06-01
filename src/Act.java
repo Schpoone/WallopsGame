@@ -22,7 +22,7 @@ public class Act implements ActionListener {
 		if(battle.getOpponent().getCurrentHealth() > 0) {
 			Move m2 = Move.NONE;
 			while(m2.getCategory() != Move.PHYSICAL && m2.getCategory() != Move.SPECIAL) {
-				int n = (int) (Math.random()*3+1);
+				int n = (int) (Math.random()*4+1);
 				if(n == 1)
 					m2 = battle.getOpponent().getMoveOne();
 				if(n == 2)
