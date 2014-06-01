@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.ScrollPane;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,15 +22,18 @@ public class OpenDesc implements ActionListener {
 	
 	public OpenDesc(JButton d, Game g) {
 		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		Dimension full = Toolkit.getDefaultToolkit().getScreenSize();
 		descWindow = new JFrame("Description of " + g.getActive().getName());
-		descWindow.setSize(new Dimension(rect.width, rect.height));
+		descWindow.setBounds(rect.width/20, rect.height/20 + ((int)full.getHeight()-rect.height), 9*rect.width/10, 9*rect.height/10);
 		scroll = new ScrollPane();
-		text = new JTextArea();
+		text = new JTextArea(100, descWindow.getHeight()/20-2);
 		scroll.add(text);
 		text.setBackground(Color.WHITE);
 		text.setForeground(Color.BLACK);
 		text.setEditable(false);
-		text.setFont(new Font("Calibri", 0, 20));
+		text.setLineWrap(true);
+		text.setWrapStyleWord(true);
+		text.setFont(new Font("MONOSPACED", 0, 20));
 		descWindow.add(scroll);
 		battle = g;
 	}

@@ -37,6 +37,7 @@ public class Game {
 	public void formatVars() {
 		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		window.setSize(new Dimension(rect.width,rect.height));
+		
 
 		setSize(view, new Dimension(2*window.getWidth()/3, window.getHeight()));
 		setSize(inputSection, new Dimension(window.getWidth()/3, window.getHeight()/2));
