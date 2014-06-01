@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -130,7 +131,13 @@ public class Wallopsmon {
 	}
 	
 	public String getName() {
-		return name;
+		String actualName = "";
+		String[] words = name.split("_");
+		for (int i = 0; i < words.length; i++) {
+			actualName += words[i] + " ";
+		}
+		actualName = actualName.substring(0, actualName.length() - 1);
+		return actualName;
 	}
 	
 
