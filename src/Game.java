@@ -99,6 +99,7 @@ public class Game {
 		inputSection.add(button4);
 		
 		desc.addActionListener(new OpenDesc(desc, this));
+		item.addActionListener(new UseItem(item));
 		run.addActionListener(new Nope(run));
 
 		hud.add(desc);
