@@ -5,13 +5,15 @@ import java.io.IOException;
 import java.util.Properties;
 
 public enum Move {
-	NONE("", Type.NONE, Move.NO, 0, 0, 0),
+	NONE(),
 	//(name, type, category, pp, power, accuracy)
 	FLAMETHROWER("Flamethrower", Type.FIRE, Move.SPECIAL, 15, 90, 100),
 	WATER_GUN("Water_Gun", Type.WATER, Move.SPECIAL, 25, 40, 100),
 	WITHDRAW("Withdraw", Type.WATER, Move.STATUS_SELF, 40, 0, -1),
 	SPLASH("Splash", Type.WATER, Move.PHYSICAL, 40, 0, -1),
+	INGRAIN("Ingrain", Type.GRASS, Move.STATUS_SELF, 20, 0, -1),
 	SOLAR_BEAM("Solar_Beam", Type.GRASS, Move.SPECIAL, 10, 120, 100),
+	SYNTHESIS("Synthesis", Type.GRASS, Move.STATUS_SELF, 5, 0, -1),
 	TACKLE("Tackle", Type.NORMAL, Move.PHYSICAL, 35, 50, 100),
 	SLAM("Slam", Type.NORMAL, Move.PHYSICAL, 20, 80, 75),
 	THUNDERBOLT("Thunderbolt", Type.ELECTRIC, Move.SPECIAL, 15, 90, 100),
@@ -31,7 +33,6 @@ public enum Move {
 	DRAGON_CLAW("Dragon_Claw", Type.DRAGON, Move.PHYSICAL, 15, 80, 100)
 	;
 	
-	public static final int NO = 0;
 	public static final int PHYSICAL = 1;
 	public static final int SPECIAL = 2;
 	public static final int STATUS_OPPONENT = 3;
