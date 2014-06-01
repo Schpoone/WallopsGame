@@ -1,9 +1,12 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
 
 public class Game {
+	private JFrame lose;
+	private JButton reset;
 	private JFrame window;
 	private JPanel view;
 	private JTextArea oppHealth;
@@ -22,7 +25,6 @@ public class Game {
 	private JButton swtch;
 	private JButton item;
 	private JButton run;
-	private int activeMon;
 	private Wallopsmon[] player;
 	private Wallopsmon opponent;
 	private int fntOpp;
@@ -41,8 +43,6 @@ public class Game {
 		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		window.setSize(new Dimension(rect.width,rect.height));
 
-		player[activeMon].setName("Fred the " + player[activeMon].getName());
-
 		setSize(view, new Dimension(2*window.getWidth()/3, window.getHeight()));
 		setSize(inputSection, new Dimension(window.getWidth()/3, window.getHeight()/2));
 		setSize(hud, new Dimension(window.getWidth()/3, window.getHeight()/2));
@@ -52,7 +52,6 @@ public class Game {
 		window.setLayout(new GridBagLayout());
 		playerStatus.setLayout(new GridLayout(2, 1));
 		view.setLayout(new GridLayout(2,2));
-
 
 		status.setEditable(false);
 		status.setLineWrap(true);
@@ -113,6 +112,8 @@ public class Game {
 		desc.addActionListener(new OpenDesc(desc, this));
 		item.addActionListener(new UseItem(item));
 		run.addActionListener(new Nope(run));
+		swtch.addActionListener(new OpenSwitch(player, this));
+		reset.addActionListener(new Reset(this));
 
 		hud.add(desc);
 		hud.add(swtch);
@@ -121,6 +122,7 @@ public class Game {
 	}
 
 	public void initVars() {
+		reset = new JButton("You lose. Click here to restart.");
 		fntOpp = 0;
 		window = new JFrame("Wallopsmon");
 		view = new JPanel();
@@ -133,8 +135,10 @@ public class Game {
 		status = new JTextArea();
 		hud = new JPanel();
 		player = new Wallopsmon[6];
-		activeMon = 0;
-		player[activeMon] = new MudDogWhelk();
+		player[0] = new MudDogWhelk();
+		player[0].setName("Fred the " + player[0].getName());
+		player[1] = new HorseshoeCrab();
+		player[1].setName("George the " + player[1].getName());
 		button1 = new JButton();
 		button2 = new JButton();
 		button3 = new JButton();
@@ -159,24 +163,27 @@ public class Game {
 	}
 
 	public Wallopsmon getActive() {
-		return player[activeMon];
+		return player[0];
 	}
 
 	public void update() {
 		if(opponent != null && opponent.getCurrentHealth() <= 0)
-			oppFaint();
+			opponentFaint();
+		if(player[0].getCurrentHealth() <= 1) {
+			playerFaint();
+		}
 		if(opponent != null) {
 			if(opponent.getName().indexOf("Wild ") != 0)
 					opponent.setName("Wild " + opponent.getName());
 			oppHealth.setText("Name: " + opponent.getName() + "\nHP: " + opponent.getCurrentHealth() + "/" + opponent.getMaxHealth()  + "\nLevel: "
 					+ opponent.getLevel());
 		}
-		playerHealth.setText("Name: " + player[activeMon].getName() + "\nHP: " + player[activeMon].getCurrentHealth() + "/" + player[activeMon].getMaxHealth()
-				+ "\nEXP: " + player[activeMon].getExpToLevel() + "\nLevel: " + player[activeMon].getLevel());
+		playerHealth.setText("Name: " + player[0].getName() + "\nHP: " + player[0].getCurrentHealth() + "/" + player[0].getMaxHealth()
+				+ "\nEXP: " + player[0].getExpToLevel() + "\nLevel: " + player[0].getLevel());
 
 		if(playerImage.getComponentCount() != 0)
 			playerImage.remove(0);
-		playerImage.add(player[activeMon].getResizedImage(playerImage.getSize()));
+		playerImage.add(player[0].getResizedImage(playerImage.getSize()));
 		playerImage.setVisible(false);
 		playerImage.setVisible(true);
 
@@ -194,45 +201,66 @@ public class Game {
 		button4.setText(player[0].getMoveFour().getName());
 
 		if(button1.getActionListeners().length == 0)
-			button1.addActionListener(new Act(player[activeMon].getMoveOne(), this));
+			button1.addActionListener(new Act(player[0].getMoveOne(), this));
 		if(button2.getActionListeners().length == 0)
-			button2.addActionListener(new Act(player[activeMon].getMoveTwo(), this));
+			button2.addActionListener(new Act(player[0].getMoveTwo(), this));
 		if(button3.getActionListeners().length == 0)
-			button3.addActionListener(new Act(player[activeMon].getMoveThree(), this));
+			button3.addActionListener(new Act(player[0].getMoveThree(), this));
 		if(button4.getActionListeners().length == 0)
-			button4.addActionListener(new Act(player[activeMon].getMoveFour(), this));
+			button4.addActionListener(new Act(player[0].getMoveFour(), this));
 
 		button1.setOpaque(true);
 		button2.setOpaque(true);
 		button3.setOpaque(true);
 		button4.setOpaque(true);
 
-		if (!player[activeMon].getMoveOne().equals(Move.NONE)) 
-			button1.setBackground(player[activeMon].getMoveOne().getType().getColor());
-		if (!player[activeMon].getMoveTwo().equals(Move.NONE))
-			button2.setBackground(player[activeMon].getMoveTwo().getType().getColor());
-		if (!player[activeMon].getMoveThree().equals(Move.NONE))
-			button3.setBackground(player[activeMon].getMoveThree().getType().getColor());
-		if (!player[activeMon].getMoveFour().equals(Move.NONE))
-			button4.setBackground(player[activeMon].getMoveFour().getType().getColor());
+		if (!player[0].getMoveOne().equals(Move.NONE)) 
+			button1.setBackground(player[0].getMoveOne().getType().getColor());
+		if (!player[0].getMoveTwo().equals(Move.NONE))
+			button2.setBackground(player[0].getMoveTwo().getType().getColor());
+		if (!player[0].getMoveThree().equals(Move.NONE))
+			button3.setBackground(player[0].getMoveThree().getType().getColor());
+		if (!player[0].getMoveFour().equals(Move.NONE))
+			button4.setBackground(player[0].getMoveFour().getType().getColor());
 		inputSection.setVisible(false);
 		inputSection.setVisible(true);
 	}
 
-	public void oppFaint() {
-		fntOpp = fntOpp%3 + 1;
-		player[activeMon].updateExp(opponent.getLevel());
+	public void opponentFaint() {
+		fntOpp = fntOpp%2+1;
+		player[0].updateExp(opponent.getLevel());
 		status.setText(opponent.getName() + " fainted!");
+		if(fntOpp == 0)		
+			opponent = new MudDogWhelk();
 		if(fntOpp == 1)		
 			opponent = new HorseshoeCrab();
-		if(fntOpp == 2)
-			opponent = new SeaPork();
-		if(fntOpp == 3)
-			opponent = new Tick();
+		//if(fntOpp == 2)
+			//opponent = new SeaPork();
+		//if(fntOpp == 3)
+			//opponent = new Tick();
 			
 		
 	}
 
+	public void playerFaint() {
+		player[0].setCurrentHealth(0);
+		button1.removeActionListener(button1.getActionListeners()[0]);
+		button2.removeActionListener(button2.getActionListeners()[0]);
+		button3.removeActionListener(button3.getActionListeners()[0]);
+		button4.removeActionListener(button4.getActionListeners()[0]);
+		for(int i=0; i<6; i++) {
+			if(player[i] != null && player[i].getCurrentHealth() != 0) {
+				((OpenSwitch) swtch.getActionListeners()[0]).open();
+				return;
+			}
+		}
+		window.setVisible(false);
+		lose = new JFrame("You Lose!");
+		lose.add(reset);
+		lose.setSize(window.getSize());
+		lose.setVisible(true);
+	}
+	
 	public void attack(Move m, Wallopsmon attacker, Wallopsmon defender) {
 		int damage;
 		int atk = 0;
@@ -476,5 +504,15 @@ public class Game {
 	
 	public void status(Move m, Wallopsmon attacker, Wallopsmon defender) {
 		
+	}
+	
+	public void reset() {
+		opponent= new MudDogWhelk();
+		initVars();
+		formatVars();
+		addComps();
+		update();
+		lose.setVisible(false);
+		window.setVisible(true);
 	}
 }
