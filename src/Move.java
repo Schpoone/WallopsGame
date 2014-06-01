@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public enum Move {
-	NONE(),
+	NONE("", Type.NONE, Move.NO, 0, 0, 0),
 	//(name, type, category, pp, power, accuracy)
 	FLAMETHROWER("Flamethrower", Type.FIRE, Move.SPECIAL, 15, 90, 100),
 	WATER_GUN("Water_Gun", Type.WATER, Move.SPECIAL, 25, 40, 100),
@@ -31,6 +31,7 @@ public enum Move {
 	DRAGON_CLAW("Dragon_Claw", Type.DRAGON, Move.PHYSICAL, 15, 80, 100)
 	;
 	
+	public static final int NO = 0;
 	public static final int PHYSICAL = 1;
 	public static final int SPECIAL = 2;
 	public static final int STATUS_OPPONENT = 3;

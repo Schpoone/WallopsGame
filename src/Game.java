@@ -194,7 +194,7 @@ public class Game {
 			oppImage.setVisible(false);
 			oppImage.setVisible(true);
 		}
-
+		
 		button1.setText(player[0].getMoveOne().getName());
 		button2.setText(player[0].getMoveTwo().getName());
 		button3.setText(player[0].getMoveThree().getName());
@@ -214,13 +214,13 @@ public class Game {
 		button3.setOpaque(true);
 		button4.setOpaque(true);
 
-		if (!player[0].getMoveOne().equals(Move.NONE)) 
+		if (player[0].getMoveOne() != null) 
 			button1.setBackground(player[0].getMoveOne().getType().getColor());
-		if (!player[0].getMoveTwo().equals(Move.NONE))
+		if (player[0].getMoveTwo() != null)
 			button2.setBackground(player[0].getMoveTwo().getType().getColor());
-		if (!player[0].getMoveThree().equals(Move.NONE))
+		if (player[0].getMoveThree() != null)
 			button3.setBackground(player[0].getMoveThree().getType().getColor());
-		if (!player[0].getMoveFour().equals(Move.NONE))
+		if (player[0].getMoveFour() != null)
 			button4.setBackground(player[0].getMoveFour().getType().getColor());
 		inputSection.setVisible(false);
 		inputSection.setVisible(true);
@@ -238,7 +238,9 @@ public class Game {
 			//opponent = new SeaPork();
 		//if(fntOpp == 3)
 			//opponent = new Tick();
-			
+		//if(fntOpp == 4)
+			//opponent = new MantisShrimp();
+		status.append("\nA " + opponent.getName() + " has appeared!");
 		
 	}
 
@@ -495,10 +497,10 @@ public class Game {
 		}
 		damage = (int)Math.round(((((2.0*lvl/5.0 + 2)*atk*pwr/def) / 50) + 2)*stab*typeAdvantage*rand/100);
 		defender.setCurrentHealth(defender.getCurrentHealth() - damage);
-		if(attacker.getName().equals(opponent.getName()))
-			status.append("\n" + attacker.getName() + " used " + m.getName() +" and dealt " + defender.getName() + " " + damage + " damage!");
-		else
+		if((status.getText().indexOf("damage") != -1 || status.getText().equals("")) && (attacker.getName().equals(player[0].getName()) || status.getText().indexOf(player[0].getName()) != 0))
 			status.setText(attacker.getName() + " used " + m.getName() +" and dealt " + defender.getName() + " " + damage + " damage!");
+		else
+			status.append("\n" + attacker.getName() + " used " + m.getName() +" and dealt " + defender.getName() + " " + damage + " damage!");
 		update();
 	}
 	

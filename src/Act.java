@@ -13,6 +13,8 @@ public class Act implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		if(btnMv.getCategory() == Move.NO)
+			return;
 		if(btnMv.getCategory() == Move.STATUS_OPPONENT)
 			battle.status(btnMv, battle.getActive(), battle.getOpponent());
 		if(btnMv.getCategory() == Move.STATUS_SELF)
