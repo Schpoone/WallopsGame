@@ -22,6 +22,7 @@ public enum Move {
 	TOXIC("Toxic", Type.POISON, Move.STATUS, 10, 0, 90),
 	DIG("Dig", Type.GROUND, Move.PHYSICAL, 10, 80, 100),
 	ROCK_THROW("RockThrow", Type.ROCK, Move.PHYSICAL, 15, 50, 90),
+	BUG_BITE("BugBite", Type.BUG, Move.PHYSICAL, 20, 60, 100),
 	BUG_BUZZ("BugBuzz", Type.BUG, Move.SPECIAL, 10, 90, 100),
 	IRON_HEAD("IronHead", Type.STEEL, Move.PHYSICAL, 15, 80, 100),
 	DRAGON_CLAW("DragonClaw", Type.DRAGON, Move.PHYSICAL, 15, 80, 100)
