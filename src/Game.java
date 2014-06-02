@@ -208,14 +208,18 @@ public class Game {
 		button3.setText(player[0].getMoveThree().getName());
 		button4.setText(player[0].getMoveFour().getName());
 
-		if(button1.getActionListeners().length == 0)
-			button1.addActionListener(new Act(player[0].getMoveOne(), this));
+		if(button1.getActionListeners().length != 0)
+			button1.removeActionListener(button1.getActionListeners()[0]);
+		button1.addActionListener(new Act(player[0].getMoveOne(), this));
 		if(button2.getActionListeners().length == 0)
-			button2.addActionListener(new Act(player[0].getMoveTwo(), this));
+			button2.removeActionListener(button1.getActionListeners()[0]);
+		button2.addActionListener(new Act(player[0].getMoveTwo(), this));
 		if(button3.getActionListeners().length == 0)
-			button3.addActionListener(new Act(player[0].getMoveThree(), this));
+			button3.removeActionListener(button1.getActionListeners()[0]);
+		button3.addActionListener(new Act(player[0].getMoveThree(), this));
 		if(button4.getActionListeners().length == 0)
-			button4.addActionListener(new Act(player[0].getMoveFour(), this));
+			button4.removeActionListener(button1.getActionListeners()[0]);
+		button4.addActionListener(new Act(player[0].getMoveFour(), this));
 
 		button1.setOpaque(true);
 		button2.setOpaque(true);
