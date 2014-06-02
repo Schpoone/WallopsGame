@@ -33,6 +33,7 @@ public enum Move {
 	DRAGON_CLAW("Dragon_Claw", Type.DRAGON, Move.PHYSICAL, 15, 80, 100)
 	;
 	
+	public static final int NO = 0;
 	public static final int PHYSICAL = 1;
 	public static final int SPECIAL = 2;
 	public static final int STATUS_OPPONENT = 3;

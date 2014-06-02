@@ -240,6 +240,10 @@ public class Game {
 			//opponent = new Tick();
 		//if(fntOpp == 4)
 			//opponent = new MantisShrimp();
+		//if(fntOpp == 5)
+			//opponent = new BaldEagle();
+		//if(fntOpp == 6)
+			//opponent = new LoblollyPine();
 		status.append("\nA " + opponent.getName() + " has appeared!");
 		
 	}
