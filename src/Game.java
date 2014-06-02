@@ -135,10 +135,18 @@ public class Game {
 		status = new JTextArea();
 		hud = new JPanel();
 		player = new Wallopsmon[6];
-		player[0] = new MudDogWhelk();
-		player[0].setName("Fred the " + player[0].getName());
+		player[0] = new BaldEagle();
+		player[0].setName("Bill the " + player[0].getName());
 		player[1] = new HorseshoeCrab();
-		player[1].setName("George the " + player[1].getName());
+		player[1].setName("Charlie the " + player[1].getName());
+		player[2] = new LoblollyPine();
+		player[2].setName("Fred the " + player[2].getName());
+		player[3] = new MudDogWhelk();
+		player[3].setName("George the " + player[3].getName());
+		player[4] = new Tick();
+		player[4].setName("Ron the " + player[4].getName());
+		player[5] = new MantisShrimp();
+		player[5].setName("Ginny the " + player[5].getName());
 		button1 = new JButton();
 		button2 = new JButton();
 		button3 = new JButton();
@@ -214,36 +222,37 @@ public class Game {
 		button3.setOpaque(true);
 		button4.setOpaque(true);
 
-		if (player[0].getMoveOne() != null) 
+		if (player[0].getMoveOne().getCategory() != Move.NO) 
 			button1.setBackground(player[0].getMoveOne().getType().getColor());
-		if (player[0].getMoveTwo() != null)
+		if (player[0].getMoveTwo().getCategory() != Move.NO)
 			button2.setBackground(player[0].getMoveTwo().getType().getColor());
-		if (player[0].getMoveThree() != null)
+		if (player[0].getMoveThree().getCategory() != Move.NO)
 			button3.setBackground(player[0].getMoveThree().getType().getColor());
-		if (player[0].getMoveFour() != null)
+		if (player[0].getMoveFour().getCategory() != Move.NO)
 			button4.setBackground(player[0].getMoveFour().getType().getColor());
 		inputSection.setVisible(false);
 		inputSection.setVisible(true);
 	}
 
 	public void opponentFaint() {
-		fntOpp = fntOpp%2+1;
+		fntOpp = fntOpp%7+1;
 		player[0].updateExp(opponent.getLevel());
 		status.setText(opponent.getName() + " fainted!");
-		if(fntOpp == 0)		
+		if(fntOpp == 7)		
 			opponent = new MudDogWhelk();
 		if(fntOpp == 1)		
 			opponent = new HorseshoeCrab();
-		//if(fntOpp == 2)
-			//opponent = new SeaPork();
-		//if(fntOpp == 3)
-			//opponent = new Tick();
-		//if(fntOpp == 4)
-			//opponent = new MantisShrimp();
-		//if(fntOpp == 5)
-			//opponent = new BaldEagle();
-		//if(fntOpp == 6)
-			//opponent = new LoblollyPine();
+		if(fntOpp == 2)
+			opponent = new SeaPork();
+		if(fntOpp == 3)
+			opponent = new Tick();
+		if(fntOpp == 4)
+			opponent = new MantisShrimp();
+		if(fntOpp == 5)
+			opponent = new BaldEagle();
+		if(fntOpp == 6)
+			opponent = new LoblollyPine();
+		opponent.setName("Wild " + opponent.getName());
 		status.append("\nA " + opponent.getName() + " has appeared!");
 		
 	}
