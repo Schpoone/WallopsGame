@@ -20,7 +20,7 @@ import com.wallops.java.buttons.OpenDesc;
 import com.wallops.java.buttons.OpenSwitch;
 import com.wallops.java.buttons.Reset;
 import com.wallops.java.buttons.UseItem;
-import com.wallops.java.referece.Move;
+import com.wallops.java.reference.Move;
 import com.wallops.java.wallopsmon.BaldEagle;
 import com.wallops.java.wallopsmon.HorseshoeCrab;
 import com.wallops.java.wallopsmon.LoblollyPine;

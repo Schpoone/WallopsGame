@@ -13,8 +13,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import com.wallops.java.referece.Move;
-import com.wallops.java.referece.Type;
+import com.wallops.java.reference.Move;
+import com.wallops.java.reference.Type;
 
 
 public class Wallopsmon {

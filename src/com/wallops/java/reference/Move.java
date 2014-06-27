@@ -1,4 +1,4 @@
-package com.wallops.java.referece;
+package com.wallops.java.reference;
 
 import java.io.File;
 import java.io.FileInputStream;

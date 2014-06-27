@@ -1,7 +1,7 @@
 package com.wallops.java.wallopsmon;
 
-import com.wallops.java.referece.Move;
-import com.wallops.java.referece.Type;
+import com.wallops.java.reference.Move;
+import com.wallops.java.reference.Type;
 
 public class MudDogWhelk extends Wallopsmon {
 	public MudDogWhelk() {

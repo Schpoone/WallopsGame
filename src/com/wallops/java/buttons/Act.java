@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.wallops.java.event.Battle;
-import com.wallops.java.referece.Move;
+import com.wallops.java.reference.Move;
 
 
 public class Act implements ActionListener {

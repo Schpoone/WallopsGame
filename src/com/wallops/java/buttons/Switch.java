@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import com.wallops.java.event.Battle;
-import com.wallops.java.referece.Move;
+import com.wallops.java.reference.Move;
 import com.wallops.java.wallopsmon.Wallopsmon;
 
 
