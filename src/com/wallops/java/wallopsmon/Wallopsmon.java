@@ -91,8 +91,8 @@ public class Wallopsmon {
 		type2 = t2;
 		
 		try {
-			mainImage = ImageIO.read(getClass().getResourceAsStream("/img/" + name + ".jpg"));
-			shinyImage = ImageIO.read(getClass().getResourceAsStream("/img/Shiny" + name + ".jpg"));
+			mainImage = ImageIO.read(new FileInputStream(new File("src/com/wallops/resources/img/" + name + ".jpg")));
+			shinyImage = ImageIO.read(new FileInputStream(new File("src/com/wallops/resources/img/Shiny" + name + ".jpg")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -126,7 +126,7 @@ public class Wallopsmon {
 		move4 = four;
 		Properties prop = new Properties();
 		try {
-			prop.load(getClass().getResourceAsStream("wallopsmon_description.properties"));
+			prop.load(new FileInputStream(new File("src/com/wallops/resources/wallopsmon_description.properties")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

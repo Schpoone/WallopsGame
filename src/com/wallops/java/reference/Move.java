@@ -70,7 +70,7 @@ public enum Move {
 		
 		Properties prop = new Properties();
 		try {
-			prop.load(new FileInputStream(new File("src/move_description.properties")));
+			prop.load(new FileInputStream(new File("src/com/wallops/resources/move_description.properties")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
