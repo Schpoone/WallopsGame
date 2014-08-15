@@ -8,14 +8,16 @@ import java.util.Properties;
 
 public enum Move {
 	NONE(),
-	//(name, type, category, pp, power, accuracy)
+	//(name, type, category, pp, power, accuracy%)
 	FLAMETHROWER("Flamethrower", Type.FIRE, Move.SPECIAL, 15, 90, 100),
 	WATER_GUN("Water_Gun", Type.WATER, Move.SPECIAL, 25, 40, 100),
-	WITHDRAW("Withdraw", Type.WATER, Move.STATUS_SELF, 40, 0, -1),
-	SPLASH("Splash", Type.WATER, Move.PHYSICAL, 40, 0, -1),
-	INGRAIN("Ingrain", Type.GRASS, Move.STATUS_SELF, 20, 0, -1),
+	WITHDRAW("Withdraw", Type.WATER, Move.STATUS_SELF, 40, -1, -1),
+	SPLASH("Splash", Type.WATER, Move.STATUS_SELF, 40, -1, -1),
+	INGRAIN("Ingrain", Type.GRASS, Move.STATUS_SELF, 20, -1, -1),
+	LEECH_SEED("Leech_Seed", Type.GRASS, Move.STATUS_OPPONENT, 10, -1, 90),
 	SOLAR_BEAM("Solar_Beam", Type.GRASS, Move.SPECIAL, 10, 120, 100),
-	SYNTHESIS("Synthesis", Type.GRASS, Move.STATUS_SELF, 5, 0, -1),
+	SYNTHESIS("Synthesis", Type.GRASS, Move.STATUS_SELF, 5, -1, -1),
+	GROWL("Growl", Type.NORMAL, Move.STATUS_OPPONENT, 40, -1, 100),
 	TACKLE("Tackle", Type.NORMAL, Move.PHYSICAL, 35, 50, 100),
 	SLAM("Slam", Type.NORMAL, Move.PHYSICAL, 20, 80, 75),
 	THUNDERBOLT("Thunderbolt", Type.ELECTRIC, Move.SPECIAL, 15, 90, 100),
@@ -24,7 +26,7 @@ public enum Move {
 	MACH_PUNCH("Mach_Punch", Type.FIGHTING, Move.PHYSICAL, 30, 40, 100),
 	FLY("Fly", Type.FLYING, Move.PHYSICAL, 15, 90, 95),
 	POISON_FANG("Poison_Fang", Type.POISON, Move.PHYSICAL, 15, 50, 100),
-	TOXIC("Toxic", Type.POISON, Move.STATUS_OPPONENT, 10, 0, 90),
+	TOXIC("Toxic", Type.POISON, Move.STATUS_OPPONENT, 10, -1, 90),
 	DIG("Dig", Type.GROUND, Move.PHYSICAL, 10, 80, 100),
 	ROCK_THROW("Rock_Throw", Type.ROCK, Move.PHYSICAL, 15, 50, 90),
 	BUG_BITE("Bug_Bite", Type.BUG, Move.PHYSICAL, 20, 60, 100),
