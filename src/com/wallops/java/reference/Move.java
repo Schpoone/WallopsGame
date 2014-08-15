@@ -9,6 +9,7 @@ import java.util.Properties;
 public enum Move {
 	NONE(),
 	//(name, type, category, pp, power, accuracy%)
+	EMBER("Ember", Type.FIRE, Move.SPECIAL, 25, 40, 100),
 	FLAMETHROWER("Flamethrower", Type.FIRE, Move.SPECIAL, 15, 90, 100),
 	WATER_GUN("Water_Gun", Type.WATER, Move.SPECIAL, 25, 40, 100),
 	WITHDRAW("Withdraw", Type.WATER, Move.STATUS_SELF, 40, -1, -1),
@@ -19,8 +20,11 @@ public enum Move {
 	SYNTHESIS("Synthesis", Type.GRASS, Move.STATUS_SELF, 5, -1, -1),
 	VINE_WHIP("Vine_Whip", Type.GRASS, Move.PHYSICAL, 25, 45, 100),
 	GROWL("Growl", Type.NORMAL, Move.STATUS_OPPONENT, 40, -1, 100),
-	TACKLE("Tackle", Type.NORMAL, Move.PHYSICAL, 35, 50, 100),
+	SCRATCH("Scratch", Type.NORMAL, Move.PHYSICAL, 35, 40, 100),
 	SLAM("Slam", Type.NORMAL, Move.PHYSICAL, 20, 80, 75),
+	SMOKESCREEN("Smokescreen", Type.NORMAL, Move.STATUS_OPPONENT, 20, -1, 100),
+	TACKLE("Tackle", Type.NORMAL, Move.PHYSICAL, 35, 50, 100),
+	TAIL_WHIP("Tail_Whip", Type.NORMAL, Move.STATUS_OPPONENT, 30, -1, 100),
 	THUNDERBOLT("Thunderbolt", Type.ELECTRIC, Move.SPECIAL, 15, 90, 100),
 	BLIZZARD("Blizzard", Type.ICE, Move.SPECIAL, 5, 110, 70),
 	BITE("Bite", Type.DARK, Move.PHYSICAL, 25, 60, 100),
