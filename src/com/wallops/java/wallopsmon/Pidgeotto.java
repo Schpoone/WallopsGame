@@ -1,7 +1,7 @@
 package com.wallops.java.wallopsmon;
 
-import com.wallops.java.reference.Type;
 import com.wallops.java.reference.Move;
+import com.wallops.java.reference.Type;
 
 public class Pidgeotto extends Wallopsmon {
 	public Pidgeotto() {
