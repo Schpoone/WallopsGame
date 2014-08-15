@@ -5,6 +5,6 @@ import com.wallops.java.reference.Type;
 
 public class Bulbasaur extends Wallopsmon {
 	public Bulbasaur() {
-		super("Bulbasaur", Type.GRASS, Type.POISON, 1, 45, 49, 49, 65, 65, 45, /*Item,*/ Move.TACKLE, Move.NONE, Move.NONE, Move.NONE);
+		super("Bulbasaur", Type.GRASS, Type.POISON, 1, 45, 49, 49, 65, 65, 45, Move.TACKLE, Move.NONE, Move.NONE, Move.NONE);
 	}
 }
