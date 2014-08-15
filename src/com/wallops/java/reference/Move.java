@@ -17,6 +17,7 @@ public enum Move {
 	LEECH_SEED("Leech_Seed", Type.GRASS, Move.STATUS_OPPONENT, 10, -1, 90),
 	SOLAR_BEAM("Solar_Beam", Type.GRASS, Move.SPECIAL, 10, 120, 100),
 	SYNTHESIS("Synthesis", Type.GRASS, Move.STATUS_SELF, 5, -1, -1),
+	VINE_WHIP("Vine_Whip", Type.GRASS, Move.PHYSICAL, 25, 45, 100),
 	GROWL("Growl", Type.NORMAL, Move.STATUS_OPPONENT, 40, -1, 100),
 	TACKLE("Tackle", Type.NORMAL, Move.PHYSICAL, 35, 50, 100),
 	SLAM("Slam", Type.NORMAL, Move.PHYSICAL, 20, 80, 75),
