@@ -15,7 +15,7 @@ public class UseItem implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if(item.getText().equals("Use Item")) {
+		if(item.getText().equalsIgnoreCase("Use Item")) {
 			item.setText("to be implemented later");
 			item.setVisible(false);
 			item.setVisible(true);

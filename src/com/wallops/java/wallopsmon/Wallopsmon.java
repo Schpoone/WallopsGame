@@ -17,7 +17,7 @@ import com.wallops.java.reference.Move;
 import com.wallops.java.reference.Type;
 
 
-public class Wallopsmon {
+public abstract class Wallopsmon {
 	//(String n, Type t1, Type t2, int l, int maxH, int att, int def, int specAtt, int specDef, int spd, /*Item hold,*/ Move one, Move two, Move three, Move four)
 	
 	private String name;
@@ -439,7 +439,7 @@ public class Wallopsmon {
 		}
 	}
 
-	private int calcExpGain(int fntLvl) {
+	public int calcExpGain(int fntLvl) {
 		int num = (int)(1.5 * 200 * fntLvl);
 		int denom = (int)(7 * level);
 		int gain = (int)(num / denom);

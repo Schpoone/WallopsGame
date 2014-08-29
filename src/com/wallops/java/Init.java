@@ -1,14 +1,21 @@
 package com.wallops.java;
 
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+
+import org.lwjgl.opengl.*;
+
 import com.wallops.java.event.Battle;
+import com.wallops.java.event.Game;
 import com.wallops.java.wallopsmon.*;
 
 public class Init {
 
 	public static void main(String[] args) {
-		Battle wallops = new Battle();
-		wallops.setOpponent(new MudDogWhelk());
-		wallops.update();
+		Game wallops = new Game();
+		//Battle wallops = new Battle();
+		//wallops.setOpponent(new MudDogWhelk());
+		//wallops.update();
 	}
 
 }

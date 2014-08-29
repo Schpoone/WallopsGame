@@ -210,10 +210,10 @@ public class Battle {
 			if(opponent.getName().indexOf("Wild ") != 0)
 					opponent.setName("Wild " + opponent.getName());
 			oppHealth.setText("Name: " + opponent.getName() + "\nHP: " + opponent.getCurrentHealth() + "/" + opponent.getMaxHealth()  + "\nLevel: "
-					+ opponent.getLevel());
+					+ opponent.getLevel() + "\nProjected XP gain: " + player[0].calcExpGain(opponent.getLevel()));
 		}
 		playerHealth.setText("Name: " + player[0].getName() + "\nHP: " + player[0].getCurrentHealth() + "/" + player[0].getMaxHealth()
-				+ "\nEXP: " + player[0].getExpToLevel() + "\nLevel: " + player[0].getLevel());
+				+ "\nEXP to next level: " + player[0].getExpToLevel() + "\nLevel: " + player[0].getLevel());
 
 		if(playerImage.getComponentCount() != 0)
 			playerImage.remove(0);
