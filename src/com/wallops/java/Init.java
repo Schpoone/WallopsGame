@@ -13,9 +13,8 @@ public class Init {
 
 	public static void main(String[] args) {
 		Game wallops = new Game();
-		//Battle wallops = new Battle();
-		//wallops.setOpponent(new MudDogWhelk());
-		//wallops.update();
+		wallops.startup();
+		wallops.startGameLoop();
 	}
 
 }

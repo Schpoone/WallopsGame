@@ -11,6 +11,10 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
+import com.wallops.java.gui.Gui;
+import com.wallops.java.gui.GuiMainMenu;
+import com.wallops.java.gui.GuiScreen;
+
 /**
  * The game object for Wallopsmon. Here all initialization and registration will take
  * place.
@@ -21,32 +25,45 @@ import org.lwjgl.opengl.GL11;
 public class Game {
 
 	/** used for logging anything that needs to be traced to the Game object */
-	private Logger logger = LogManager.getLogger();
+	public Logger logger = LogManager.getLogger();
+	
+	private int displayHeight;
+	private int displayWidth;
+	private GuiScreen activeGui;
+	private Game game;
 	
 	/**
 	 * creates a display and initializes game loop.
+	 * TODO: have this varied based on command line arguments
 	 */
 	public Game() {
 		// all messages will temporarily be logged under ERROR, until a configuration is added
 		logger.error("^Ignore that. I'll fix it later. ~Pure");
-		initDisplay();
-
-		logger.log(Level.ERROR, "Starting main game loop.");
-		// Game loop, methinks
-		while(!Display.isCloseRequested()) {
-			Display.update();
-		}
-		logger.log(Level.ERROR, "Main game loop terminated.");
-		cleanup();
-		
-		logger.log(Level.ERROR, "Game shut down completely.");
+		this.game = this;
+		this.displayHeight = 480;
+		this.displayWidth = 720;
+		this.activeGui = new GuiMainMenu(game);
 	}
 	
+	public void startGameLoop() {
+		logger.log(Level.ERROR, "Starting main game loop.");
+		// Game loop, methinks
+		try {
+			while(!Display.isCloseRequested()) {
+				this.activeGui.renderScreen();
+				Display.update();
+			}
+		} catch (Exception e) {
+			
+		} finally {
+			cleanup();
+		}
+	}
 	
 	/**
 	 * creates a new instance of LWJGL's Display class, initializes OpenGL
 	 */
-	private void initDisplay() {
+	public void startup() {
 		logger.log(Level.ERROR, "Initializing graphics...");
 		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		try {
@@ -66,6 +83,9 @@ public class Game {
 	 */
 	private void cleanup() {
 		logger.log(Level.ERROR, "Cleaning up game...");
+		
 		Display.destroy();
+		
+		logger.log(Level.ERROR, "Game shut down completely.");
 	}
 }
