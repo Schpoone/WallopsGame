@@ -237,13 +237,13 @@ public class Battle {
 		if(button1.getActionListeners().length != 0)
 			button1.removeActionListener(button1.getActionListeners()[0]);
 		button1.addActionListener(new Act(player[0].getMoveOne(), this));
-		if(button2.getActionListeners().length == 0)
+		if(button2.getActionListeners().length != 0)
 			button2.removeActionListener(button1.getActionListeners()[0]);
 		button2.addActionListener(new Act(player[0].getMoveTwo(), this));
-		if(button3.getActionListeners().length == 0)
+		if(button3.getActionListeners().length != 0)
 			button3.removeActionListener(button1.getActionListeners()[0]);
 		button3.addActionListener(new Act(player[0].getMoveThree(), this));
-		if(button4.getActionListeners().length == 0)
+		if(button4.getActionListeners().length != 0)
 			button4.removeActionListener(button1.getActionListeners()[0]);
 		button4.addActionListener(new Act(player[0].getMoveFour(), this));
 
@@ -284,7 +284,6 @@ public class Battle {
 			opponent = new LoblollyPine();
 		opponent.setName("Wild " + opponent.getName());
 		status.append("\nA " + opponent.getName() + " has appeared!");
-		
 	}
 
 	public void playerFaint() {
@@ -548,7 +547,10 @@ public class Battle {
 	}
 	
 	public void status(Move m, Wallopsmon attacker, Wallopsmon defender) {
-		
+		if((status.getText().indexOf("damage") != -1 || status.getText().equals("")) && (attacker.getName().equals(player[0].getName()) || status.getText().indexOf(player[0].getName()) != 0))
+			status.setText(attacker.getName() + " used " + m.getName() +" on " + defender.getName() + "!");
+		else
+			status.append("\n" + attacker.getName() + " used " + m.getName() +" on " + defender.getName() + "!");
 	}
 	
 	public void reset() {

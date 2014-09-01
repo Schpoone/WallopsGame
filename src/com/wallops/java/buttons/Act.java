@@ -26,9 +26,10 @@ public class Act implements ActionListener {
 			battle.status(btnMv, battle.getActive(), battle.getActive());
 		if(btnMv.getCategory() == Move.PHYSICAL || btnMv.getCategory() == Move.SPECIAL)
 			battle.attack(btnMv, battle.getActive(), battle.getOpponent());
-		if(battle.getOpponent().getCurrentHealth() > 0) {
+		if(battle.getOpponent() != null && battle.getOpponent().getCurrentHealth() > 0) {
 			Move m2 = Move.NONE;
-			while(m2.getCategory() != Move.PHYSICAL && m2.getCategory() != Move.SPECIAL) {
+			
+			while(m2 == Move.NONE) {
 				int n = (int) (Math.random()*4+1);
 				if(n == 1)
 					m2 = battle.getOpponent().getMoveOne();
@@ -39,7 +40,16 @@ public class Act implements ActionListener {
 				if(n == 4)
 					m2 = battle.getOpponent().getMoveFour();
 			}
-			battle.attack(m2, battle.getOpponent(), battle.getActive());
+
+			if(m2.getCategory() == Move.PHYSICAL || m2.getCategory() == Move.SPECIAL)
+				battle.attack(m2, battle.getOpponent(), battle.getActive());
+			if(m2.getCategory() == Move.STATUS_SELF)
+				battle.status(m2, battle.getOpponent(), battle.getOpponent());
+			if(m2.getCategory() == Move.STATUS_OPPONENT)
+				battle.status(m2, battle.getOpponent(), battle.getActive());
+			if(m2.getCategory() == Move.NO)
+				return;
+
 		}
 	}
 
