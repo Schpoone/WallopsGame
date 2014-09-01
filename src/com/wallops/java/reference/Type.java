@@ -19,8 +19,10 @@ public enum Type {
 	ROCK(12, new Color(180, 155, 20)),
 	BUG(13, new Color(130, 190, 60)),
 	STEEL(14, Color.GRAY.brighter()),
-	DRAGON(15, new Color(90, 10, 200));
-	//this is missing psychic, ghost, and fairy
+	DRAGON(15, new Color(90, 10, 200)),
+	PSYCHIC(16, new Color(240, 90, 150)),
+	GHOST(17, new Color(120, 85, 150) ),
+	FAIRY(18, Color.PINK);
 	
 	private int value;
 	private Color color;
