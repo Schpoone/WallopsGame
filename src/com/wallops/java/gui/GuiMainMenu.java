@@ -27,6 +27,7 @@ public class GuiMainMenu extends GuiScreen {
 	@Override
 	public void renderScreen() {
 		if(this.visible) {
+			super.renderScreen();
 			this.play.renderButton();
 			this.options.renderButton();
 			this.quit.renderButton();
