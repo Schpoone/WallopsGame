@@ -1,5 +1,6 @@
 package com.wallops.java.event;
 
+import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 
@@ -10,6 +11,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.TrueTypeFont;
 
 import com.wallops.java.gui.Gui;
 import com.wallops.java.gui.GuiMainMenu;
@@ -32,21 +34,22 @@ public class Game {
 	private GuiScreen activeGui;
 	private Game game;
 	
+	/** for funky mac related weirdness that'd have to be dealt with */
+	public static final boolean isRunningOnMac = System.getProperty("os.name").toLowerCase().contains("mac");
+	
 	/**
 	 * creates a display and initializes game loop.
 	 * TODO: have this varied based on command line arguments
 	 */
 	public Game() {
-		// all messages will temporarily be logged under ERROR, until a configuration is added
-		logger.error("^Ignore that. I'll fix it later. ~Pure");
 		this.game = this;
 		this.displayHeight = 480;
 		this.displayWidth = 720;
-		this.activeGui = new GuiMainMenu(game);
 	}
 	
 	public void startGameLoop() {
-		logger.log(Level.ERROR, "Starting main game loop.");
+		this.logger.log(Level.INFO, "Starting main game loop.");
+		this.activeGui = new GuiMainMenu(game);
 		// Game loop, methinks
 		try {
 			while(!Display.isCloseRequested()) {
@@ -56,7 +59,7 @@ public class Game {
 		} catch (Exception e) {
 			
 		} finally {
-			cleanup();
+			this.cleanup();
 		}
 	}
 	
@@ -64,7 +67,7 @@ public class Game {
 	 * creates a new instance of LWJGL's Display class, initializes OpenGL
 	 */
 	public void startup() {
-		logger.log(Level.ERROR, "Initializing graphics...");
+		logger.log(Level.INFO, "Initializing graphics...");
 		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		try {
 			Display.setDisplayMode(new DisplayMode((int)rect.getWidth(), (int)rect.getHeight()));
@@ -75,17 +78,17 @@ public class Game {
 		GL11.glMatrixMode(GL11.GL_PROJECTION); // setting focused matrix to projection matrix
 		GL11.glLoadIdentity(); // clearing the projection matrix
 		GL11.glOrtho(0, Display.getWidth(), 0, Display.getHeight(), -1, 1);
-		logger.log(Level.ERROR, "Graphics initialized: lwjgl 2.9.1, see http://www.lwjgl.org/");
+		logger.log(Level.INFO, "Graphics initialized: lwjgl 2.9.1, see http://www.lwjgl.org/");
 	}
 	
 	/**
 	 * cleans up the game before closing (or caught crashes)
 	 */
 	private void cleanup() {
-		logger.log(Level.ERROR, "Cleaning up game...");
+		logger.log(Level.INFO, "Cleaning up game...");
 		
 		Display.destroy();
 		
-		logger.log(Level.ERROR, "Game shut down completely.");
+		logger.log(Level.INFO, "Game shut down completely.");
 	}
 }
