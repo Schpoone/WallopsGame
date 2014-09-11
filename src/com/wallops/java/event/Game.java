@@ -77,7 +77,8 @@ public class Game {
 		}
 		GL11.glMatrixMode(GL11.GL_PROJECTION); // setting focused matrix to projection matrix
 		GL11.glLoadIdentity(); // clearing the projection matrix
-		GL11.glOrtho(0, Display.getWidth(), 0, Display.getHeight(), -1, 1);
+		GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0, -1, 1);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		logger.log(Level.INFO, "Graphics initialized: lwjgl 2.9.1, see http://www.lwjgl.org/");
 	}
 	
