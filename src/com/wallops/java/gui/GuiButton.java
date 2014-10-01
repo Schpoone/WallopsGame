@@ -84,7 +84,19 @@ public class GuiButton extends Gui {
 	 * @return whether the mouse is in this button's bounds
 	 */
 	public boolean isMouseInBounds() {
-		return this.mouseX > this.x && this.mouseX < this.x+this.width && this.mouseY > this.y && this.mouseY < this.y+this.height;
+		return this.isMouseInBounds(this.mouseX, this.mouseY);
+	}
+
+	/**
+	 * a helper method to figure out when the mouse is in the button's bounds
+	 * @return whether the mouse is in this button's bounds
+	 */
+	public boolean isMouseInBounds(int mouseX, int mouseY) {
+		return mouseX > this.x && mouseX < this.x+this.width && mouseY > this.y && mouseY < this.y+this.height;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 }

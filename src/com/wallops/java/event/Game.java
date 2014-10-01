@@ -1,6 +1,5 @@
 package com.wallops.java.event;
 
-import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 
@@ -8,10 +7,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.TrueTypeFont;
 
 import com.wallops.java.gui.Gui;
 import com.wallops.java.gui.GuiMainMenu;
@@ -29,6 +28,7 @@ public class Game {
 	/** used for logging anything that needs to be traced to the Game object */
 	public Logger logger = LogManager.getLogger();
 	
+	private boolean running;
 	private int displayHeight;
 	private int displayWidth;
 	private GuiScreen activeGui;
@@ -39,7 +39,7 @@ public class Game {
 	
 	/**
 	 * creates a display and initializes game loop.
-	 * TODO: have this varied based on command line arguments
+	 * TODO: have this varied based on command line arguments from launcher
 	 */
 	public Game() {
 		this.game = this;
@@ -49,15 +49,18 @@ public class Game {
 	
 	public void startGameLoop() {
 		this.logger.log(Level.INFO, "Starting main game loop.");
+		this.running = true;
 		this.activeGui = new GuiMainMenu(game);
 		// Game loop, methinks
 		try {
-			while(!Display.isCloseRequested()) {
+			while(!Display.isCloseRequested() && this.running) {
 				this.activeGui.renderScreen();
+				if(Mouse.isCreated()&&Mouse.next())
+					this.activeGui.handleMouse();
 				Display.update();
 			}
 		} catch (Exception e) {
-			
+			;
 		} finally {
 			this.cleanup();
 		}
@@ -80,6 +83,14 @@ public class Game {
 		GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0, -1, 1);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		logger.log(Level.INFO, "Graphics initialized: lwjgl 2.9.1, see http://www.lwjgl.org/");
+	}
+	
+	
+	/**
+	 * shuts down the game
+	 */
+	public void shutdown() {
+		this.running = false;
 	}
 	
 	/**
