@@ -14,12 +14,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import org.lwjgl.opengl.Display;
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
+
 import com.wallops.java.buttons.Act;
 import com.wallops.java.buttons.Nope;
 import com.wallops.java.buttons.OpenDesc;
 import com.wallops.java.buttons.OpenSwitch;
 import com.wallops.java.buttons.Reset;
 import com.wallops.java.buttons.UseItem;
+import com.wallops.java.gui.GuiButton;
+import com.wallops.java.gui.GuiScreen;
+import com.wallops.java.gui.MoveButton;
 import com.wallops.java.reference.Move;
 import com.wallops.java.wallopsmon.BaldEagle;
 import com.wallops.java.wallopsmon.HorseshoeCrab;
@@ -30,23 +37,17 @@ import com.wallops.java.wallopsmon.SeaPork;
 import com.wallops.java.wallopsmon.Tick;
 import com.wallops.java.wallopsmon.Wallopsmon;
 
-public class Battle {
-	private JFrame lose;
+public class Battle extends GuiScreen {
+	//private JFrame lose;
 	private JButton reset;
-	private JFrame window;
+	//private JFrame window;
 	private JPanel view;
 	private JTextArea oppHealth;
-	private JPanel oppImage;
-	private JPanel playerImage;
 	private JPanel playerStatus;
 	private JTextArea status;
 	private JTextArea playerHealth;
 	private JPanel inputSection;
 	private JPanel hud;
-	private JButton button1;
-	private JButton button2;
-	private JButton button3;
-	private JButton button4;
 	private JButton desc;
 	private JButton swtch;
 	private JButton item;
@@ -55,27 +56,20 @@ public class Battle {
 	private Wallopsmon opponent;
 	private int fntOpp;
 
-	public Battle() {
-
+	public Battle(Game game) {
+		super(game);
 		initVars();
 		formatVars();
 		addComps();
 		update();
-
-		window.setVisible(true);
 	}
 
 	public void formatVars() {
-		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		window.setSize(new Dimension(rect.width,rect.height));
 
-		setSize(view, new Dimension(2*window.getWidth()/3, window.getHeight()));
-		setSize(inputSection, new Dimension(window.getWidth()/3, window.getHeight()/2));
-		setSize(hud, new Dimension(window.getWidth()/3, window.getHeight()/2));
-		setSize(playerImage, new Dimension(view.getWidth()/2, view.getHeight()/2));
-		setSize(oppImage, new Dimension(view.getWidth()/2, view.getHeight()/2));
+		setSize(view, new Dimension(2*Display.getWidth()/3, Display.getHeight()));
+		setSize(inputSection, new Dimension(Display.getWidth()/3, Display.getHeight()/2));
+		setSize(hud, new Dimension(Display.getWidth()/3, Display.getHeight()/2));
 
-		window.setLayout(new GridBagLayout());
 		playerStatus.setLayout(new GridLayout(2, 1));
 		view.setLayout(new GridLayout(2,2));
 
@@ -90,8 +84,6 @@ public class Battle {
 
 		view.setBackground(Color.BLUE);
 		hud.setBackground(Color.CYAN);
-
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	public void setSize(Component c, Dimension d) {
@@ -113,27 +105,25 @@ public class Battle {
 		c.gridheight = 2;
 		c.gridx = 0;
 		c.gridy = 0;
-		window.add(view, c);
+		//Display.add(view, c);
 
 		c.gridwidth = 1;
 		c.gridheight = 1;
 		c.gridx = 2;
-		window.add(hud, c);
+		//Display.add(hud, c);
 		c.gridy = 1;
-		window.add(inputSection, c);
+		//Display.add(inputSection, c);
 
 		playerStatus.add(playerHealth);
 		playerStatus.add(status);
 
 		view.add(oppHealth);
-		view.add(oppImage);
-		view.add(playerImage);
 		view.add(playerStatus);
 
-		inputSection.add(button1);
-		inputSection.add(button2);
-		inputSection.add(button3);
-		inputSection.add(button4);
+		this.screenButtons.add(new MoveButton(player[0].getMoveOne(), 0));
+		this.screenButtons.add(new MoveButton(player[0].getMoveTwo(), 1));
+		this.screenButtons.add(new MoveButton(player[0].getMoveThree(), 2));
+		this.screenButtons.add(new MoveButton(player[0].getMoveFour(), 3));
 
 		desc.addActionListener(new OpenDesc(desc, this));
 		item.addActionListener(new UseItem(item));
@@ -150,11 +140,8 @@ public class Battle {
 	public void initVars() {
 		reset = new JButton("You lose. Click here to restart.");
 		fntOpp = 0;
-		window = new JFrame("Wallopsmon");
 		view = new JPanel();
 		oppHealth = new JTextArea();
-		oppImage = new JPanel();
-		playerImage = new JPanel();
 		playerHealth = new JTextArea();
 		inputSection = new JPanel();
 		playerStatus = new JPanel();
@@ -173,10 +160,6 @@ public class Battle {
 		player[4].setName("Ron the " + player[4].getName());
 		player[5] = new MantisShrimp();
 		player[5].setName("Ginny the " + player[5].getName());
-		button1 = new JButton();
-		button2 = new JButton();
-		button3 = new JButton();
-		button4 = new JButton();
 
 		desc = new JButton("Description");
 		desc.setBackground(Color.WHITE);
@@ -215,51 +198,14 @@ public class Battle {
 		playerHealth.setText("Name: " + player[0].getName() + "\nHP: " + player[0].getCurrentHealth() + "/" + player[0].getMaxHealth()
 				+ "\nEXP to next level: " + player[0].getExpToLevel() + "\nLevel: " + player[0].getLevel());
 
-		if(playerImage.getComponentCount() != 0)
-			playerImage.remove(0);
-		playerImage.add(player[0].getResizedImage(playerImage.getSize()));
-		playerImage.setVisible(false);
-		playerImage.setVisible(true);
-
-		if(opponent != null) {
-			if(oppImage.getComponentCount() != 0)
-				oppImage.remove(0);
-			oppImage.add(opponent.getResizedImage(oppImage.getSize()));
-			oppImage.setVisible(false);
-			oppImage.setVisible(true);
-		}
-		
-		button1.setText(player[0].getMoveOne().getName());
-		button2.setText(player[0].getMoveTwo().getName());
-		button3.setText(player[0].getMoveThree().getName());
-		button4.setText(player[0].getMoveFour().getName());
-
-		if(button1.getActionListeners().length != 0)
-			button1.removeActionListener(button1.getActionListeners()[0]);
-		button1.addActionListener(new Act(player[0].getMoveOne(), this));
-		if(button2.getActionListeners().length != 0)
-			button2.removeActionListener(button1.getActionListeners()[0]);
-		button2.addActionListener(new Act(player[0].getMoveTwo(), this));
-		if(button3.getActionListeners().length != 0)
-			button3.removeActionListener(button1.getActionListeners()[0]);
-		button3.addActionListener(new Act(player[0].getMoveThree(), this));
-		if(button4.getActionListeners().length != 0)
-			button4.removeActionListener(button1.getActionListeners()[0]);
-		button4.addActionListener(new Act(player[0].getMoveFour(), this));
-
-		button1.setOpaque(true);
-		button2.setOpaque(true);
-		button3.setOpaque(true);
-		button4.setOpaque(true);
-
-		if (player[0].getMoveOne().getCategory() != Move.NO) 
+		/*if (player[0].getMoveOne().getCategory() != Move.NO) 
 			button1.setBackground(player[0].getMoveOne().getType().getColor());
 		if (player[0].getMoveTwo().getCategory() != Move.NO)
 			button2.setBackground(player[0].getMoveTwo().getType().getColor());
 		if (player[0].getMoveThree().getCategory() != Move.NO)
 			button3.setBackground(player[0].getMoveThree().getType().getColor());
 		if (player[0].getMoveFour().getCategory() != Move.NO)
-			button4.setBackground(player[0].getMoveFour().getType().getColor());
+			button4.setBackground(player[0].getMoveFour().getType().getColor());*/
 		inputSection.setVisible(false);
 		inputSection.setVisible(true);
 	}
@@ -288,21 +234,16 @@ public class Battle {
 
 	public void playerFaint() {
 		player[0].setCurrentHealth(0);
-		button1.removeActionListener(button1.getActionListeners()[0]);
-		button2.removeActionListener(button2.getActionListeners()[0]);
-		button3.removeActionListener(button3.getActionListeners()[0]);
-		button4.removeActionListener(button4.getActionListeners()[0]);
 		for(int i=0; i<6; i++) {
 			if(player[i] != null && player[i].getCurrentHealth() != 0) {
 				((OpenSwitch) swtch.getActionListeners()[0]).open();
 				return;
 			}
 		}
-		window.setVisible(false);
-		lose = new JFrame("You Lose!");
+		/*lose = new JFrame("You Lose!");
 		lose.add(reset);
 		lose.setSize(window.getSize());
-		lose.setVisible(true);
+		lose.setVisible(true);*/
 	}
 	
 	public void attack(Move m, Wallopsmon attacker, Wallopsmon defender) {
@@ -559,7 +500,23 @@ public class Battle {
 		formatVars();
 		addComps();
 		update();
-		lose.setVisible(false);
-		window.setVisible(true);
+		//lose.setVisible(false);
+	}
+
+	@Override
+	public void buttonClicked(GuiButton clickedButton) {
+		if(clickedButton instanceof MoveButton)
+			this.attack(((MoveButton)clickedButton).getMove(), this.player[0], this.opponent);
+	}
+	
+	@Override
+	public void renderScreen() {
+		super.renderScreen();
+		player[0].getImage().bind();
+		drawRectangle(Display.getWidth()/3, Display.getHeight()/2, 2*Display.getWidth()/3, 2*Display.getHeight()/2, Integer.MAX_VALUE);
+		player[0].getImage().release();
+		opponent.getImage().bind();
+		drawRectangle(0, 0, Display.getWidth()/3, Display.getHeight()/2, Integer.MAX_VALUE);
+		opponent.getImage().release();
 	}
 }

@@ -58,6 +58,8 @@ public class Game {
 				if(Mouse.isCreated()&&Mouse.next())
 					this.activeGui.handleMouse();
 				Display.update();
+				if(Display.wasResized())
+					this.activeGui.resize();
 			}
 		} catch (Exception e) {
 			;
@@ -75,6 +77,7 @@ public class Game {
 		try {
 			Display.setDisplayMode(new DisplayMode((int)rect.getWidth(), (int)rect.getHeight()));
 			Display.create();
+			Display.setResizable(true);
 		} catch (LWJGLException e) {
 			logger.fatal("Crashed while trying to initialize display: ", e);
 		}
@@ -102,5 +105,9 @@ public class Game {
 		Display.destroy();
 		
 		logger.log(Level.INFO, "Game shut down completely.");
+	}
+	
+	public void setScreen(GuiScreen screen) {
+		this.activeGui = screen;
 	}
 }

@@ -7,7 +7,7 @@ import org.lwjgl.opengl.Display;
 
 import com.wallops.java.event.Game;
 
-public class GuiScreen extends Gui {
+public abstract class GuiScreen extends Gui implements IRenderable{
 	/** where the button in this GuiScreen are stored */
 	protected ArrayList<GuiButton> screenButtons;
 	protected boolean visible;
@@ -28,7 +28,7 @@ public class GuiScreen extends Gui {
 		}
 	}
 
-	public void buttonClicked(GuiButton clickedButton) {}
+	public abstract void buttonClicked(GuiButton clickedButton);
 
 	public void handleMouse() {
 		int x = Mouse.getEventX();
@@ -41,5 +41,10 @@ public class GuiScreen extends Gui {
 				if(g.isMouseInBounds(x, y) && Mouse.isButtonDown(buttonPressed))
 					this.buttonClicked(g);
 			}
+	}
+
+	public void resize() {
+		for(GuiButton g : this.screenButtons)
+			g.resize();
 	}
 }

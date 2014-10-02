@@ -12,11 +12,11 @@ public class GuiButton extends Gui {
 
 	private int mouseX;
 	private int mouseY;
-	private int x;
-	private int y;
-	private int width;
-	private int height;
-	private String name;
+	protected int x;
+	protected int y;
+	protected int width;
+	protected int height;
+	protected String name;
 	private boolean enabled;
 	private boolean visible;
 	private TrueTypeFont font;
@@ -97,6 +97,16 @@ public class GuiButton extends Gui {
 	
 	public String getName() {
 		return name;
+	}
+
+	public void resize() {}
+	
+	public void setSize(int x, int y, int width, int height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.font = new TrueTypeFont(new Font(Font.MONOSPACED, Font.PLAIN, this.height/4), false);
 	}
 
 }

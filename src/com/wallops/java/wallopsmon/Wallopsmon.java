@@ -13,6 +13,10 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
+import org.newdawn.slick.util.ResourceLoader;
+
 import com.wallops.java.reference.Move;
 import com.wallops.java.reference.Type;
 
@@ -23,8 +27,8 @@ public abstract class Wallopsmon {
 	private String name;
 	private Type type1;
 	private Type type2;
-	private Image mainImage;
-	private Image shinyImage;
+	private Texture mainImage;
+	private Texture shinyImage;
 	private boolean shiny;
 	private int level;
 	private int currentExp;
@@ -91,8 +95,8 @@ public abstract class Wallopsmon {
 		type2 = t2;
 		
 		try {
-			mainImage = ImageIO.read(new FileInputStream(new File("src/com/wallops/resources/img/" + name + ".jpg")));
-			shinyImage = ImageIO.read(new FileInputStream(new File("src/com/wallops/resources/img/Shiny" + name + ".jpg")));
+			mainImage = TextureLoader.getTexture("JPG", ResourceLoader.getResourceAsStream("src/com/wallops/resources/img/" + name + ".jpg"));
+			shinyImage = TextureLoader.getTexture("JPG", ResourceLoader.getResourceAsStream("src/com/wallops/resources/img/Shiny" + name + ".jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -156,14 +160,12 @@ public abstract class Wallopsmon {
 		return type2;
 	}
 	
-	public JLabel getResizedImage(Dimension d) {
-		Image img = null;
-		if (shiny) 
-			img = shinyImage.getScaledInstance(d.width, d.height, Image.SCALE_SMOOTH);
-		else
-			img = mainImage.getScaledInstance(d.width, d.height, Image.SCALE_SMOOTH);
-				
-		return new JLabel(new ImageIcon(img));
+	public Texture getImage() {
+		return this.mainImage;
+	}
+	
+	public Texture getShinyImage() {
+		return this.shinyImage;
 	}
 	
 	public boolean isShiny() {
@@ -300,11 +302,11 @@ public abstract class Wallopsmon {
 		type2 = t;
 	}
 	
-	public void setMainImage(BufferedImage i) {
+	public void setMainImage(Texture i) {
 		mainImage = i;
 	}
 	
-	public void setShinyImage(BufferedImage i) {
+	public void setShinyImage(Texture i) {
 		shinyImage = i;
 	}
 	
