@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 public class TableFlipException extends Exception {
-	ArrayList<JFrame> destroy = new ArrayList<JFrame>(10);
-	while (true) {
-		destroy.add(new JFrame());
+	/*
+	 * why am i even fixing this? this isn't even how exceptions work...
+	 */
+	public TableFlipException() {
+		ArrayList<JFrame> destroy = new ArrayList<JFrame>();
+		while (true) {
+			destroy.add(new JFrame());
+		}
 	}
 }
