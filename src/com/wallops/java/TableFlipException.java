@@ -9,8 +9,10 @@ public class TableFlipException extends RuntimeException {
 	 */
 	public TableFlipException() {
 		ArrayList<JFrame> destroy = new ArrayList<JFrame>();
+		int i = 0;
 		while (true) {
 			destroy.add(new JFrame());
+			destroy[i].
 		}
 	}
 }
