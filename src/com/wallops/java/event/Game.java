@@ -26,7 +26,7 @@ import com.wallops.java.gui.GuiScreen;
 public class Game {
 
 	/** used for logging anything that needs to be traced to the Game object */
-	public Logger logger = LogManager.getLogger();
+	public Logger logger = LogManager.getLogger(this.getClass().getSimpleName());
 	
 	private boolean running;
 	private int displayHeight;
@@ -54,15 +54,16 @@ public class Game {
 		// Game loop, methinks
 		try {
 			while(!Display.isCloseRequested() && this.running) {
-				this.activeGui.renderScreen();
+				this.activeGui.render();
 				if(Mouse.isCreated()&&Mouse.next())
 					this.activeGui.handleMouse();
 				Display.update();
-				if(Display.wasResized())
+				if(Display.wasResized()) {
 					this.activeGui.resize();
+				}
 			}
 		} catch (Exception e) {
-			;
+			e.printStackTrace();
 		} finally {
 			this.cleanup();
 		}
@@ -78,6 +79,7 @@ public class Game {
 			Display.setDisplayMode(new DisplayMode((int)rect.getWidth(), (int)rect.getHeight()));
 			Display.create();
 			Display.setResizable(true);
+			Display.setVSyncEnabled(true);
 		} catch (LWJGLException e) {
 			logger.fatal("Crashed while trying to initialize display: ", e);
 		}
@@ -94,6 +96,8 @@ public class Game {
 	 */
 	public void shutdown() {
 		this.running = false;
+		this.displayHeight = Display.getHeight();
+		this.displayWidth = Display.getWidth();
 	}
 	
 	/**

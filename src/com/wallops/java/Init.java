@@ -1,13 +1,8 @@
 package com.wallops.java;
 
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-
-import org.lwjgl.opengl.*;
-
-import com.wallops.java.event.Battle;
 import com.wallops.java.event.Game;
-import com.wallops.java.wallopsmon.*;
+import com.wallops.java.gui.GuiGameScreen;
+import com.wallops.java.wallopsmon.MudDogWhelk;
 
 public class Init {
 

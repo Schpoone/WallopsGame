@@ -8,17 +8,13 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
-public class GuiButton extends Gui {
+public class GuiButton extends Resizeable implements IRenderable {
 
 	private int mouseX;
 	private int mouseY;
-	protected int x;
-	protected int y;
-	protected int width;
-	protected int height;
 	protected String name;
 	private boolean enabled;
-	private boolean visible;
+	private Font jfont;
 	private TrueTypeFont font;
 	private int trimColor;
 	private int centerColor;
@@ -27,28 +23,27 @@ public class GuiButton extends Gui {
 
 	/**
 	 * creates a new button at a specified location, with a certain size and text to display
-	 * @param x left bound of button
-	 * @param y lower bound of button
-	 * @param width width of the button
-	 * @param height height of the button
+	 * @param xScale the ratio between the Display width and the button's x coordinate
+	 * @param yScale the ratio between the Display height and the button's y coordinate
+	 * @param widthScale the ratio between the Display width and the button's width
+	 * @param heightScale the ratio between the Display size and the button's height
 	 * @param name name of the button (to be displayed)
 	 */
-	public GuiButton(int x, int y, int width, int height, String name) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+	public GuiButton(float xScale, float yScale, float widthScale, float heightScale, String name) {
+		super(xScale, yScale, widthScale, heightScale);
 		this.name = name;
 		this.enabled = true;
 		this.visible = true;
-		this.font = new TrueTypeFont(new Font(Font.MONOSPACED, Font.PLAIN, this.height/4), false);
+		this.jfont = new Font(Font.MONOSPACED, Font.PLAIN, 1);
+		this.resize();
 	}
 
 	/**
 	 * renders this button in its stored location with color (depending on where the 
 	 * mouse is, and whether it's clicked)
 	 */
-	public void renderButton() {
+	@Override
+	public void render() {
 		this.mouseX = Mouse.getX();
 		this.mouseY = Display.getHeight() - Mouse.getY();
 		if (System.currentTimeMillis() >= cooldown) {
@@ -98,15 +93,23 @@ public class GuiButton extends Gui {
 	public String getName() {
 		return name;
 	}
-
-	public void resize() {}
 	
-	public void setSize(int x, int y, int width, int height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.font = new TrueTypeFont(new Font(Font.MONOSPACED, Font.PLAIN, this.height/4), false);
+	public void setName(String newName) {
+		this.name = newName;
+	}
+	
+	@Override
+	public void resize() {
+		super.resize();
+		this.font = new TrueTypeFont(jfont.deriveFont((float)this.height/4), false);
+	}
+	
+	public boolean isEnabled() {
+		return this.enabled;
+	}
+	
+	public void setEnabled(boolean enbled) {
+		this.enabled = enbled;
 	}
 
 }

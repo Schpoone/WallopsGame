@@ -11,9 +11,9 @@ public class GuiMainMenu extends GuiScreen {
 
 	public GuiMainMenu(Game game) {
 		super(game);
-		this.screenButtons.add(new GuiButton((Display.getWidth())/3, (Display.getHeight())/3, Display.getWidth()/3, 5*Display.getHeight()/54, "Play"));
-		this.screenButtons.add(new GuiButton((Display.getWidth())/3, (4*Display.getHeight())/9, Display.getWidth()/3, 5*Display.getHeight()/54, "Options"));
-		this.screenButtons.add(new GuiButton((Display.getWidth())/3, (5*Display.getHeight())/9, Display.getWidth()/3, 5*Display.getHeight()/54, "Quit"));
+		this.renderables.add(new GuiButton(1F/3F, 1F/3F, 1F/3F, 5F/54F, "Play"));
+		this.renderables.add(new GuiButton(1F/3F, 4F/9F, 1F/3F, 5F/54F, "Options"));
+		this.renderables.add(new GuiButton(1F/3F, 5F/9F, 1F/3F, 5F/54F, "Quit"));
 	}
 	
 	/**
@@ -33,14 +33,6 @@ public class GuiMainMenu extends GuiScreen {
 			game.logger.debug("Close requested from "+this.getClass().getSimpleName()+"\'s \"Quit\" button.");
 			this.game.shutdown();
 		}
-	}
-	
-	@Override
-	public void resize() {
-		super.resize();
-		this.screenButtons.get(0).setSize((Display.getWidth())/3, (Display.getHeight())/3, Display.getWidth()/3, 5*Display.getHeight()/54);
-		this.screenButtons.get(1).setSize((Display.getWidth())/3, (4*Display.getHeight())/9, Display.getWidth()/3, 5*Display.getHeight()/54);
-		this.screenButtons.get(2).setSize((Display.getWidth())/3, (5*Display.getHeight())/9, Display.getWidth()/3, 5*Display.getHeight()/54);
 	}
 
 }

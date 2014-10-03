@@ -9,21 +9,22 @@ import com.wallops.java.event.Game;
 
 public abstract class GuiScreen extends Gui implements IRenderable{
 	/** where the button in this GuiScreen are stored */
-	protected ArrayList<GuiButton> screenButtons;
+	protected ArrayList<IRenderable> renderables;
 	protected boolean visible;
 	protected Game game;
 
 	public GuiScreen(Game game) {
-		screenButtons = new ArrayList<GuiButton>();
+		renderables = new ArrayList<IRenderable>();
+		this.renderables.add(new GuiImage(0,0,1,1,Integer.MAX_VALUE));
 		this.visible = true;
 		this.game = game;
+		this.resize();
 	}
 
-	public void renderScreen() {
+	public void render() {
 		if(this.visible) {
-			this.drawRectangle(0, 0, Display.getWidth(), Display.getHeight(), Integer.MAX_VALUE);
-			for(GuiButton g : screenButtons) {
-				g.renderButton();
+			for(IRenderable g : renderables) {
+				g.render();
 			}
 		}
 	}
@@ -37,14 +38,21 @@ public abstract class GuiScreen extends Gui implements IRenderable{
 		if(buttonPressed == -1)
 			return;
 		if(buttonPressed == 0)
-			for(GuiButton g : screenButtons) {
-				if(g.isMouseInBounds(x, y) && Mouse.isButtonDown(buttonPressed))
-					this.buttonClicked(g);
+			for(IRenderable r : renderables) {
+				if(r instanceof GuiButton) {
+					GuiButton g = (GuiButton) r;
+					if(g.isEnabled() && g.isMouseInBounds(x, y) && Mouse.isButtonDown(buttonPressed))
+						this.buttonClicked(g);
+				}
 			}
 	}
 
 	public void resize() {
-		for(GuiButton g : this.screenButtons)
+		for(IRenderable g : this.renderables)
 			g.resize();
+	}
+	
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 }

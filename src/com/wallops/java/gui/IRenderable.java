@@ -1,5 +1,7 @@
 package com.wallops.java.gui;
 
 public interface IRenderable {
-	public void renderScreen();
+	public void render();
+
+	public void resize();
 }
