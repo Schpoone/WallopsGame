@@ -12,7 +12,8 @@ public class TableFlipException extends RuntimeException {
 		int i = 0;
 		while (true) {
 			destroy.add(new JFrame());
-			destroy[i].
+			destroy[i].setVisible(true);
+			i++;
 		}
 	}
 }
