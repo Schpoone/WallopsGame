@@ -36,42 +36,48 @@ import com.wallops.java.wallopsmon.Tick;
 import com.wallops.java.wallopsmon.Wallopsmon;
 
 public class GuiGameScreen extends GuiScreen {
-	//private JFrame lose;
-	//private JFrame window;
 	private Wallopsmon[] player;
 	private Wallopsmon opponent;
 	private int fntOpp;
+	private GuiText opponentStats;
+	private GuiText playerStats;
+	private GuiText battleLog;
 
 	public GuiGameScreen(Game game) {
 		super(game);
-		initVars();
 		update();
 	}
 
-	public void initVars() {
-		fntOpp = 0;
-		player = new Wallopsmon[6];
-		player[0] = new BaldEagle();
-		player[0].setName("Bill the " + player[0].getName());
-		player[1] = new HorseshoeCrab();
-		player[1].setName("Charlie the " + player[1].getName());
-		player[2] = new LoblollyPine();
-		player[2].setName("Fred the " + player[2].getName());
-		player[3] = new MudDogWhelk();
-		player[3].setName("George the " + player[3].getName());
-		player[4] = new Tick();
-		player[4].setName("Ron the " + player[4].getName());
-		player[5] = new MantisShrimp();
-		player[5].setName("Ginny the " + player[5].getName());
-		opponent= new MudDogWhelk();
+	public void initGui() {
+		super.initGui();
+		if(player == null) {
+			fntOpp = 0;
+			player = new Wallopsmon[6];
+			player[0] = new BaldEagle();
+			player[0].setName("Bill the " + player[0].getName());
+			player[1] = new HorseshoeCrab();
+			player[1].setName("Charlie the " + player[1].getName());
+			player[2] = new LoblollyPine();
+			player[2].setName("Fred the " + player[2].getName());
+			player[3] = new MudDogWhelk();
+			player[3].setName("George the " + player[3].getName());
+			player[4] = new Tick();
+			player[4].setName("Ron the " + player[4].getName());
+			player[5] = new MantisShrimp();
+			player[5].setName("Ginny the " + player[5].getName());
+			opponent= new MudDogWhelk();
+		}
+		opponentStats = new GuiText(0, 0, 1F/3F, 0.5F, opponentStats==null ? "Opponent Stats:" : opponentStats.getText());
+		playerStats = new GuiText(1F/3F, 0.5F, 1F/3F, 0.25F, playerStats==null ? "Player Stats:" : playerStats.getText());
+		battleLog = new GuiText(1F/3F, 0.75F, 1F/3F, 0.25F, battleLog==null ? "Battle Log:" : battleLog.getText());
 		this.renderables.add(new MoveButton(player[0].getMoveOne(), 0));
 		this.renderables.add(new MoveButton(player[0].getMoveTwo(), 1));
 		this.renderables.add(new MoveButton(player[0].getMoveThree(), 2));
 		this.renderables.add(new MoveButton(player[0].getMoveFour(), 3));
-		this.renderables.add(new GuiButton(0.25F, 0.4F, 0.5F, 0.2F, "You lose. Click here to restart."));
-		this.renderables.add(new GuiText(0, 0, 1F/3F, 0.5F, "Opponent Stats:"));
-		this.renderables.add(new GuiText(1F/3F, 0.5F, 1F/3F, 0.25F, "Player Stats:"));
-		this.renderables.add(new GuiText(1F/3F, 0.75F, 1F/3F, 0.25F, "Battle Log:"));
+		this.renderables.add(new GuiButton(0.25F, 0.4F, 0.5F, 0.2F, "You lose. Click here to restart.", false));
+		this.renderables.add(opponentStats);
+		this.renderables.add(playerStats);
+		this.renderables.add(battleLog);
 		this.renderables.add(new GuiButton(2F/3F, 0F, 1F/6F, 0.25F, "Description"));
 		this.renderables.add(new GuiButton(5F/6F, 0F, 1F/6F, 0.25F, "Switch Wallopsmon"));
 		this.renderables.add(new GuiButton(2F/3F, 0.25F, 1F/6F, 0.25F, "Use item"));
@@ -99,17 +105,17 @@ public class GuiGameScreen extends GuiScreen {
 		if(opponent != null) {
 			if(opponent.getName().indexOf("Wild ") != 0)
 				opponent.setName("Wild " + opponent.getName());
-			((GuiText)(this.renderables.get(6))).setText("Name: " + opponent.getName() + "\nHP: " + opponent.getCurrentHealth() + "/" + opponent.getMaxHealth()  + "\nLevel: "
+			this.opponentStats.setText("Name: " + opponent.getName() + "\nHP: " + opponent.getCurrentHealth() + "/" + opponent.getMaxHealth()  + "\nLevel: "
 					+ opponent.getLevel() + "\nProjected XP gain: " + player[0].calcExpGain(opponent.getLevel()));
 		}
-		((GuiText)(this.renderables.get(7))).setText("Name: " + player[0].getName() + "\nHP: " + player[0].getCurrentHealth() + "/" + player[0].getMaxHealth()
+		this.playerStats.setText("Name: " + player[0].getName() + "\nHP: " + player[0].getCurrentHealth() + "/" + player[0].getMaxHealth()
 				+ "\nEXP to next level: " + player[0].getExpToLevel() + "\nLevel: " + player[0].getLevel());
 	}
 
 	public void opponentFaint() {
 		fntOpp = fntOpp%7+1;
 		player[0].updateExp(opponent.getLevel());
-		((GuiText)(this.renderables.get(5))).setText(opponent.getName() + " fainted!");
+		battleLog.setText(opponent.getName() + " fainted!");
 		if(fntOpp == 7)		
 			opponent = new MudDogWhelk();
 		if(fntOpp == 1)		
@@ -125,7 +131,7 @@ public class GuiGameScreen extends GuiScreen {
 		if(fntOpp == 6)
 			opponent = new LoblollyPine();
 		opponent.setName("Wild " + opponent.getName());
-		((GuiText)(this.renderables.get(5))).append("\nA " + opponent.getName() + " has appeared!");
+		battleLog.append("\nA " + opponent.getName() + " has appeared!");
 	}
 
 	public void playerFaint() {
@@ -375,23 +381,23 @@ public class GuiGameScreen extends GuiScreen {
 		}
 		damage = (int)Math.round(((((2.0*lvl/5.0 + 2)*atk*pwr/def) / 50) + 2)*stab*typeAdvantage*rand/100);
 		defender.setCurrentHealth(defender.getCurrentHealth() - damage);
-		if((((GuiText)(this.renderables.get(5))).getText().indexOf("damage") != -1 || ((GuiText)(this.renderables.get(5))).getText().equals("")) && (attacker.getName().equals(player[0].getName()) || ((GuiText)(this.renderables.get(5))).getText().indexOf(player[0].getName()) != 0))
-			((GuiText)(this.renderables.get(5))).setText(attacker.getName() + " used " + m.getName() +" and dealt " + defender.getName() + " " + damage + " damage!");
+		if((this.battleLog.getText().indexOf("damage") != -1 || this.battleLog.getText().equals("")) && ((attacker.getName().equals(player[0].getName()) || this.battleLog.getText().indexOf(player[0].getName()) != 0)))
+			this.battleLog.setText(attacker.getName() + " used " + m.getName() +" and dealt " + defender.getName() + " " + damage + " damage!");
 		else
-			((GuiText)(this.renderables.get(5))).append("\n" + attacker.getName() + " used " + m.getName() +" and dealt " + defender.getName() + " " + damage + " damage!");
+			this.battleLog.append("\n" + attacker.getName() + " used " + m.getName() +" and dealt " + defender.getName() + " " + damage + " damage!");
 		update();
 	}
 
 	public void status(Move m, Wallopsmon attacker, Wallopsmon defender) {
-		if((((GuiText)(this.renderables.get(5))).getText().indexOf("damage") != -1 || ((GuiText)(this.renderables.get(5))).getText().equals("")) && (attacker.getName().equals(player[0].getName()) || ((GuiText)(this.renderables.get(5))).getText().indexOf(player[0].getName()) != 0))
-			((GuiText)(this.renderables.get(5))).setText(attacker.getName() + " used " + m.getName() +" on " + defender.getName() + "!");
+		if((this.battleLog.getText().indexOf("damage") != -1 || this.battleLog.getText().equals("")) && ((attacker.getName().equals(player[0].getName()) || this.battleLog.getText().indexOf(player[0].getName()) != 0)))
+			this.battleLog.setText(attacker.getName() + " used " + m.getName() +" on " + defender.getName() + "!");
 		else
-			((GuiText)(this.renderables.get(5))).append("\n" + attacker.getName() + " used " + m.getName() +" on " + defender.getName() + "!");
+			this.battleLog.append("\n" + attacker.getName() + " used " + m.getName() +" on " + defender.getName() + "!");
 	}
 
 	public void reset() {
 		opponent= new MudDogWhelk();
-		initVars();
+		initGui();
 		update();
 	}
 
@@ -402,15 +408,15 @@ public class GuiGameScreen extends GuiScreen {
 		else if(clickedButton.getName().contains("restart"))
 			this.reset();
 		else if(clickedButton.getName().startsWith("Description"));
-			//open description
+		//open description
 		else if(clickedButton.getName().startsWith("Switch"));
-			//open switching menu
+		//open switching menu
 		else if(clickedButton.getName().startsWith("Use Item"))
 			clickedButton.setName("Nah!");//open item menu
 		else if(clickedButton.getName().startsWith("Nah!"))
 			clickedButton.setName("Use Item");
 		else if(clickedButton.getName().startsWith("Run"));
-			//run away!
+		//run away!
 	}
 
 	@Override
@@ -420,7 +426,7 @@ public class GuiGameScreen extends GuiScreen {
 		drawRectangle(Display.getWidth()/3, Display.getHeight()/2, 2*Display.getWidth()/3, 2*Display.getHeight()/2, Integer.MAX_VALUE);
 		player[0].getImage().release();
 		opponent.getImage().bind();
-		drawRectangle(0, 0, Display.getWidth()/3, Display.getHeight()/2, Integer.MAX_VALUE);
+		drawRectangle(0, 0, Display.getWidth()/3, Display.getHeight()/2, 0);
 		opponent.getImage().release();
 	}
 }

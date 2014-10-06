@@ -11,10 +11,12 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Matrix4f;
 
 import com.wallops.java.gui.Gui;
 import com.wallops.java.gui.GuiMainMenu;
 import com.wallops.java.gui.GuiScreen;
+import com.wallops.java.reference.MouseHandler;
 
 /**
  * The game object for Wallopsmon. Here all initialization and registration will take
@@ -26,13 +28,14 @@ import com.wallops.java.gui.GuiScreen;
 public class Game {
 
 	/** used for logging anything that needs to be traced to the Game object */
-	public Logger logger = LogManager.getLogger(this.getClass().getSimpleName());
+	public static Logger logger = LogManager.getLogger("Game");
 	
 	private boolean running;
-	private int displayHeight;
-	private int displayWidth;
+	public int displayHeight;
+	public int displayWidth;
 	private GuiScreen activeGui;
-	private Game game;
+	public static Game game;
+	public static MouseHandler mouseHandler = new MouseHandler();
 	
 	/** for funky mac related weirdness that'd have to be dealt with */
 	public static final boolean isRunningOnMac = System.getProperty("os.name").toLowerCase().contains("mac");
@@ -42,7 +45,7 @@ public class Game {
 	 * TODO: have this varied based on command line arguments from launcher
 	 */
 	public Game() {
-		this.game = this;
+		game = this;
 		this.displayHeight = 480;
 		this.displayWidth = 720;
 	}
@@ -51,15 +54,25 @@ public class Game {
 		this.logger.log(Level.INFO, "Starting main game loop.");
 		this.running = true;
 		this.activeGui = new GuiMainMenu(game);
+		this.displayHeight = Display.getHeight();
+		this.displayWidth = Display.getWidth();
 		// Game loop, methinks
 		try {
 			while(!Display.isCloseRequested() && this.running) {
+				GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+				GL11.glDisable(GL11.GL_DEPTH_TEST);
 				this.activeGui.render();
 				if(Mouse.isCreated()&&Mouse.next())
 					this.activeGui.handleMouse();
 				Display.update();
-				if(Display.wasResized()) {
+				if(Display.getHeight() != this.displayHeight || Display.getWidth() != this.displayWidth) {
+					//GL11.glMatrixMode(GL11.GL_MODELVIEW_MATRIX);
+					//GL11.glScalef(Display.getWidth()/(float)(this.displayWidth), Display.getHeight()/(float)(this.displayHeight),1);
+					//GL11.glViewport(0, 0, Display.getWidth(), Display.getHeight());
+					this.displayHeight = Display.getHeight();
+					this.displayWidth = Display.getWidth();
 					this.activeGui.resize();
+					this.logger.debug("Finished resizing to: " + Display.getWidth() + "/" +Display.getHeight()+"\n");
 				}
 			}
 		} catch (Exception e) {
@@ -76,7 +89,7 @@ public class Game {
 		logger.log(Level.INFO, "Initializing graphics...");
 		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		try {
-			Display.setDisplayMode(new DisplayMode((int)rect.getWidth(), (int)rect.getHeight()));
+			Display.setDisplayMode(new DisplayMode(this.displayWidth, this.displayHeight));
 			Display.create();
 			Display.setResizable(true);
 			Display.setVSyncEnabled(true);

@@ -8,9 +8,14 @@ import org.lwjgl.opengl.Display;
 import com.wallops.java.event.Game;
 
 public class GuiMainMenu extends GuiScreen {
-
+	
 	public GuiMainMenu(Game game) {
 		super(game);
+	}
+
+	@Override
+	public void initGui() {
+		super.initGui();
 		this.renderables.add(new GuiButton(1F/3F, 1F/3F, 1F/3F, 5F/54F, "Play"));
 		this.renderables.add(new GuiButton(1F/3F, 4F/9F, 1F/3F, 5F/54F, "Options"));
 		this.renderables.add(new GuiButton(1F/3F, 5F/9F, 1F/3F, 5F/54F, "Quit"));

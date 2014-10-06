@@ -6,6 +6,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
 import com.wallops.java.event.Game;
+import com.wallops.java.reference.MouseHandler;
 
 public abstract class GuiScreen extends Gui implements IRenderable{
 	/** where the button in this GuiScreen are stored */
@@ -14,11 +15,14 @@ public abstract class GuiScreen extends Gui implements IRenderable{
 	protected Game game;
 
 	public GuiScreen(Game game) {
-		renderables = new ArrayList<IRenderable>();
-		this.renderables.add(new GuiImage(0,0,1,1,Integer.MAX_VALUE));
-		this.visible = true;
 		this.game = game;
-		this.resize();
+		this.initGui();
+	}
+	
+	public void initGui() {
+		renderables = new ArrayList<IRenderable>();
+		this.renderables.add(new GuiImage(0F,0F,1F,1F,Integer.MAX_VALUE));
+		this.visible = true;
 	}
 
 	public void render() {
@@ -32,8 +36,8 @@ public abstract class GuiScreen extends Gui implements IRenderable{
 	public abstract void buttonClicked(GuiButton clickedButton);
 
 	public void handleMouse() {
-		int x = Mouse.getEventX();
-		int y = Display.getHeight()-Mouse.getEventY();
+		int x = MouseHandler.getEventX();
+		int y = MouseHandler.getEventY();
 		int buttonPressed = Mouse.getEventButton();
 		if(buttonPressed == -1)
 			return;
@@ -48,8 +52,8 @@ public abstract class GuiScreen extends Gui implements IRenderable{
 	}
 
 	public void resize() {
-		for(IRenderable g : this.renderables)
-			g.resize();
+		this.renderables.clear();
+		this.initGui();
 	}
 	
 	public void setVisible(boolean visible) {

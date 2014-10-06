@@ -2,18 +2,29 @@ package com.wallops.java.gui;
 
 import java.awt.Font;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
-public class GuiButton extends Resizeable implements IRenderable {
+import com.wallops.java.event.Game;
+import com.wallops.java.reference.MouseHandler;
 
+public class GuiButton extends Gui implements IRenderable {
+
+	protected int x;
+	protected int y;
+	protected int width;
+	protected int height;
+	private Logger logger;
 	private int mouseX;
 	private int mouseY;
 	protected String name;
 	private boolean enabled;
+	private boolean visible;
 	private Font jfont;
 	private TrueTypeFont font;
 	private int trimColor;
@@ -30,22 +41,70 @@ public class GuiButton extends Resizeable implements IRenderable {
 	 * @param name name of the button (to be displayed)
 	 */
 	public GuiButton(float xScale, float yScale, float widthScale, float heightScale, String name) {
-		super(xScale, yScale, widthScale, heightScale);
-		this.name = name;
-		this.enabled = true;
-		this.visible = true;
-		this.jfont = new Font(Font.MONOSPACED, Font.PLAIN, 1);
-		this.resize();
+		this((int)(xScale*Game.game.displayWidth), (int)(yScale*Game.game.displayHeight), (int)(widthScale*Game.game.displayWidth), (int)(heightScale*Game.game.displayHeight), name);
 	}
-
+	
+	/**
+	 * creates a new button at a specified location, with a certain size and text to display
+	 * @param xScale the ratio between the Display width and the button's x coordinate
+	 * @param yScale the ratio between the Display height and the button's y coordinate
+	 * @param widthScale the ratio between the Display width and the button's width
+	 * @param heightScale the ratio between the Display size and the button's height
+	 * @param name name of the button (to be displayed)
+	 * @param visible whether to display this button
+	 */
+	
+	public GuiButton(float xScale, float yScale, float widthScale, float heightScale, String name, boolean visible) {
+		this((int)(xScale*Game.game.displayWidth), (int)(yScale*Game.game.displayHeight), (int)(widthScale*Game.game.displayWidth), (int)(heightScale*Game.game.displayHeight), name, visible);
+	}
+	
+	/**
+	 * creates a new button at a specified location, with a certain size and text to display
+	 * @param x the button's x coordinate
+	 * @param y the button's y coordinate
+	 * @param width the button's width
+	 * @param height the button's height
+	 * @param name name of the button (to be displayed)
+	 */
+	public GuiButton(int x, int y, int width, int height, String name) {
+		this(x, y, width, height, name, true);
+	}
+	
+	/**
+	 * creates a new button at a specified location, with a certain size and text to display
+	 * @param x the button's x coordinate
+	 * @param y the button's y coordinate
+	 * @param width the button's width
+	 * @param height the button's height
+	 * @param name name of the button (to be displayed)
+	 * @param visible whether to display this button
+	 */
+	public GuiButton(int x, int y, int width, int height, String name, boolean visible) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.name = name;
+		this.logger = LogManager.getLogger(this.name);
+		this.enabled = true;
+		this.visible = visible;
+		this.jfont = new Font(Font.MONOSPACED, Font.PLAIN, 1);
+		this.font = new TrueTypeFont(this.jfont, false);
+		float widthMaxFontSize = (float)(this.width)/(float)(this.font.getWidth(this.name));
+		float heightMaxFontSize = (float)(this.height)/(float)(this.font.getHeight(this.name));
+		float maxFontSize = widthMaxFontSize > heightMaxFontSize ? heightMaxFontSize : widthMaxFontSize;
+		this.jfont = jfont.deriveFont(jfont.getSize2D()*maxFontSize);
+		this.font = new TrueTypeFont(this.jfont, false);
+	}
+	
 	/**
 	 * renders this button in its stored location with color (depending on where the 
 	 * mouse is, and whether it's clicked)
 	 */
 	@Override
 	public void render() {
-		this.mouseX = Mouse.getX();
-		this.mouseY = Display.getHeight() - Mouse.getY();
+		this.mouseX = MouseHandler.getX();
+		this.mouseY = MouseHandler.getY();
 		if (System.currentTimeMillis() >= cooldown) {
 			// red (means mouse isn't in button's bounds)
 			this.trimColor = 255 << 24 | 130 << 16 | 28 << 8 | 0;
@@ -89,27 +148,25 @@ public class GuiButton extends Resizeable implements IRenderable {
 	public boolean isMouseInBounds(int mouseX, int mouseY) {
 		return mouseX > this.x && mouseX < this.x+this.width && mouseY > this.y && mouseY < this.y+this.height;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String newName) {
 		this.name = newName;
 	}
-	
-	@Override
-	public void resize() {
-		super.resize();
-		this.font = new TrueTypeFont(jfont.deriveFont((float)this.height/4), false);
-	}
-	
+
 	public boolean isEnabled() {
 		return this.enabled;
 	}
-	
+
 	public void setEnabled(boolean enbled) {
 		this.enabled = enbled;
+	}
+	
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 
 }

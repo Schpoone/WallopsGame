@@ -13,6 +13,12 @@ public class MoveButton extends GuiButton {
 		this.move = move;
 		this.loc = loc;
 	}
+	
+	public MoveButton(int x, int y, int width, int height,  Move move, int loc) {
+		super(x, y, width, height, move.getName());
+		this.move = move;
+		this.loc = loc;
+	}
 
 	public MoveButton(Move move, int loc) {
 		super(((loc%2+4F)/6F)+2F/150F, ((loc/2+2F)/4F)+2F/150F, (1F/6F)-2F/150F, (1F/4F)-2F/150F, move.getName());
