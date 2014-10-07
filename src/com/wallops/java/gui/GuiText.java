@@ -49,7 +49,6 @@ public class GuiText extends Gui implements IRenderable {
 				continue;
 			float tempWidthMaxFontSize = (float)(this.width)/(float)(this.font.getWidth(line));
 			widthMaxFontSize = widthMaxFontSize > tempWidthMaxFontSize ? tempWidthMaxFontSize : widthMaxFontSize;
-			logger.debug(line+" "+widthMaxFontSize);
 		}
 		float maxFontSize = widthMaxFontSize > heightMaxFontSize ? heightMaxFontSize : widthMaxFontSize;
 		this.font = new TrueTypeFont(jfont.deriveFont(maxFontSize), false);

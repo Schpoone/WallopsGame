@@ -66,13 +66,16 @@ public class Game {
 					this.activeGui.handleMouse();
 				Display.update();
 				if(Display.getHeight() != this.displayHeight || Display.getWidth() != this.displayWidth) {
-					//GL11.glMatrixMode(GL11.GL_MODELVIEW_MATRIX);
+					GL11.glMatrixMode(GL11.GL_PROJECTION);
+					GL11.glLoadIdentity();
 					//GL11.glScalef(Display.getWidth()/(float)(this.displayWidth), Display.getHeight()/(float)(this.displayHeight),1);
-					//GL11.glViewport(0, 0, Display.getWidth(), Display.getHeight());
+					
 					this.displayHeight = Display.getHeight();
 					this.displayWidth = Display.getWidth();
+					GL11.glViewport(0, 0, displayWidth, displayHeight);
+					GL11.glScissor(0, 0, displayWidth, displayHeight);
+					GL11.glOrtho(0,displayWidth,displayHeight,0,-1,1);
 					this.activeGui.resize();
-					this.logger.debug("Finished resizing to: " + Display.getWidth() + "/" +Display.getHeight()+"\n");
 				}
 			}
 		} catch (Exception e) {
