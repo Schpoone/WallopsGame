@@ -1,6 +1,1 @@
-1. Have textures render.
-2. Have strings render.
-3. Add background to main menu.
-4. Convert battle to work with LWJGL.
-5. Have buttons actually do something.
-6. Add a configuration for log4j2.
+1. Add background to main menu.
