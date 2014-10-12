@@ -161,7 +161,7 @@ public abstract class Wallopsmon {
 	}
 	
 	public Texture getImage() {
-		return this.mainImage;
+		return this.shiny ? this.shinyImage : this.mainImage;
 	}
 	
 	public Texture getShinyImage() {

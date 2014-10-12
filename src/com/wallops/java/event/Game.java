@@ -14,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 
 import com.wallops.java.gui.Gui;
+import com.wallops.java.gui.GuiGameScreen;
 import com.wallops.java.gui.GuiMainMenu;
 import com.wallops.java.gui.GuiScreen;
 import com.wallops.java.reference.MouseHandler;
@@ -53,7 +54,7 @@ public class Game {
 	public void startGameLoop() {
 		this.logger.log(Level.INFO, "Starting main game loop.");
 		this.running = true;
-		this.activeGui = new GuiMainMenu(game);
+		this.activeGui = new GuiGameScreen(game);
 		this.displayHeight = Display.getHeight();
 		this.displayWidth = Display.getWidth();
 		// Game loop, methinks
@@ -68,7 +69,6 @@ public class Game {
 				if(Display.getHeight() != this.displayHeight || Display.getWidth() != this.displayWidth) {
 					GL11.glMatrixMode(GL11.GL_PROJECTION);
 					GL11.glLoadIdentity();
-					//GL11.glScalef(Display.getWidth()/(float)(this.displayWidth), Display.getHeight()/(float)(this.displayHeight),1);
 					
 					this.displayHeight = Display.getHeight();
 					this.displayWidth = Display.getWidth();
@@ -96,6 +96,7 @@ public class Game {
 			Display.create();
 			Display.setResizable(true);
 			Display.setVSyncEnabled(true);
+			Display.setTitle("Wallopsmon");
 		} catch (LWJGLException e) {
 			logger.fatal("Crashed while trying to initialize display: ", e);
 		}
@@ -103,6 +104,7 @@ public class Game {
 		GL11.glLoadIdentity(); // clearing the projection matrix
 		GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0, -1, 1);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		logger.log(Level.INFO, "Graphics initialized: lwjgl 2.9.1, see http://www.lwjgl.org/");
 	}
 	

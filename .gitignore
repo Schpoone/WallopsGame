@@ -3,6 +3,7 @@ bin
 .project
 .classpath
 **/.DS_Store
+.DS_Store
 .settings
 
 # ignore libraries (these should probably be elsewhere anyway)

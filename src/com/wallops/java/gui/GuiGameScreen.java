@@ -405,28 +405,24 @@ public class GuiGameScreen extends GuiScreen {
 	public void buttonClicked(GuiButton clickedButton) {
 		if(clickedButton instanceof MoveButton)
 			this.attack(((MoveButton)clickedButton).getMove(), this.player[0], this.opponent);
-		else if(clickedButton.getName().contains("restart"))
+		else if(clickedButton.getName().toLowerCase().contains("restart"))
 			this.reset();
-		else if(clickedButton.getName().startsWith("Description"));
+		else if(clickedButton.getName().toLowerCase().startsWith("description"));
 		//open description
-		else if(clickedButton.getName().startsWith("Switch"));
+		else if(clickedButton.getName().toLowerCase().startsWith("switch"));
 		//open switching menu
-		else if(clickedButton.getName().startsWith("Use Item"))
+		else if(clickedButton.getName().toLowerCase().startsWith("use item"))
 			clickedButton.setName("Nah!");//open item menu
-		else if(clickedButton.getName().startsWith("Nah!"))
+		else if(clickedButton.getName().toLowerCase().startsWith("nah!"))
 			clickedButton.setName("Use Item");
-		else if(clickedButton.getName().startsWith("Run"));
+		else if(clickedButton.getName().toLowerCase().startsWith("run"));
 		//run away!
 	}
 
 	@Override
 	public void render() {
 		super.render();
-		player[0].getImage().bind();
-		drawRectangle(Display.getWidth()/3, Display.getHeight()/2, 2*Display.getWidth()/3, 2*Display.getHeight()/2, Integer.MAX_VALUE);
-		player[0].getImage().release();
-		opponent.getImage().bind();
-		drawRectangle(0, 0, Display.getWidth()/3, Display.getHeight()/2, 0);
-		opponent.getImage().release();
+		this.drawBoundImage(0, Display.getHeight()/2, Display.getWidth()/3, 2*Display.getHeight()/2, player[0].getImage());
+		this.drawBoundImage(Display.getWidth()/3, 0, 2*Display.getWidth()/3, Display.getHeight()/2, opponent.getImage());
 	}
 }
