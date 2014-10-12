@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import com.wallops.java.event.Battle;
+import com.wallops.java.gui.GuiGameScreen;
 import com.wallops.java.wallopsmon.Wallopsmon;
 
 
@@ -21,9 +21,9 @@ public class OpenSwitch implements ActionListener {
 	private JButton[] buttons;
 	private JFrame choose;
 	private ActionListener[] actions;
-	private Battle battle;
+	private GuiGameScreen battle;
 
-	public OpenSwitch(Wallopsmon[] w, Battle g) {
+	public OpenSwitch(Wallopsmon[] w, GuiGameScreen g) {
 		wallopsmons = w;
 		buttons = new JButton[6];
 		for(int i=0; i<6; i++)

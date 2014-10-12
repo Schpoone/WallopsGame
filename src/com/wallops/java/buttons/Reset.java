@@ -3,13 +3,13 @@ package com.wallops.java.buttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.wallops.java.event.Battle;
+import com.wallops.java.gui.GuiGameScreen;
 
 
 public class Reset implements ActionListener {
-	private Battle battle;
+	private GuiGameScreen battle;
 	
-	public Reset(Battle g) {
+	public Reset(GuiGameScreen g) {
 		battle = g;
 	}
 

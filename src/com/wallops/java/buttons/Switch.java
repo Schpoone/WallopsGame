@@ -5,18 +5,18 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-import com.wallops.java.event.Battle;
+import com.wallops.java.gui.GuiGameScreen;
 import com.wallops.java.reference.Move;
 import com.wallops.java.wallopsmon.Wallopsmon;
 
 
 public class Switch implements ActionListener {
-	private Battle battle;
+	private GuiGameScreen battle;
 	private JFrame choose;
 	private Wallopsmon[] wallopsmons;
 	private int loc;
 	
-	public Switch(Battle g, JFrame jf, Wallopsmon[] w, int i) {
+	public Switch(GuiGameScreen g, JFrame jf, Wallopsmon[] w, int i) {
 		battle = g;
 		choose = jf;
 		wallopsmons = w;

@@ -3,15 +3,15 @@ package com.wallops.java.buttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.wallops.java.event.Battle;
+import com.wallops.java.gui.GuiGameScreen;
 import com.wallops.java.reference.Move;
 
 
 public class Act implements ActionListener {
 	private Move btnMv;
-	private Battle battle;
+	private GuiGameScreen battle;
 
-	public Act(Move m, Battle g) {
+	public Act(Move m, GuiGameScreen g) {
 		btnMv = m;
 		battle = g;
 	}
