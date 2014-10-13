@@ -13,6 +13,12 @@ import org.newdawn.slick.TrueTypeFont;
 import com.wallops.java.event.Game;
 import com.wallops.java.reference.MouseHandler;
 
+/**
+ * A {@link Gui} used to display buttons in their location and have utility methods for clicking it.
+ * 
+ * @author PureChaose
+ *
+ */
 public class GuiButton extends Gui implements IRenderable {
 
 	protected int x;
@@ -33,12 +39,15 @@ public class GuiButton extends Gui implements IRenderable {
 	private long cooldown;
 
 	/**
-	 * creates a new button at a specified location, with a certain size and text to display
+	 * Creates a new button at a specified location, with a certain size and text to display
 	 * @param xScale the ratio between the Display width and the button's x coordinate
 	 * @param yScale the ratio between the Display height and the button's y coordinate
 	 * @param widthScale the ratio between the Display width and the button's width
 	 * @param heightScale the ratio between the Display size and the button's height
 	 * @param name name of the button (to be displayed)
+	 * @see GuiButton#GuiButton(int, int, int, int, String)
+	 * @see GuiButton#GuiButton(float, float, float, float, String, boolean)
+	 * @see GuiButton#GuiButton(int, int, int, int, String, boolean)
 	 */
 	public GuiButton(float xScale, float yScale, float widthScale, float heightScale, String name) {
 		this((int)(xScale*Game.game.displayWidth), (int)(yScale*Game.game.displayHeight), (int)(widthScale*Game.game.displayWidth), (int)(heightScale*Game.game.displayHeight), name);
@@ -52,6 +61,9 @@ public class GuiButton extends Gui implements IRenderable {
 	 * @param heightScale the ratio between the Display size and the button's height
 	 * @param name name of the button (to be displayed)
 	 * @param visible whether to display this button
+	 * @see GuiButton#GuiButton(float, float, float, float, String)
+	 * @see GuiButton#GuiButton(float, float, float, float, String, boolean)
+	 * @see GuiButton#GuiButton(int, int, int, int, String, boolean)
 	 */
 	
 	public GuiButton(float xScale, float yScale, float widthScale, float heightScale, String name, boolean visible) {
@@ -65,6 +77,9 @@ public class GuiButton extends Gui implements IRenderable {
 	 * @param width the button's width
 	 * @param height the button's height
 	 * @param name name of the button (to be displayed)
+	 * @see GuiButton#GuiButton(float, float, float, float, String)
+	 * @see GuiButton#GuiButton(int, int, int, int, String)
+	 * @see GuiButton#GuiButton(int, int, int, int, String, boolean)
 	 */
 	public GuiButton(int x, int y, int width, int height, String name) {
 		this(x, y, width, height, name, true);
@@ -78,6 +93,9 @@ public class GuiButton extends Gui implements IRenderable {
 	 * @param height the button's height
 	 * @param name name of the button (to be displayed)
 	 * @param visible whether to display this button
+	 * @see GuiButton#GuiButton(float, float, float, float, String)
+	 * @see GuiButton#GuiButton(int, int, int, int, String)
+	 * @see GuiButton#GuiButton(float, float, float, float, String, boolean)
 	 */
 	public GuiButton(int x, int y, int width, int height, String name, boolean visible) {
 		this.x = x;
@@ -146,7 +164,7 @@ public class GuiButton extends Gui implements IRenderable {
 	 * @return whether the mouse is in this button's bounds
 	 */
 	public boolean isMouseInBounds(int mouseX, int mouseY) {
-		return mouseX > this.x && mouseX < this.x+this.width && mouseY > this.y && mouseY < this.y+this.height;
+		return (mouseX > this.x && mouseX < this.x+this.width && mouseY > this.y && mouseY < this.y+this.height) && this.enabled && this.visible;
 	}
 
 	public String getName() {

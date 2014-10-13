@@ -5,6 +5,12 @@ import org.lwjgl.opengl.GL43;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
+/**
+ * A class used for easily rendering for its subclasses.
+ * 
+ * @author PureChaose
+ *
+ */
 public class Gui {
 	
 	/**
@@ -53,6 +59,7 @@ public class Gui {
 	 * @param x2 ending point's x
 	 * @param y2 ending point's y
 	 * @param color the rectangle's color packed into an int
+	 * @see Gui#drawTexture(int, int, int, int, Texture)
 	 */
 	public void drawRectangle(int x1, int y1, int x2, int y2, int color) {
 		
@@ -87,7 +94,16 @@ public class Gui {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 	
-	public void drawBoundImage(int x1, int y1, int x2, int y2, Texture t) {
+	/**
+	 * Draws a given {@linkplain Texture} in a given location with a given size. 
+	 * @param x1 The x coordinate top-left point of where the {@linkplain Texture} should be rendered
+	 * @param y1 The y coordinate top-left point of where the {@linkplain Texture} should be rendered
+	 * @param x2 The x coordinate bottom-right point of where the {@linkplain Texture} should be rendered
+	 * @param y2 The y coordinate bottom-left point of where the {@linkplain Texture} should be rendered
+	 * @param t The {@linkplain Texture} to be rendered
+	 * @see Gui#drawRectangle(int, int, int, int, int)
+	 */
+	public void drawTexture(int x1, int y1, int x2, int y2, Texture t) {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -108,7 +124,6 @@ public class Gui {
 		}
 		float texCoordX = (float)(t.getImageWidth())/t.getTextureWidth();
 		float texCoordY = (float)(t.getImageHeight())/t.getTextureHeight();
-		// TODO make Tesselator work with textures too
 		Tesselator tess = Tesselator.instance;
 		tess.addVertexTex((double)x1, (double)y1, 0.0D, 0, 0);
 		tess.addVertexTex((double)x2, (double)y1, 0.0D, texCoordX, 0);

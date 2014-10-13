@@ -7,12 +7,26 @@ import org.lwjgl.opengl.Display;
 
 import com.wallops.java.event.Game;
 
+/**
+ * A {@linkplain GuiScreen} used for the main menu of the game. Has 3 {@linkplain GuiButton}s, one to play the game, one to open the options menu (to be implemented) and one to quit the game.
+ * 
+ * @author PureChaose
+ *
+ */
 public class GuiMainMenu extends GuiScreen {
 	
+	/**
+	 * Creates a new GuiMainMenu GuiScreen with a reference back to the calling Game Object as specified by GuiScreen's constructor.
+	 * @param game The calling Game Object
+	 * @see GuiGameScreen#GuiGameScreen(Game)
+	 */
 	public GuiMainMenu(Game game) {
 		super(game);
 	}
 
+	/**
+	 * Calls GuiScreen initGui and then adds three GuiButtons to render, one to start the game, one for options, and one to quit the game.
+	 */
 	@Override
 	public void initGui() {
 		super.initGui();
@@ -22,7 +36,7 @@ public class GuiMainMenu extends GuiScreen {
 	}
 	
 	/**
-	 * Does an action based on a given clicked button
+	 * Using the given GuiButton, the GuiMainMenu decides whether to play the game, open the options menu or quit the game.
 	 */
 	@Override
 	public void buttonClicked(GuiButton clickedButton) {

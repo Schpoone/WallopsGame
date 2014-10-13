@@ -11,6 +11,12 @@ import org.newdawn.slick.TrueTypeFont;
 
 import com.wallops.java.event.Game;
 
+/**
+ * A renderable Object used to display Strings within certain defined boundaries
+ * 
+ * @author PureChaose
+ *
+ */
 public class GuiText extends Gui implements IRenderable {
 
 	protected int x;
@@ -23,10 +29,26 @@ public class GuiText extends Gui implements IRenderable {
 	private TrueTypeFont font;
 	private Logger logger;
 
+	/**
+	 * Creates a new GuiText with specified ratio between the Display's dimension and its own, and the text to display in it.
+	 * @param xScale The ratio between the x coordinate of this GuiText and the Display's width
+	 * @param yScale The ratio between the y coordinate of this GuiText and the Display's height
+	 * @param widthScale The ratio between the width of this GuiText and the Display's width
+	 * @param heightScale The ratio between the height of this GuiText and the Display's height
+	 * @param text The text to be displayed in this GuiText
+	 */
 	public GuiText(float xScale, float yScale, float widthScale, float heightScale, String text) {
 		this((int)(xScale*Game.game.displayWidth), (int)(yScale*Game.game.displayHeight), (int)(widthScale*Game.game.displayWidth), (int)(heightScale*Game.game.displayHeight), text);
 	}
 
+	/**
+	 * Creates a new GuiText with specified x and y coordinates, width and height, and the text to display in it.
+	 * @param x The x coordinate of this GuiText
+	 * @param y The y coordinate of this GuiText
+	 * @param width The width of this GuiText
+	 * @param height The height of this GuiText
+	 * @param text The text to be displayed in this GuiText
+	 */
 	public GuiText(int x, int y, int width, int height, String text) {
 		this.x = x;
 		this.y = y;
@@ -38,6 +60,13 @@ public class GuiText extends Gui implements IRenderable {
 		this.makeFontRenderer();
 	}
 
+	/**
+	 * Resizes the internal font renderer to a size that fits within the GuiText's bounds. 
+	 * 
+	 * Called automatically when a method in this class updates the text in this GuiText.
+	 * @see #setText(String)
+	 * @see #append(String)
+	 */
 	public void makeFontRenderer() {
 		this.jfont = new Font(Font.MONOSPACED, Font.PLAIN, 1);
 		this.font = new TrueTypeFont(this.jfont, false);
@@ -69,15 +98,30 @@ public class GuiText extends Gui implements IRenderable {
 		}
 	}
 
+	/**
+	 * Sets the text to be displayed in this GuiText are and resizes the internal font renderer.
+	 * @param text The text to be displayed in this GuiText.
+	 * @see #makeFontRenderer()
+	 * @see #append(String)
+	 */
 	public void setText(String text) {
 		this.text = text;
 		this.makeFontRenderer();
 	}
 
+	/**
+	 * @return The text stored in this GuiText.
+	 */
 	public String getText() {
 		return this.text;
 	}
 
+	/**
+	 * Appends the text stored in this GuiText with a given String and resizes the internal font renderer.
+	 * @param text The String to append to the stored text in this GuiText.
+	 * @see #makeFontRenderer()
+	 * @see #setText(String)
+	 */
 	public void append(String text) {
 		this.text += text;
 		this.makeFontRenderer();

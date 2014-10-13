@@ -35,6 +35,12 @@ import com.wallops.java.wallopsmon.SeaPork;
 import com.wallops.java.wallopsmon.Tick;
 import com.wallops.java.wallopsmon.Wallopsmon;
 
+/**
+ * A {@linkplain GuiScreen} used to display the the main game, namely the battle scene and controls.
+ * 
+ * @author PureChaose
+ *
+ */
 public class GuiGameScreen extends GuiScreen {
 	private Wallopsmon[] player;
 	private Wallopsmon opponent;
@@ -43,11 +49,21 @@ public class GuiGameScreen extends GuiScreen {
 	private GuiText playerStats;
 	private GuiText battleLog;
 
+	/**
+	 * Creates a new GuiGameScreen with a reference back to the calling Game Object.
+	 * @param game The calling Game Object
+	 * @see GuiScreen#GuiScreen(Game)
+	 */
 	public GuiGameScreen(Game game) {
 		super(game);
 		update();
 	}
 
+	/**
+	 * Calls the superclass's initGui(), then initializes all instance variables taht are needed in battle.
+	 * @see GuiScreen#initGui()
+	 */
+	@Override
 	public void initGui() {
 		super.initGui();
 		if(player == null) {
@@ -84,18 +100,34 @@ public class GuiGameScreen extends GuiScreen {
 		this.renderables.add(new GuiButton(5F/6F, 0.25F, 1F/6F, 0.25F, "Run"));
 	}
 
+	/**
+	 * Gets the current opponent Wallopsmon.
+	 * @return The current opponent
+	 */
 	public Wallopsmon getOpponent() {
 		return opponent;
 	}
 
+	/**
+	 * Changes the opponent Wallopsmon to a new one.
+	 * @param opponent The new opponent Wallopsmon
+	 */
 	public void setOpponent(Wallopsmon opponent) {
 		this.opponent = opponent;
+		this.update();
 	}
 
+	/**
+	 * Gets the currently active and displayed Wallopsmon belonging to the player.
+	 * @return The current active Wallopsmon.
+	 */
 	public Wallopsmon getActive() {
 		return player[0];
 	}
 
+	/**
+	 * Checks the current situation in the battle and takes care of fainted Wallopsmon and changesany relevant text.
+	 */
 	public void update() {
 		if(opponent != null && opponent.getCurrentHealth() <= 0)
 			opponentFaint();
@@ -112,6 +144,9 @@ public class GuiGameScreen extends GuiScreen {
 				+ "\nEXP to next level: " + player[0].getExpToLevel() + "\nLevel: " + player[0].getLevel());
 	}
 
+	/**
+	 * Called when an opponent Wallopsmon faints. Updates the active Wallopsmon's experience and "spawns" a new opponent Wallopsmon.
+	 */
 	public void opponentFaint() {
 		fntOpp = fntOpp%7+1;
 		player[0].updateExp(opponent.getLevel());
@@ -134,10 +169,14 @@ public class GuiGameScreen extends GuiScreen {
 		battleLog.append("\nA " + opponent.getName() + " has appeared!");
 	}
 
+	/**
+	 * Caleed when a Wallopsmon of he player has fainted. If the player has any Wallopsmon in reserve, this does nothing.
+	 * If the player is out of Wallopsmon, the reset button is shown.
+	 */
 	public void playerFaint() {
 		player[0].setCurrentHealth(0);
-		for(int i=0; i<6; i++) {
-			if(player[i] != null && player[i].getCurrentHealth() != 0) {
+		for(Wallopsmon w : player) {
+			if(w != null && w.getCurrentHealth() >= 0) {
 				return;
 			}
 		}
@@ -147,6 +186,13 @@ public class GuiGameScreen extends GuiScreen {
 		lose.setVisible(true);*/
 	}
 
+	/**
+	 * Perform the attack on a Wallopsmon by another, using a certain move.
+	 * @param m The Move used by the attacking Wallopsmon
+	 * @param attacker The attacking Wallopsmon
+	 * @param defender The defending Wallopsmon
+	 * @see #status(Move, Wallopsmon, Wallopsmon)
+	 */
 	public void attack(Move m, Wallopsmon attacker, Wallopsmon defender) {
 		int damage;
 		int atk = 0;
@@ -388,6 +434,12 @@ public class GuiGameScreen extends GuiScreen {
 		update();
 	}
 
+	/**
+	 * Performs a status effect on a Wallopsmon using a move used by another Wallopsmon.
+	 * @param m The Move used for the status effect
+	 * @param attacker The Wallopsmon using the Move
+	 * @param defender The Wallopsmon the Move is being used on
+	 */
 	public void status(Move m, Wallopsmon attacker, Wallopsmon defender) {
 		if((this.battleLog.getText().indexOf("damage") != -1 || this.battleLog.getText().equals("")) && ((attacker.getName().equals(player[0].getName()) || this.battleLog.getText().indexOf(player[0].getName()) != 0)))
 			this.battleLog.setText(attacker.getName() + " used " + m.getName() +" on " + defender.getName() + "!");
@@ -395,6 +447,9 @@ public class GuiGameScreen extends GuiScreen {
 			this.battleLog.append("\n" + attacker.getName() + " used " + m.getName() +" on " + defender.getName() + "!");
 	}
 
+	/**
+	 * Resets the game to its initial form.
+	 */
 	public void reset() {
 		opponent= new MudDogWhelk();
 		initGui();
@@ -422,7 +477,7 @@ public class GuiGameScreen extends GuiScreen {
 	@Override
 	public void render() {
 		super.render();
-		this.drawBoundImage(0, Display.getHeight()/2, Display.getWidth()/3, 2*Display.getHeight()/2, player[0].getImage());
-		this.drawBoundImage(Display.getWidth()/3, 0, 2*Display.getWidth()/3, Display.getHeight()/2, opponent.getImage());
+		this.drawTexture(0, Display.getHeight()/2, Display.getWidth()/3, 2*Display.getHeight()/2, player[0].getImage());
+		this.drawTexture(Display.getWidth()/3, 0, 2*Display.getWidth()/3, Display.getHeight()/2, opponent.getImage());
 	}
 }
