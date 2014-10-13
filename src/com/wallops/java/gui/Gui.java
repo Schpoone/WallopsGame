@@ -88,7 +88,6 @@ public class Gui {
 	}
 	
 	public void drawBoundImage(int x1, int y1, int x2, int y2, Texture t) {
-		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -107,27 +106,14 @@ public class Gui {
 			y1 = y2;
 			y2 = temp;
 		}
-		// TODO make Tesselator work with textures too
-		/*Tesselator tess = Tesselator.instance;
-		tess.addVertex((double)x1, (double)y2, 0.0D);
-		tess.addVertex((double)x2, (double)y2, 0.0D);
-		tess.addVertex((double)x2, (double)y1, 0.0D);
-		tess.addVertex((double)x1, (double)y1, 0.0D);
-		tess.draw();
-		*/
 		float texCoordX = (float)(t.getImageWidth())/t.getTextureWidth();
 		float texCoordY = (float)(t.getImageHeight())/t.getTextureHeight();
-		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glTexCoord2f(0,0);
-		GL11.glVertex2f(x1,y1);
-		GL11.glTexCoord2f(texCoordX,0);
-		GL11.glVertex2f(x2,y1);
-		GL11.glTexCoord2f(texCoordX,texCoordY);
-		GL11.glVertex2f(x2,y2);
-		GL11.glTexCoord2f(0,texCoordY);
-		GL11.glVertex2f(x1,y2);
-		GL11.glEnd();
-		//t.release();
-		GL11.glPopMatrix();
+		// TODO make Tesselator work with textures too
+		Tesselator tess = Tesselator.instance;
+		tess.addVertexTex((double)x1, (double)y1, 0.0D, 0, 0);
+		tess.addVertexTex((double)x2, (double)y1, 0.0D, texCoordX, 0);
+		tess.addVertexTex((double)x2, (double)y2, 0.0D, texCoordX, texCoordY);
+		tess.addVertexTex((double)x1, (double)y2, 0.0D, 0, texCoordY);
+		tess.draw();
 	}
 }

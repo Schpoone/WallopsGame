@@ -407,15 +407,15 @@ public class GuiGameScreen extends GuiScreen {
 			this.attack(((MoveButton)clickedButton).getMove(), this.player[0], this.opponent);
 		else if(clickedButton.getName().toLowerCase().contains("restart"))
 			this.reset();
-		else if(clickedButton.getName().toLowerCase().startsWith("description"));
+		else if(clickedButton.getName().toLowerCase().contains("description"));
 		//open description
-		else if(clickedButton.getName().toLowerCase().startsWith("switch"));
+		else if(clickedButton.getName().toLowerCase().contains("switch"));
 		//open switching menu
-		else if(clickedButton.getName().toLowerCase().startsWith("use item"))
+		else if(clickedButton.getName().toLowerCase().contains("use item"))
 			clickedButton.setName("Nah!");//open item menu
-		else if(clickedButton.getName().toLowerCase().startsWith("nah!"))
-			clickedButton.setName("Use Item");
-		else if(clickedButton.getName().toLowerCase().startsWith("run"));
+		else if(clickedButton.getName().toLowerCase().contains("nah!"))
+			clickedButton.setName("Use item");
+		else if(clickedButton.getName().toLowerCase().contains("run"));
 		//run away!
 	}
 

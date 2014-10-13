@@ -54,7 +54,7 @@ public class Game {
 	public void startGameLoop() {
 		this.logger.log(Level.INFO, "Starting main game loop.");
 		this.running = true;
-		this.activeGui = new GuiGameScreen(game);
+		this.activeGui = new GuiMainMenu(game);
 		this.displayHeight = Display.getHeight();
 		this.displayWidth = Display.getWidth();
 		// Game loop, methinks
