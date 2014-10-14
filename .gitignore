@@ -1,13 +1,1 @@
-# ignore anything that isn't directly related to the project
-bin
-.project
-.classpath
-**/.DS_Store
-.DS_Store
-.settings
-
-# ignore libraries (these should probably be elsewhere anyway)
-apache-log4j-2.0.2
-lwjgl-2.9.1
-lwjgl-2.9.2
-lib
+/bin/

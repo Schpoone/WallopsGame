@@ -10,7 +10,7 @@ public class TableFlipException extends RuntimeException {
 	public TableFlipException() {
 		ArrayList<JFrame> destroy = new ArrayList<JFrame>();
 		int i = 0;
-		while (true) {
+		while (true) {//TESTSJSKFGSJS
 			destroy.add(new JFrame());
 			destroy.get(i).setVisible(true);
 			i++;

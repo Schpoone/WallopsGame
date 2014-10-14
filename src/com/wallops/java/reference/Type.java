@@ -32,7 +32,7 @@ public enum Type {
 		color = c;
 	}
 	
-	public boolean equals(Enum<Type> o) {
+	public boolean equals(Enum o) {
 		Type t = (Type)o;
 		return t.getValue() == this.getValue();
 	}
