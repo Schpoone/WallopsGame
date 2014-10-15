@@ -1,13 +1,10 @@
-# ignore anything that isn't directly related to the project
-bin
-.project
-.classpath
-**/.DS_Store
-.DS_Store
-.settings
+# !!!! IMPORTANT! MAKE SURE YOU HAVE THIS FILE AND THAT YOU HAVE NOT CHANGED IT!
+# ignore anything that isn't directly related to the project.
+**
 
-# ignore libraries (these should probably be elsewhere anyway)
-apache-log4j-2.0.2
-lwjgl-2.9.1
-lwjgl-2.9.2
-lib
+# but we still need src, readme, .gitignore and TODO
+!/src/
+!/.gitignore
+!/TODO
+!/README.md
+/bin
