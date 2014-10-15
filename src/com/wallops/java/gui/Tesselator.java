@@ -45,6 +45,9 @@ public class Tesselator {
 	private boolean hasColor;
 	private boolean hasBrightness;
 	private boolean hasTexture;
+
+	/** Tells LWJGL what mode to draw in */
+	private int mode;
 	/** a Tesselator instance for drawing shapes */
 	public static final Tesselator instance = new Tesselator(2097152);
 
@@ -110,6 +113,9 @@ public class Tesselator {
 		this.vertexCount = 0;
 		this.byteBuffer.clear();
 		this.rawBufferIndex = 0;
+		this.hasBrightness = false;
+		this.hasColor = false;
+		this.hasTexture = false;
 	}
 
 	/**
@@ -145,7 +151,7 @@ public class Tesselator {
 			GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
 
 			// draw
-			GL11.glDrawArrays(7, 0, this.vertexCount);
+			GL11.glDrawArrays(this.mode, 0, this.vertexCount);
 
 			// disable enabled GL states
 			GL11.glDisableClientState(GL11.GL_VERTEX_ARRAY);
@@ -163,5 +169,13 @@ public class Tesselator {
 		}
 
 		this.reset();
+	}
+	
+	public void startDrawingQuads() {
+		this.mode = 7;
+	}
+	
+	public void setDrawMode(int mode) {
+		this.mode = mode;
 	}
 }
