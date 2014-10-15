@@ -1,6 +1,7 @@
 package com.wallops.java.gui;
 
 import java.awt.Font;
+import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,6 +10,9 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
+import org.newdawn.slick.util.ResourceLoader;
 
 import com.wallops.java.event.Game;
 import com.wallops.java.reference.MouseHandler;
@@ -25,6 +29,9 @@ public class GuiButton extends Gui implements IRenderable {
 	protected int y;
 	protected int width;
 	protected int height;
+	protected static Texture buttonImage;
+	private int[][] coords;
+	private float[] tCoords;
 	private Logger logger;
 	private int mouseX;
 	private int mouseY;
@@ -34,9 +41,10 @@ public class GuiButton extends Gui implements IRenderable {
 	private Font jfont;
 	private TrueTypeFont font;
 	private int trimColor;
-	private int centerColor;
+	private Color centerColor;
 	/** time when button should stop being rendered as "pushed" after it is clicked (175 milis after it is clicked, by default) */
 	private long cooldown;
+	private int intCenterColor;
 
 	/**
 	 * Creates a new button at a specified location, with a certain size and text to display
@@ -102,6 +110,8 @@ public class GuiButton extends Gui implements IRenderable {
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.coords = new int[][]{{x,x+15,x+width-15,x+width},{y,y+15,y+height-15,y+height}};
+		this.tCoords = new float[]{0,15/32F,17/32F,1};
 		this.name = name;
 		this.logger = LogManager.getLogger(this.name);
 		this.enabled = true;
@@ -113,6 +123,12 @@ public class GuiButton extends Gui implements IRenderable {
 		float maxFontSize = widthMaxFontSize > heightMaxFontSize ? heightMaxFontSize : widthMaxFontSize;
 		this.jfont = jfont.deriveFont(jfont.getSize2D()*maxFontSize);
 		this.font = new TrueTypeFont(this.jfont, false);
+		if(buttonImage == null)
+			try {
+				buttonImage = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("src/com/wallops/resources/img/ButtonTemplate32X.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	}
 	
 	/**
@@ -126,22 +142,25 @@ public class GuiButton extends Gui implements IRenderable {
 		if (System.currentTimeMillis() >= cooldown) {
 			// red (means mouse isn't in button's bounds)
 			this.trimColor = 255 << 24 | 130 << 16 | 28 << 8 | 0;
-			this.centerColor = 255 << 24 | 255 << 16 | 55 << 8 | 0;
+			this.intCenterColor = 255 << 24 | 255 << 16 | 55 << 8 | 0;
 			if(isMouseInBounds()) {
 				// blue (mouse in button's bounds, but not clicked)
 				this.trimColor = 255 << 24 | 0 << 16 | 28 << 8 | 130;
-				this.centerColor = 255 << 24 | 0 << 16 | 55 << 8 | 255;
+				this.intCenterColor = 255 << 24 | 0 << 16 | 55 << 8 | 255;
 				if(Mouse.isButtonDown(0)) {
 					// green (mouse in button's bounds and clicked)
 					cooldown = System.currentTimeMillis() + 175;
 					this.trimColor = 255 << 24 | 0 << 16 | 130 << 8 | 28;
-					this.centerColor = 255 << 24 | 0 << 16 | 255 << 8 | 55;
+					this.intCenterColor = 255 << 24 | 0 << 16 | 255 << 8 | 55;
 				}
 			}
+			this.centerColor = new Color(this.intCenterColor);
 		}
 		if(this.visible) {
-			this.drawRectangle(this.x, this.y, this.x+this.width, this.y+this.height, this.trimColor); // ARGB
-			this.drawRectangle(this.x+7, this.y+7, this.x+this.width-7, this.y+this.height-7, this.centerColor); //ARGB
+			//this.centerColor.bind();
+			this.drawRectangle(this.x, this.y, this.x+this.width, this.y+this.height, this.intCenterColor); //ARGB
+			this.drawTexture(this.coords, this.tCoords, GuiButton.buttonImage, this.centerColor);
+			//this.drawRectangle(this.x+7, this.y+7, this.x+this.width-7, this.y+this.height-7, this.intCenterColor); //ARGB
 			GL11.glDrawBuffer(GL11.GL_BACK);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
