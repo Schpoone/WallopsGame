@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="slick-util/lib/slick-util.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="apache-log4j-2.0.2/apache-log4j-2.0.2-bin/log4j-api-2.0.2.jar"/>
+	<classpathentry kind="lib" path="apache-log4j-2.0.2/apache-log4j-2.0.2-bin/log4j-core-2.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/slick-util.jar" sourcepath="lib/slick-util-src.zip"/>
 	<classpathentry kind="lib" path="lwjgl-2.9.1/jar/lwjgl_util.jar"/>
-	<classpathentry kind="lib" path="lwjgl-2.9.1/jar/lwjgl.jar">
+	<classpathentry kind="lib" path="lwjgl-2.9.1/jar/lwjgl.jar" sourcepath="lwjgl-2.9.1/lwjgl-source-2.9.1/src/java">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="WallopsGame/lwjgl-2.9.1/native/windows"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="WallpsGame-master/lwjgl-2.9.1/native/macosx"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="apache-log4j-2.0.2-bin/log4j-api-2.0.2.jar"/>
-	<classpathentry kind="lib" path="apache-log4j-2.0.2-bin/log4j-core-2.0.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
