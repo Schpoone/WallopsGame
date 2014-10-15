@@ -1,1 +1,10 @@
-/bin/
+# !!!! IMPORTANT! MAKE SURE YOU HAVE THIS FILE AND THAT YOU HAVE NOT CHANGED IT!
+# ignore anything that isn't directly related to the project.
+**
+
+# but we still need src, readme, .gitignore and TODO
+!/src/
+!/.gitignore
+!/TODO
+!/README.md
+/bin
