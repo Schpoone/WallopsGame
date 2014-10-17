@@ -26,6 +26,7 @@ import com.wallops.java.buttons.Reset;
 import com.wallops.java.buttons.UseItem;
 import com.wallops.java.event.Game;
 import com.wallops.java.reference.Move;
+import com.wallops.java.reference.Type;
 import com.wallops.java.wallopsmon.BaldEagle;
 import com.wallops.java.wallopsmon.HorseshoeCrab;
 import com.wallops.java.wallopsmon.LoblollyPine;
@@ -203,7 +204,10 @@ public class GuiGameScreen extends GuiScreen {
 		double stab = 1;
 		if(attacker.getType1().equals(m.getType()))
 			stab = 1.5;
-		double typeAdvantage = 1;
+		double typeAdvantage = m.getType().getEffectivenessAgainst(defender.getType1());
+		if (!defender.getType2().equals(Type.NONE)) {
+			typeAdvantage *= m.getType().getEffectivenessAgainst(defender.getType2());
+		}
 		if(m.getCategory() == Move.PHYSICAL) {
 			atk = attacker.getAttack();
 			def = defender.getDefense();
@@ -211,219 +215,6 @@ public class GuiGameScreen extends GuiScreen {
 		if(m.getCategory() == Move.SPECIAL) {
 			atk = attacker.getSpecAttack();
 			def = defender.getSpecDefense();
-		}
-		switch(defender.getType1()) {
-		case NORMAL:
-			switch(m.getType()) {
-			case FIGHTING:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case FIRE:
-			switch(m.getType()) {
-			case FIRE:
-			case GRASS:
-			case ICE:
-			case BUG:
-			case STEEL:
-				typeAdvantage = 0.5;
-				break;
-			case WATER:
-			case GROUND:
-			case ROCK:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case WATER:
-			switch(m.getType()) {
-			case FIRE:
-			case WATER:
-			case ICE:
-			case STEEL:
-				typeAdvantage = 0.5;
-				break;
-			case ELECTRIC:
-			case GRASS:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case ELECTRIC:
-			switch(m.getType()) {
-			case ELECTRIC:
-			case FLYING:
-			case STEEL:
-				typeAdvantage = 0.5;
-				break;
-			case GROUND:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case GRASS:
-			switch(m.getType()) {
-			case WATER:
-			case ELECTRIC:
-			case GRASS:
-			case GROUND:
-				typeAdvantage = 0.5;
-				break;
-			case FIRE:
-			case ICE:
-			case POISON:
-			case FLYING:
-			case BUG:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case ICE:
-			switch(m.getType()) {
-			case ICE:
-				typeAdvantage = 0.5;
-				break;
-			case FIRE:
-			case FIGHTING:
-			case ROCK:
-				typeAdvantage = 2;
-				break;
-			}
-		case FIGHTING:
-			switch(m.getType()) {
-			case BUG:
-			case ROCK:
-			case DARK:
-				typeAdvantage = 0.5;
-				break;
-			case FLYING:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case POISON:
-			switch(m.getType()) {
-			case GRASS:
-			case FIGHTING:
-			case POISON:
-			case BUG:
-				typeAdvantage = 0.5;
-				break;
-			case GROUND:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case GROUND:
-			switch(m.getType()) {
-			case ELECTRIC:
-				typeAdvantage = 0;
-				break;
-			case POISON:
-			case ROCK:
-				typeAdvantage = 0.5;
-				break;
-			case WATER:
-			case GRASS:
-			case ICE:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case FLYING:
-			switch(m.getType()) {
-			case GROUND:
-				typeAdvantage = 0;
-				break;
-			case FIGHTING:
-			case BUG:
-				typeAdvantage = 0.5;
-				break;
-			case ELECTRIC:
-			case ICE:
-			case ROCK:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case BUG:
-			switch(m.getType()) {
-			case GRASS:
-			case FIGHTING:
-			case GROUND:
-				typeAdvantage = 0.5;
-				break;
-			case FIRE:
-			case FLYING:
-			case ROCK:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case ROCK:
-			switch(m.getType()) {
-			case NORMAL:
-			case FIRE:
-			case POISON:
-			case FLYING:
-				typeAdvantage = 0.5;
-				break;
-			case WATER:
-			case GRASS:
-			case ICE:
-			case GROUND:
-			case STEEL:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case DRAGON:
-			switch(m.getType()) {
-			case FIRE:
-			case WATER:
-			case ELECTRIC:
-			case GRASS:
-				typeAdvantage = 0.5;
-				break;
-			case ICE:
-			case DRAGON:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case DARK:
-			switch(m.getType()) {
-			case DARK:
-				typeAdvantage = 0.5;
-				break;
-			case FIGHTING:
-			case ROCK:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
-		case STEEL:
-			switch(m.getType()) {
-			case POISON:
-				typeAdvantage = 0;
-				break;
-			case NORMAL:
-			case GRASS:
-			case ICE:
-			case FLYING:
-			case BUG:
-			case ROCK:
-			case DRAGON:
-			case STEEL:
-				typeAdvantage = 0.5;
-				break;
-			case FIGHTING:
-			case GROUND:
-				typeAdvantage = 2;
-				break;
-			}
-			break;
 		}
 		damage = (int)Math.round(((((2.0*lvl/5.0 + 2)*atk*pwr/def) / 50) + 2)*stab*typeAdvantage*rand/100);
 		defender.setCurrentHealth(defender.getCurrentHealth() - damage);
