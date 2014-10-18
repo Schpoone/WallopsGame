@@ -127,7 +127,7 @@ public class Gui {
 	}
 	
 	public void drawTexture(int[][] coords, float[] tCoords, Texture t) {
-		this.drawTexture(coords, tCoords, t, 255,0,0,0);
+		this.drawTexture(coords, tCoords, t, 255,255,255,255);
 	}
 	
 	public void drawTexture(int[][] coords, float[] tCoords, Texture t, int color) {
