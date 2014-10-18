@@ -41,10 +41,9 @@ public class GuiButton extends Gui implements IRenderable {
 	private Font jfont;
 	private TrueTypeFont font;
 	private int trimColor;
-	private Color centerColor;
 	/** time when button should stop being rendered as "pushed" after it is clicked (175 milis after it is clicked, by default) */
 	private long cooldown;
-	private int intCenterColor;
+	private int centerColor;
 
 	/**
 	 * Creates a new button at a specified location, with a certain size and text to display
@@ -142,25 +141,21 @@ public class GuiButton extends Gui implements IRenderable {
 		if (System.currentTimeMillis() >= cooldown) {
 			// red (means mouse isn't in button's bounds)
 			this.trimColor = 255 << 24 | 130 << 16 | 28 << 8 | 0;
-			this.intCenterColor = 255 << 24 | 255 << 16 | 55 << 8 | 0;
+			this.centerColor = 255 << 24 | 255 << 16 | 55 << 8 | 0;
 			if(isMouseInBounds()) {
 				// blue (mouse in button's bounds, but not clicked)
 				this.trimColor = 255 << 24 | 0 << 16 | 28 << 8 | 130;
-				this.intCenterColor = 255 << 24 | 0 << 16 | 55 << 8 | 255;
+				this.centerColor = 255 << 24 | 0 << 16 | 55 << 8 | 255;
 				if(Mouse.isButtonDown(0)) {
 					// green (mouse in button's bounds and clicked)
 					cooldown = System.currentTimeMillis() + 175;
 					this.trimColor = 255 << 24 | 0 << 16 | 130 << 8 | 28;
-					this.intCenterColor = 255 << 24 | 0 << 16 | 255 << 8 | 55;
+					this.centerColor = 255 << 24 | 0 << 16 | 255 << 8 | 55;
 				}
 			}
-			this.centerColor = new Color(this.intCenterColor);
 		}
 		if(this.visible) {
-			//this.centerColor.bind();
-			this.drawRectangle(this.x, this.y, this.x+this.width, this.y+this.height, this.intCenterColor); //ARGB
 			this.drawTexture(this.coords, this.tCoords, GuiButton.buttonImage, this.centerColor);
-			//this.drawRectangle(this.x+7, this.y+7, this.x+this.width-7, this.y+this.height-7, this.intCenterColor); //ARGB
 			GL11.glDrawBuffer(GL11.GL_BACK);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
