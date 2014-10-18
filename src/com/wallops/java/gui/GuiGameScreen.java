@@ -1,29 +1,7 @@
 package com.wallops.java.gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
 import org.lwjgl.opengl.Display;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
 
-import com.wallops.java.buttons.Act;
-import com.wallops.java.buttons.Nope;
-import com.wallops.java.buttons.OpenDesc;
-import com.wallops.java.buttons.OpenSwitch;
-import com.wallops.java.buttons.Reset;
-import com.wallops.java.buttons.UseItem;
 import com.wallops.java.event.Game;
 import com.wallops.java.reference.Move;
 import com.wallops.java.reference.Type;
