@@ -108,12 +108,6 @@ public class Gui {
 	 * @see Gui#drawRectangle(int, int, int, int, int)
 	 */
 	public void drawTexture(int x1, int y1, int x2, int y2, Texture t) {
-		/*GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		Color.white.bind();
-		t.bind();*/
 
 		if(x1 > x2) {
 			int temp = x1;
@@ -130,28 +124,22 @@ public class Gui {
 		int[][] coords = {{x1,x2},{y1,y2}};
 		this.drawTexture(coords, tCoords, t);
 		
-		/*float texCoordX = (float)(t.getImageWidth())/t.getTextureWidth();
-		float texCoordY = (float)(t.getImageHeight())/t.getTextureHeight();
-		Tesselator tess = Tesselator.instance;
-		tess.startDrawingQuads();
-		tess.addVertexTex((double)x1, (double)y1, 0.0D, 0, 0);
-		tess.addVertexTex((double)x2, (double)y1, 0.0D, texCoordX, 0);
-		tess.addVertexTex((double)x2, (double)y2, 0.0D, texCoordX, texCoordY);
-		tess.addVertexTex((double)x1, (double)y2, 0.0D, 0, texCoordY);
-		tess.draw();*/
-		
 	}
 	
 	public void drawTexture(int[][] coords, float[] tCoords, Texture t) {
-		this.drawTexture(coords, tCoords, t, Color.white);
+		this.drawTexture(coords, tCoords, t, 255,0,0,0);
+	}
+	
+	public void drawTexture(int[][] coords, float[] tCoords, Texture t, int color) {
+		this.drawTexture(coords, tCoords, t, color >> 24 & 255, color >> 16 & 255, color >> 8 & 255, color & 255);
 	}
 
-	public void drawTexture(int[][] coords, float[] tCoords, Texture t, Color c) {
+	public void drawTexture(int[][] coords, float[] tCoords, Texture t, int alpha, int red, int green, int blue) {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		c.bind();
+		GL11.glColor4f(red/255F, green/255F, blue/255F, alpha/255F);
 		t.bind();
 		//these two values are used because of how LWJGL stores images. 
 		float uMod = (float)(t.getImageWidth())/t.getTextureWidth();
@@ -171,12 +159,6 @@ public class Gui {
 				ptY1=coords[1][j];
 				ptX2=coords[0][i+1];
 				ptY2=coords[1][j+1];
-				/*logger.debug(i+" "+j);
-				logger.debug("\t"+u1+","+v1);
-				logger.debug("\t"+u2+","+v2);
-
-				logger.debug("\t"+ptX1+","+ptY1);
-				logger.debug("\t"+ptX2+","+ptY2);//*/
 				tess.addVertexTex(ptX1, ptY1, 0.0D, u1, v1);
 				tess.addVertexTex(ptX2, ptY1, 0.0D, u2, v1);
 				tess.addVertexTex(ptX2, ptY2, 0.0D, u2, v2);
