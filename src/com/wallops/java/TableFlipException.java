@@ -8,7 +8,7 @@ public class TableFlipException extends RuntimeException {
 	 * why am i even fixing this? this isn't even how exceptions work...
 	 */
 	public TableFlipException() {
-		ArrayList<JFrame> destroy = new ArrayList<JFrame>();
+		ArrayList<JFrame> destroy = new ArrayList<JFrame>();//test
 		int i = 0;
 		while (true) {
 			destroy.add(new JFrame());
