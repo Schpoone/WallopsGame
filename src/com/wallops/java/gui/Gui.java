@@ -97,7 +97,7 @@ public class Gui {
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
-
+	//i think you mean bottom-right for @param y2
 	/**
 	 * Draws a given {@linkplain Texture} in a given location with a given size. 
 	 * @param x1 The x coordinate top-left point of where the {@linkplain Texture} should be rendered
