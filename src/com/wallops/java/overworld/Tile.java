@@ -1,4 +1,4 @@
-package com.wallops.java.maps;
+package com.wallops.java.overworld;
 
 import org.newdawn.slick.opengl.Texture;
 
