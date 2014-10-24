@@ -1,4 +1,4 @@
-package com.wallops.java.animation;
+package com.wallops.java.overworld;
 
 import org.newdawn.slick.opengl.Texture;
 
