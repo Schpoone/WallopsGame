@@ -18,6 +18,7 @@ import com.wallops.java.gui.GuiGameScreen;
 import com.wallops.java.gui.GuiMainMenu;
 import com.wallops.java.gui.GuiScreen;
 import com.wallops.java.reference.MouseHandler;
+import com.wallops.java.reference.TextureManager;
 
 /**
  * The game object for Wallopsmon. Here all initialization and registration will take
@@ -29,14 +30,15 @@ import com.wallops.java.reference.MouseHandler;
 public class Game {
 
 	/** used for logging anything that needs to be traced to the Game object */
-	public static Logger logger = LogManager.getLogger("Game");
+	public static final Logger logger = LogManager.getLogger("Game");
 	
 	private boolean running;
 	public int displayHeight;
 	public int displayWidth;
 	private GuiScreen activeGui;
 	public static Game game;
-	public static MouseHandler mouseHandler = new MouseHandler();
+	public static final MouseHandler mouseHandler = new MouseHandler();
+	public static final TextureManager textureManager = new TextureManager();
 	
 	/** for funky mac related weirdness that'd have to be dealt with */
 	public static final boolean isRunningOnMac = System.getProperty("os.name").toLowerCase().contains("mac");
@@ -79,7 +81,7 @@ public class Game {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.fatal(e.getMessage());
 		} finally {
 			this.cleanup();
 		}
@@ -106,6 +108,7 @@ public class Game {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		logger.log(Level.INFO, "Graphics initialized: lwjgl 2.9.1, see http://www.lwjgl.org/");
+		textureManager.load();
 	}
 	
 	
