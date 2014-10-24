@@ -95,8 +95,8 @@ public abstract class Wallopsmon {
 		type2 = t2;
 		
 		try {
-			mainImage = TextureLoader.getTexture("JPG", ResourceLoader.getResourceAsStream("src/com/wallops/resources/img/" + name + ".jpg"));
-			shinyImage = TextureLoader.getTexture("JPG", ResourceLoader.getResourceAsStream("src/com/wallops/resources/img/Shiny" + name + ".jpg"));
+			mainImage = TextureLoader.getTexture("JPG", ResourceLoader.getResourceAsStream("src/com/wallops/resources/img/wallopsmon/" + name + ".jpg"));
+			shinyImage = TextureLoader.getTexture("JPG", ResourceLoader.getResourceAsStream("src/com/wallops/resources/img/wallopsmon/Shiny" + name + ".jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
