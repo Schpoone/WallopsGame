@@ -3,8 +3,6 @@ package com.wallops.java.gui;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL43;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
 /**
@@ -145,24 +143,31 @@ public class Gui {
 		float uMod = (float)(t.getImageWidth())/t.getTextureWidth();
 		float vMod = (float)(t.getImageHeight())/t.getTextureHeight();
 
-		double ptX1,ptY1,ptX2,ptY2;
+		double x1,y1,x2,y2;
 		float u1,v1,u2,v2;
 		Tesselator tess = Tesselator.instance;
 		tess.startDrawingQuads();
+		// I swear this makes sense on some level. Kind of hard to explain in a comment though. Let's try it:
+		//	The following nested loop runs through the grid of rectangles designated by the coords double 
+		//	array, then adds it to render with the corresponding rectangle designated by tCoords on the 
+		//	given Texture.
 		for(int i=0;i+1<tCoords.length;i++) 
 			for(int j=0;j+1<tCoords.length;j++) {
+				// Find the rectangle on the texture
 				u1=tCoords[i]*uMod;
 				v1=tCoords[j]*vMod;
 				u2=tCoords[i+1]*uMod;
 				v2=tCoords[j+1]*vMod;
-				ptX1=coords[0][i];
-				ptY1=coords[1][j];
-				ptX2=coords[0][i+1];
-				ptY2=coords[1][j+1];
-				tess.addVertexTex(ptX1, ptY1, 0.0D, u1, v1);
-				tess.addVertexTex(ptX2, ptY1, 0.0D, u2, v1);
-				tess.addVertexTex(ptX2, ptY2, 0.0D, u2, v2);
-				tess.addVertexTex(ptX1, ptY2, 0.0D, u1, v2);
+				// Find the rectangle on the screen where the rectangle from the texture should be rendered
+				x1=coords[0][i];
+				y1=coords[1][j];
+				x2=coords[0][i+1];
+				y2=coords[1][j+1];
+				// Add it to render
+				tess.addVertexTex(x1, y1, 0.0D, u1, v1);
+				tess.addVertexTex(x2, y1, 0.0D, u2, v1);
+				tess.addVertexTex(x2, y2, 0.0D, u2, v2);
+				tess.addVertexTex(x1, y2, 0.0D, u1, v2);
 			}
 		tess.draw();
 	}
