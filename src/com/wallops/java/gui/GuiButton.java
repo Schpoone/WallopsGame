@@ -59,7 +59,7 @@ public class GuiButton extends Gui implements IRenderable {
 	public GuiButton(float xScale, float yScale, float widthScale, float heightScale, String name) {
 		this((int)(xScale*Game.game.displayWidth), (int)(yScale*Game.game.displayHeight), (int)(widthScale*Game.game.displayWidth), (int)(heightScale*Game.game.displayHeight), name);
 	}
-	
+
 	/**
 	 * creates a new button at a specified location, with a certain size and text to display
 	 * @param xScale the ratio between the Display width and the button's x coordinate
@@ -72,11 +72,11 @@ public class GuiButton extends Gui implements IRenderable {
 	 * @see GuiButton#GuiButton(float, float, float, float, String, boolean)
 	 * @see GuiButton#GuiButton(int, int, int, int, String, boolean)
 	 */
-	
+
 	public GuiButton(float xScale, float yScale, float widthScale, float heightScale, String name, boolean visible) {
 		this((int)(xScale*Game.game.displayWidth), (int)(yScale*Game.game.displayHeight), (int)(widthScale*Game.game.displayWidth), (int)(heightScale*Game.game.displayHeight), name, visible);
 	}
-	
+
 	/**
 	 * creates a new button at a specified location, with a certain size and text to display
 	 * @param x the button's x coordinate
@@ -91,7 +91,7 @@ public class GuiButton extends Gui implements IRenderable {
 	public GuiButton(int x, int y, int width, int height, String name) {
 		this(x, y, width, height, name, true);
 	}
-	
+
 	/**
 	 * creates a new button at a specified location, with a certain size and text to display
 	 * @param x the button's x coordinate
@@ -123,13 +123,9 @@ public class GuiButton extends Gui implements IRenderable {
 		this.jfont = jfont.deriveFont(jfont.getSize2D()*maxFontSize);
 		this.font = new TrueTypeFont(this.jfont, false);
 		if(buttonImage == null)
-			try {
-				buttonImage = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("src/com/wallops/resources/img/ButtonTemplate32X.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			buttonImage = Game.textureManager.getTexture("src/com/wallops/resources/img/ButtonTemplate32X.png");
 	}
-	
+
 	/**
 	 * renders this button in its stored location with color (depending on where the 
 	 * mouse is, and whether it's clicked)
@@ -196,7 +192,7 @@ public class GuiButton extends Gui implements IRenderable {
 	public void setEnabled(boolean enbled) {
 		this.enabled = enbled;
 	}
-	
+
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}

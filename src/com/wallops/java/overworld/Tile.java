@@ -6,10 +6,12 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
+import com.wallops.java.event.Game;
+
 public abstract class Tile {
-	
+
 	private Texture tileImg;
-	
+
 	public Tile() {
 		this.tileImg = null;
 	}
@@ -21,13 +23,9 @@ public abstract class Tile {
 	public void setTileImg(Texture tileImg) {
 		this.tileImg = tileImg;
 	}
-	
+
 	public void loadTileTex(String tileName) {
-		try {
-			tileImg = TextureLoader.getTexture("JPG", ResourceLoader.getResourceAsStream("src/com/wallops/resources/img/overworld/" + tileName.toLowerCase() + ".jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		tileImg = Game.textureManager.getTexture("src/com/wallops/resources/img/overworld/" + tileName.toLowerCase() + ".jpg");
 	}
-	
+
 }
