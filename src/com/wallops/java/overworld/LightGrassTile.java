@@ -1,10 +1,10 @@
 package com.wallops.java.overworld;
 
-public class PathTile extends Tile implements Standable {
+public class LightGrassTile extends Tile implements Standable {
 
-	public PathTile() {
+	public LightGrassTile() {
 		super();
-		loadTileTex("pathtile");
+		loadTileTex("lightgrasstile");
 	}
 
 	@Override
