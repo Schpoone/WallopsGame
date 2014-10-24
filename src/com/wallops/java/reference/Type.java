@@ -64,7 +64,7 @@ public enum Type {
 	public double getEffectivenessAgainst(Type o) {
 		if(Type.typeAdvantages == null)
 			try {
-				typeAdvantages.load(new FileInputStream(new File("src/com/wallops/resources/TypeEffectiveness.properties")));
+				typeAdvantages.load(new FileInputStream(new File("src/com/wallops/resources/type_effectiveness.properties")));
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -72,6 +72,7 @@ public enum Type {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		System.out.println(this.name()+o.name());
 		return Double.parseDouble(typeAdvantages.getProperty(this.name()+o.name()));
 	}
 }
