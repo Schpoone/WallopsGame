@@ -24,7 +24,7 @@ public abstract class Tile {
 	
 	public void loadTileTex(String tileName) {
 		try {
-			tileImg = TextureLoader.getTexture("JPG", ResourceLoader.getResourceAsStream("src/com/wallops/resources/img/overworld/" + tileName + ".jpg"));
+			tileImg = TextureLoader.getTexture("JPG", ResourceLoader.getResourceAsStream("src/com/wallops/resources/img/overworld/" + tileName.toLowerCase() + ".jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
