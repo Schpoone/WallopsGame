@@ -4,7 +4,6 @@ public class LightGrassTile extends Tile implements Standable {
 
 	public LightGrassTile() {
 		super();
-		loadTileTex("lightgrasstile");
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class TextureManager {
 		for(File child : parent.listFiles()) {
 			if(child.isFile()) {
 				try {
-					childPath = child.getCanonicalPath().substring((child.getCanonicalPath().indexOf("src/com/wallops/resources/img")));
+					childPath = child.getCanonicalPath().substring((child.getCanonicalPath().indexOf("src/com/wallops/resources/img")+1));
 					childExtension = childPath.substring(childPath.lastIndexOf(".")+1);
 					if(childExtension.equalsIgnoreCase("png")||childExtension.equals("jpg")) {
 						textureMap.put(childPath, TextureLoader.getTexture(childExtension, ResourceLoader.getResourceAsStream(childPath)));

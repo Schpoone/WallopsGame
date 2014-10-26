@@ -14,6 +14,7 @@ public abstract class Tile {
 
 	public Tile() {
 		this.tileImg = null;
+		loadTileTex();
 	}
 
 	public Texture getTileImg() {
@@ -24,7 +25,9 @@ public abstract class Tile {
 		this.tileImg = tileImg;
 	}
 
-	public void loadTileTex(String tileName) {
+	public void loadTileTex() {
+		String tileName = this.getClass().getName();
+		tileName = tileName.substring(tileName.lastIndexOf("." + 1));
 		tileImg = Game.textureManager.getTexture("src/com/wallops/resources/img/overworld/" + tileName.toLowerCase() + ".jpg");
 	}
 

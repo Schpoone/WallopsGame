@@ -81,7 +81,8 @@ public class Game {
 				}
 			}
 		} catch (Exception e) {
-			logger.fatal(e.getMessage());
+			System.out.println(this.getClass().getName());
+			//logger.fatal(e.getMessage());
 		} finally {
 			this.cleanup();
 		}

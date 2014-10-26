@@ -4,7 +4,6 @@ public class PathTile extends Tile implements Standable {
 
 	public PathTile() {
 		super();
-		loadTileTex("pathtile");
 	}
 
 	@Override

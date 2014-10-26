@@ -4,7 +4,6 @@ public class SmallForestTreeTile extends Tile implements Interactable {
 
 	public SmallForestTreeTile() {
 		super();
-		loadTileTex("smallforesttreetile");
 	}
 
 	@Override
