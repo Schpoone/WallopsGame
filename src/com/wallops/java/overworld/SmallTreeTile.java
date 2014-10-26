@@ -1,8 +1,8 @@
 package com.wallops.java.overworld;
 
-public class SmallForestTreeTile extends Tile implements Interactable {
+public class SmallTreeTile extends Tile implements Interactable {
 
-	public SmallForestTreeTile() {
+	public SmallTreeTile() {
 		super();
 	}
 
