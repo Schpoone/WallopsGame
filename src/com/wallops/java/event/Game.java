@@ -55,7 +55,7 @@ public class Game {
 	}
 	
 	public void startGameLoop() {
-		this.logger.log(Level.INFO, "Starting main game loop.");
+		logger.info("Starting main game loop.");
 		this.running = true;
 		this.activeGui = new GuiMainMenu(game);
 		this.displayHeight = Display.getHeight();
@@ -81,8 +81,6 @@ public class Game {
 					this.activeGui.resize();
 					
 				}
-				String o = null;
-				o.hashCode();
 			}
 		} catch (Exception e) {
 			logger.fatal("Crashed while running game loop: ", e);
@@ -95,7 +93,7 @@ public class Game {
 	 * creates a new instance of LWJGL's Display class, initializes OpenGL
 	 */
 	public void startup() {
-		logger.log(Level.INFO, "Initializing graphics...");
+		logger.info("Initializing graphics...");
 		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		try {
 			Display.setDisplayMode(new DisplayMode(this.displayWidth, this.displayHeight));
@@ -111,7 +109,7 @@ public class Game {
 		GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0, -1, 1);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
-		logger.log(Level.INFO, "Graphics initialized: lwjgl 2.9.1, see http://www.lwjgl.org/");
+		logger.info("Graphics initialized: lwjgl 2.9.1, see http://www.lwjgl.org/");
 		textureManager.load();
 	}
 	
@@ -129,11 +127,11 @@ public class Game {
 	 * cleans up the game before closing (or caught crashes)
 	 */
 	private void cleanup() {
-		logger.log(Level.INFO, "Cleaning up game...");
+		logger.info("Cleaning up game...");
 		
 		Display.destroy();
 		
-		logger.log(Level.INFO, "Game shut down completely.");
+		logger.info("Game shut down completely.");
 	}
 	
 	public void setScreen(GuiScreen screen) {
