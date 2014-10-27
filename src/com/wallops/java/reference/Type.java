@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
 
+import com.wallops.java.event.Game;
+
 
 public enum Type {
 	NONE(-1, Color.WHITE),
@@ -65,12 +67,10 @@ public enum Type {
 		typeAdvantages = new Properties();
 		try {
 			typeAdvantages.load(new FileInputStream(new File("src/com/wallops/resources/type_effectiveness.properties")));
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (FileNotFoundException e) {
+			Game.logger.fatal("Could not find properties file: ",e);
+		} catch (IOException e) {
+			Game.logger.fatal("Error while loading properties file in Type.java: ",e);
 		}
 		return Double.parseDouble(typeAdvantages.getProperty(this.name()+o.name()));
 	}

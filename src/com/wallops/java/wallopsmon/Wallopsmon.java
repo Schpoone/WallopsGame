@@ -129,9 +129,9 @@ public abstract class Wallopsmon {
 		try {
 			prop.load(new FileInputStream(new File("src/com/wallops/resources/wallopsmon_description.properties")));
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Game.logger.fatal("Could not find properties file: ",e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Game.logger.fatal("Error while loading properties file in Wallopsmon.java: ",e);
 		}
 		description = prop.getProperty(name);
 	}

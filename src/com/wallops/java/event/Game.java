@@ -2,6 +2,7 @@ package com.wallops.java.event;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
+import java.io.PrintStream;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -78,10 +79,13 @@ public class Game {
 					GL11.glScissor(0, 0, displayWidth, displayHeight);
 					GL11.glOrtho(0,displayWidth,displayHeight,0,-1,1);
 					this.activeGui.resize();
+					
 				}
+				String o = null;
+				o.hashCode();
 			}
 		} catch (Exception e) {
-			logger.fatal(e.getMessage());
+			logger.fatal("Crashed while running game loop: ", e);
 		} finally {
 			this.cleanup();
 		}

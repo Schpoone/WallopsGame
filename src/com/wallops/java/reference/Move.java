@@ -6,6 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.wallops.java.event.Game;
+
 public enum Move {
 	NONE(),
 	//(name, type, category, pp, power, accuracy%)
@@ -115,9 +120,9 @@ public enum Move {
 		try {
 			prop.load(new FileInputStream(new File("src/com/wallops/resources/move_description.properties")));
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Game.logger.fatal("Could not find properties file: ",e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Game.logger.fatal("Error while loading properties file in Move.java: ",e);
 		}
 		description = prop.getProperty(name);
 	}

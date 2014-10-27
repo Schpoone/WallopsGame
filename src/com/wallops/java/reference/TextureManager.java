@@ -39,7 +39,7 @@ public class TextureManager {
 						logger.info("Successfully loaded "+childPath.substring(childPath.lastIndexOf(s)+1));
 					}
 				} catch (IOException e) {
-					logger.fatal(e.getMessage());
+					logger.fatal("Error while loading textures: ",e);
 				}
 
 			} else if(child.isDirectory())
