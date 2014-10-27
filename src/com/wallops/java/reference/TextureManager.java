@@ -36,7 +36,7 @@ public class TextureManager {
 					childExtension = childPath.substring(childPath.lastIndexOf(".")+1);
 					if(childExtension.equalsIgnoreCase("png")||childExtension.equals("jpg")) {
 						textureMap.put(childPath, TextureLoader.getTexture(childExtension, ResourceLoader.getResourceAsStream(childPath)));
-						logger.info("Successfully loaded "+childPath);
+						logger.info("Successfully loaded "+childPath.substring(childPath.lastIndexOf(s)+1));
 					}
 				} catch (IOException e) {
 					logger.fatal(e.getMessage());
