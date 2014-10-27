@@ -20,7 +20,7 @@ public class TextureManager {
     }
 
     public void load() {
-	String s = System.getProperty("file.separator");
+	String s = File.separator;
 	File parent = new File("src"+s+"com"+s+"wallops"+s+"resources"+s+"img"+s);
 	if(parent.isDirectory())
 	    loadDir(parent);
