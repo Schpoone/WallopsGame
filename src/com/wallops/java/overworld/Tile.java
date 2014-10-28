@@ -1,5 +1,6 @@
 package com.wallops.java.overworld;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.newdawn.slick.opengl.Texture;
@@ -28,7 +29,8 @@ public abstract class Tile {
 	public void loadTileTex() {
 		String tileName = this.getClass().getName();
 		tileName = tileName.substring(tileName.lastIndexOf("." + 1));
-		tileImg = Game.textureManager.getTexture("src/com/wallops/resources/img/overworld/" + tileName.toLowerCase() + ".jpg");
+		String s = File.separator;
+		tileImg = Game.textureManager.getTexture("src"+s+"com"+s+"wallops"+s+"resources"+s+"img"+s+"overworld"+s+tileName.toLowerCase() + ".jpg");
 	}
 
 }

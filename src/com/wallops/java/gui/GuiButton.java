@@ -1,6 +1,7 @@
 package com.wallops.java.gui;
 
 import java.awt.Font;
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
@@ -122,8 +123,10 @@ public class GuiButton extends Gui implements IRenderable {
 		float maxFontSize = widthMaxFontSize > heightMaxFontSize ? heightMaxFontSize : widthMaxFontSize;
 		this.jfont = jfont.deriveFont(jfont.getSize2D()*maxFontSize);
 		this.font = new TrueTypeFont(this.jfont, false);
-		if(buttonImage == null)
-			buttonImage = Game.textureManager.getTexture("src/com/wallops/resources/img/ButtonTemplate32X.png");
+		if(buttonImage == null) {
+			String s = File.separator;
+			buttonImage = Game.textureManager.getTexture("src"+s+"com"+s+"wallops"+s+"resources"+s+"img"+s+"ButtonTemplate32X.png");
+		}
 	}
 
 	/**
