@@ -1,21 +1,19 @@
 package com.wallops.java.overworld;
 
-public class RedCarpetTile extends Tile implements Standable {
+public class RedCarpetTile extends Tile {
 
 	public RedCarpetTile() {
 		super();
 	}
 
 	@Override
-	public void whenMovedOnto() {
-		// TODO Auto-generated method stub
-		//nothing
+	public void requestMoveIn(Player p) {
+		//moves in
 	}
 
 	@Override
-	public void whenMovedOffOf() {
-		// TODO Auto-generated method stub
-		//maybe check for map change
+	public void requestInteraction(Player p) {
+		//does nothing
 	}
 
 }

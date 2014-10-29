@@ -1,21 +1,19 @@
 package com.wallops.java.overworld;
 
-public class LightGrassTile extends Tile implements Standable {
+public class LightGrassTile extends Tile {
 
 	public LightGrassTile() {
 		super();
 	}
 
 	@Override
-	public void whenMovedOnto() {
-		// TODO Auto-generated method stub
-		//nothing
+	public void requestMoveIn(Player p) {
+		//moves in
 	}
 
 	@Override
-	public void whenMovedOffOf() {
-		// TODO Auto-generated method stub
-		//nothing
+	public void requestInteraction(Player p) {
+		//does nothing
 	}
 
 }
