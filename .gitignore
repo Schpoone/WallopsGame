@@ -7,4 +7,7 @@
 !/.gitignore
 !/TODO
 !/README.md
+
+# also ignore this stuff
+/**/.DS_Store
 /bin
