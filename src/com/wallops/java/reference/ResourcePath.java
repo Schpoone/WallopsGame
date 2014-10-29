@@ -6,7 +6,7 @@ import java.io.File;
  * This class is used for storing the location of files, and includes several utility functions. 
  * 
  * @author PureChaose
- *
+ * 
  */
 public class ResourcePath {
 	private String path;
