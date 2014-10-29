@@ -32,5 +32,11 @@ public abstract class Tile {
 		tileName = tileName.substring(tileName.lastIndexOf("." + 1));
 		tileImg = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+"overworld"+File.separator+tileName.toLowerCase() + ".jpg"));
 	}
-
+	
+	public abstract void requestMoveIn(Player p);
+	//called when the player wants to move to this tile
+	
+	public abstract void requestInteraction(Player p);
+	//called when the player presses the action button
+	//(usually A on game boy) while facing this tile
 }

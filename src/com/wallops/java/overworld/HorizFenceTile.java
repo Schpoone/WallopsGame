@@ -6,4 +6,14 @@ public class HorizFenceTile extends Tile {
 		super();
 	}
 
+	@Override
+	public void requestMoveIn(Player p) {
+		//cannot move in
+	}
+
+	@Override
+	public void requestInteraction(Player p) {
+		//does nothing
+	}
+
 }
