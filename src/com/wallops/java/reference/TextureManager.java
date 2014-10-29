@@ -12,47 +12,43 @@ import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 public class TextureManager {
-	private Map<String,Texture> textureMap;
+	private Map<ResourcePath,Texture> textureMap;
 	private Logger logger = LogManager.getLogger("TextureManager");
 
 	public TextureManager() {
-		textureMap = new HashMap<String,Texture>();
+		textureMap = new HashMap<ResourcePath,Texture>();
 	}
 
 	public void load() {
-		String s = File.separator;
-		File parent = new File("src"+s+"com"+s+"wallops"+s+"resources"+s+"img"+s);
+		File parent = new File(ResourcePath.resourceDir);
 		if(parent.isDirectory())
-			loadDir(parent);
+			loadDir(parent, true);
 	}
 
-	private void loadDir(File parent) {
-		String childPath, childExtension;
-		String s = System.getProperty("file.separator");
-		String imgDirPath = "src"+s+"com"+s+"wallops"+s+"resources"+s+"img"+s;
-		for(File child : parent.listFiles()) {
-			if(child.isFile()) {
+	private void loadDir(File parent, boolean recursive) {
+		ResourcePath child;
+		for(File childFile : parent.listFiles()) {
+			if(childFile.isFile()) {
 				try {
-					childPath = child.getCanonicalPath().substring(child.getCanonicalPath().indexOf(imgDirPath));
-					childExtension = childPath.substring(childPath.lastIndexOf(".")+1);
-					if(childExtension.equalsIgnoreCase("png")||childExtension.equals("jpg")) {
-						Texture textureToPut = TextureLoader.getTexture(childExtension, ResourceLoader.getResourceAsStream(childPath));
+					child = new ResourcePath(childFile);
+					if(child.getExtension().equalsIgnoreCase("png")||child.getExtension().equals("jpg")) {
+						Texture textureToPut = TextureLoader.getTexture(child.getExtension(), ResourceLoader.getResourceAsStream(child.getName()));
 						if(textureToPut != null) {
-							textureMap.put(childPath, textureToPut);
-							logger.info("Successfully loaded "+childPath); // verbose intentionally. might switch this to a less visible log level if it's too cluttered.
+							textureMap.put(child, textureToPut);
+							logger.debug("Successfully loaded "+child.getName()); // verbose intentionally. might switch this to a less visible log level if it's too cluttered.
 						} else
-							logger.info("Failed to load "+childPath);
+							logger.warn("Failed to load "+child.getName());
 					}
 				} catch (IOException e) {
 					logger.fatal("Error while loading textures: ",e);
 				}
 
-			} else if(child.isDirectory())
-				loadDir(child);
+			} else if(childFile.isDirectory() && recursive)
+				loadDir(childFile, recursive);
 		} 
 	}
 
-	public Texture getTexture(String path) {
+	public Texture getTexture(ResourcePath path) {
 		return textureMap.get(path);
 	}
 

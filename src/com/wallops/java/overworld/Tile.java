@@ -8,6 +8,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 import com.wallops.java.event.Game;
+import com.wallops.java.reference.ResourcePath;
 
 public abstract class Tile {
 
@@ -29,8 +30,7 @@ public abstract class Tile {
 	public void loadTileTex() {
 		String tileName = this.getClass().getName();
 		tileName = tileName.substring(tileName.lastIndexOf("." + 1));
-		String s = File.separator;
-		tileImg = Game.textureManager.getTexture("src"+s+"com"+s+"wallops"+s+"resources"+s+"img"+s+"overworld"+s+tileName.toLowerCase() + ".jpg");
+		tileImg = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+"overworld"+File.separator+tileName.toLowerCase() + ".jpg"));
 	}
 
 }

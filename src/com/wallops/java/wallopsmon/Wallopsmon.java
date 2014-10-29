@@ -19,6 +19,7 @@ import org.newdawn.slick.util.ResourceLoader;
 
 import com.wallops.java.event.Game;
 import com.wallops.java.reference.Move;
+import com.wallops.java.reference.ResourcePath;
 import com.wallops.java.reference.Type;
 
 
@@ -94,9 +95,8 @@ public abstract class Wallopsmon {
 		name = n;
 		type1 = t1;
 		type2 = t2;
-		String s = File.separator;
-		mainImage = Game.textureManager.getTexture("src"+s+"com"+s+"wallops"+s+"resources"+s+"img"+s+"wallopsmon"+s + name + ".jpg");
-		shinyImage = Game.textureManager.getTexture("src"+s+"com"+s+"wallops"+s+"resources"+s+"img"+s+"wallopsmon"+s +"Shiny" + name + ".jpg");
+		mainImage = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+"wallopsmon"+File.separator + name + ".jpg"));
+		shinyImage = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+"wallopsmon"+File.separator +"Shiny" + name + ".jpg"));
 
 		if (Math.random()*8192 < 1)
 			shiny = true;

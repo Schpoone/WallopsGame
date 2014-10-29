@@ -17,6 +17,7 @@ import org.newdawn.slick.util.ResourceLoader;
 
 import com.wallops.java.event.Game;
 import com.wallops.java.reference.MouseHandler;
+import com.wallops.java.reference.ResourcePath;
 
 /**
  * A {@link Gui} used to display buttons in their location and have utility methods for clicking it.
@@ -123,10 +124,8 @@ public class GuiButton extends Gui implements IRenderable {
 		float maxFontSize = widthMaxFontSize > heightMaxFontSize ? heightMaxFontSize : widthMaxFontSize;
 		this.jfont = jfont.deriveFont(jfont.getSize2D()*maxFontSize);
 		this.font = new TrueTypeFont(this.jfont, false);
-		if(buttonImage == null) {
-			String s = File.separator;
-			buttonImage = Game.textureManager.getTexture("src"+s+"com"+s+"wallops"+s+"resources"+s+"img"+s+"ButtonTemplate32X.png");
-		}
+		if(buttonImage == null)
+			buttonImage = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+"ButtonTemplate32X.png"));
 	}
 
 	/**
