@@ -32,5 +32,9 @@ public abstract class Tile {
 		tileName = tileName.substring(tileName.lastIndexOf("." + 1));
 		tileImg = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+"overworld"+File.separator+tileName.toLowerCase() + ".jpg"));
 	}
+	
+	public abstract void requestMoveIn(Player p) {
+		
+	}
 
 }
