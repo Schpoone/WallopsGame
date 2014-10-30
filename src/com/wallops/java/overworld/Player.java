@@ -7,6 +7,10 @@ public class Player {
 	private Texture sprite;
 	
 	public Player() {
+		sprite = null;
+	}
+	
+	public Player(Game g) {
 		
 	}
 
