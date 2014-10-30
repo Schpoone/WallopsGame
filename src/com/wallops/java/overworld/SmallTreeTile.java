@@ -1,14 +1,18 @@
 package com.wallops.java.overworld;
 
-public class SmallTreeTile extends Tile implements Interactable {
+public class SmallTreeTile extends Tile {
 
 	public SmallTreeTile() {
 		super();
 	}
+	
+	@Override
+	public void requestMoveIn(Player p) {
+		//cannot move in
+	}
 
 	@Override
-	public void whenInteractedWith() {
-		// TODO Auto-generated method stub
+	public void requestInteraction(Player p) {
 		//headbutt
 	}
 
