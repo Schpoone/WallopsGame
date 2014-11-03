@@ -18,7 +18,7 @@ public class GuiMainMenu extends GuiScreen {
 	/**
 	 * Creates a new GuiMainMenu GuiScreen with a reference back to the calling Game Object as specified by GuiScreen's constructor.
 	 * @param game The calling Game Object
-	 * @see GuiGameScreen#GuiGameScreen(Game)
+	 * @see GuiBattleScreen#GuiBattleScreen(Game)
 	 */
 	public GuiMainMenu(Game game) {
 		super(game);
@@ -42,7 +42,7 @@ public class GuiMainMenu extends GuiScreen {
 	public void buttonClicked(GuiButton clickedButton) {
 		if(clickedButton.getName().equalsIgnoreCase("play")) {
 			game.logger.debug("Starting game from "+this.getClass().getSimpleName()+"\'s \"Play\" button");
-			game.setScreen(new GuiGameScreen(game));
+			game.setScreen(new GuiBattleScreen(game));
 		}
 		if(clickedButton.getName().equalsIgnoreCase("options")) {
 			game.logger.debug("Opening options menu from "+this.getClass().getSimpleName()+"\'s \"Options\" button.");

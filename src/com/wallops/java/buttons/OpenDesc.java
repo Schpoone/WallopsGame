@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
-import com.wallops.java.gui.GuiGameScreen;
+import com.wallops.java.gui.GuiBattleScreen;
 
 
 public class OpenDesc implements ActionListener {
@@ -22,9 +22,9 @@ public class OpenDesc implements ActionListener {
 	private JFrame descWindow;
 	private ScrollPane scroll;
 	private JTextArea text;
-	private GuiGameScreen battle;
+	private GuiBattleScreen battle;
 	
-	public OpenDesc(JButton d, GuiGameScreen g) {
+	public OpenDesc(JButton d, GuiBattleScreen g) {
 		Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		Dimension full = Toolkit.getDefaultToolkit().getScreenSize();
 		descWindow = new JFrame("Description of " + g.getActive().getName());

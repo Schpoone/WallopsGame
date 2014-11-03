@@ -1,11 +1,8 @@
 package com.wallops.java.overworld;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-import org.newdawn.slick.util.ResourceLoader;
 
 import com.wallops.java.event.Game;
 import com.wallops.java.reference.ResourcePath;

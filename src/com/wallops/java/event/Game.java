@@ -2,9 +2,7 @@ package com.wallops.java.event;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
-import java.io.PrintStream;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.LWJGLException;
@@ -12,10 +10,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Matrix4f;
 
-import com.wallops.java.gui.Gui;
-import com.wallops.java.gui.GuiGameScreen;
 import com.wallops.java.gui.GuiMainMenu;
 import com.wallops.java.gui.GuiScreen;
 import com.wallops.java.reference.MouseHandler;
@@ -53,6 +48,7 @@ public class Game {
 		this.displayHeight = 480;
 		this.displayWidth = 720;
 	}
+	
 	
 	public void startGameLoop() {
 		logger.info("Starting main game loop.");

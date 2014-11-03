@@ -20,7 +20,7 @@ import com.wallops.java.wallopsmon.Wallopsmon;
  * @author PureChaose
  *
  */
-public class GuiGameScreen extends GuiScreen {
+public class GuiBattleScreen extends GuiScreen {
 	private Wallopsmon[] player;
 	private Wallopsmon opponent;
 	private int fntOpp;
@@ -29,11 +29,11 @@ public class GuiGameScreen extends GuiScreen {
 	private GuiText battleLog;
 
 	/**
-	 * Creates a new GuiGameScreen with a reference back to the calling Game Object.
+	 * Creates a new GuiBattleScreen with a reference back to the calling Game Object.
 	 * @param game The calling Game Object
 	 * @see GuiScreen#GuiScreen(Game)
 	 */
-	public GuiGameScreen(Game game) {
+	public GuiBattleScreen(Game game) {
 		super(game);
 		update();
 	}
