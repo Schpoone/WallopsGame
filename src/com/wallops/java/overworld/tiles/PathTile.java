@@ -1,15 +1,16 @@
-package com.wallops.java.overworld;
+package com.wallops.java.overworld.tiles;
 
-public class TallGrassTile extends Tile {
+import com.wallops.java.overworld.Player;
 
-	public TallGrassTile() {
+public class PathTile extends Tile {
+
+	public PathTile() {
 		super();
 	}
 
 	@Override
 	public void requestMoveIn(Player p) {
-		//allows move in
-		//chance of wild pokemon
+		//moves in
 	}
 
 	@Override

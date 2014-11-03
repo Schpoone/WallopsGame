@@ -1,8 +1,10 @@
-package com.wallops.java.overworld;
+package com.wallops.java.overworld.tiles;
 
-public class RightGrassLedgetile extends Tile {
+import com.wallops.java.overworld.Player;
 
-	public RightGrassLedgetile() {
+public class RightGrassLedgeTile extends Tile {
+
+	public RightGrassLedgeTile() {
 		super();
 	}
 

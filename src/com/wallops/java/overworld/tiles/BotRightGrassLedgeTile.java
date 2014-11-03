@@ -1,8 +1,10 @@
-package com.wallops.java.overworld;
+package com.wallops.java.overworld.tiles;
 
-public class HorizFenceTile extends Tile {
+import com.wallops.java.overworld.Player;
 
-	public HorizFenceTile() {
+public class BotRightGrassLedgeTile extends Tile {
+
+	public BotRightGrassLedgeTile() {
 		super();
 	}
 
@@ -15,5 +17,5 @@ public class HorizFenceTile extends Tile {
 	public void requestInteraction(Player p) {
 		//does nothing
 	}
-
+	
 }

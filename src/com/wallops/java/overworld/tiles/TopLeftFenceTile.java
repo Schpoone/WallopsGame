@@ -1,8 +1,10 @@
-package com.wallops.java.overworld;
+package com.wallops.java.overworld.tiles;
 
-public class BotRightGrassLedgeTile extends Tile {
+import com.wallops.java.overworld.Player;
 
-	public BotRightGrassLedgeTile() {
+public class TopLeftFenceTile extends Tile {
+
+	public TopLeftFenceTile() {
 		super();
 	}
 
@@ -15,5 +17,5 @@ public class BotRightGrassLedgeTile extends Tile {
 	public void requestInteraction(Player p) {
 		//does nothing
 	}
-	
+
 }

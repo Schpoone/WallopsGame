@@ -10,6 +10,8 @@ import com.wallops.java.reference.ResourcePath;
 public class Player {
 	
 	private Texture sprite;
+	private Spritesheet animations;
+	private Location loc;
 	
 	public Player() {
 		sprite = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+File.separator+"img"+File.separator+"overworld"+File.separator+"walking_spritesheet.jpg"));

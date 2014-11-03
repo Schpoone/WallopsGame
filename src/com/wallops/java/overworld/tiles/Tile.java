@@ -1,10 +1,11 @@
-package com.wallops.java.overworld;
+package com.wallops.java.overworld.tiles;
 
 import java.io.File;
 
 import org.newdawn.slick.opengl.Texture;
 
 import com.wallops.java.event.Game;
+import com.wallops.java.overworld.Player;
 import com.wallops.java.reference.ResourcePath;
 
 public abstract class Tile {
