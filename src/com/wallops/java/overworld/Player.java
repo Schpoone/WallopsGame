@@ -17,4 +17,28 @@ public class Player {
 		sprite = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+File.separator+"img"+File.separator+"overworld"+File.separator+"walking_spritesheet.jpg"));
 	}
 
+	public Texture getSprite() {
+		return sprite;
+	}
+
+	public Spritesheet getAnimations() {
+		return animations;
+	}
+
+	public Location getLoc() {
+		return loc;
+	}
+
+	public void setSprite(Texture sprite) {
+		this.sprite = sprite;
+	}
+
+	public void setAnimations(Spritesheet animations) {
+		this.animations = animations;
+	}
+
+	public void setLoc(Location loc) {
+		this.loc = loc;
+	}
+
 }
