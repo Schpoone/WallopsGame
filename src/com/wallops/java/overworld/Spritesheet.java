@@ -2,7 +2,7 @@ package com.wallops.java.overworld;
 
 import org.newdawn.slick.opengl.Texture;
 
-public class Spritesheet {
+public abstract class Spritesheet {
 	
 	private Texture sheet;
 	
@@ -17,5 +17,7 @@ public class Spritesheet {
 	public void setSheet(Texture sheet) {
 		this.sheet = sheet;
 	}
+	
+	public abstract void animate(int animation, int direction);
 	
 }
