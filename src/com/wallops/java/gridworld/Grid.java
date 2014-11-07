@@ -17,9 +17,11 @@
  * @author Cay Horstmann
  */
 
-package info.gridworld.grid;
+package com.wallops.java.gridworld;
 
 import java.util.ArrayList;
+
+import com.wallops.java.overworld.Location;
 
 /**
  * <code>Grid</code> provides an interface for a two-dimensional, grid-like

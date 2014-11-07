@@ -17,9 +17,11 @@
  * @author Cay Horstmann
  */
 
-package info.gridworld.grid;
+package com.wallops.java.gridworld;
 
 import java.util.ArrayList;
+
+import com.wallops.java.overworld.Location;
 
 /**
  * A <code>BoundedGrid</code> is a rectangular grid with a finite number of

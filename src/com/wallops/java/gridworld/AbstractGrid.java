@@ -14,9 +14,11 @@
  * @author Cay Horstmann
  */
 
-package info.gridworld.grid;
+package com.wallops.java.gridworld;
 
 import java.util.ArrayList;
+
+import com.wallops.java.overworld.Location;
 
 /**
  * <code>AbstractGrid</code> contains the methods that are common to grid

@@ -16,11 +16,9 @@
  * @author Cay Horstmann
  */
 
-package info.gridworld.gui;
+package com.wallops.java.gridworld;
 
-import info.gridworld.grid.Grid;
-import info.gridworld.grid.Location;
-
+import com.wallops.java.overworld.Location;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;

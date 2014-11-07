@@ -17,7 +17,7 @@
  * @author Cay Horstmann
  */
 
-package info.gridworld.gui;
+package com.wallops.java.gridworld;
 
 import java.awt.Color;
 import java.awt.Font;
