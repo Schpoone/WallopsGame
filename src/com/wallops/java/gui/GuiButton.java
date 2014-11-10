@@ -3,6 +3,7 @@ package com.wallops.java.gui;
 import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,7 +35,7 @@ public class GuiButton extends Gui implements IRenderable {
 	protected static Texture buttonImage;
 	private int[][] coords;
 	private float[] tCoords;
-	private Logger logger;
+	private java.util.logging.Logger logger;
 	private int mouseX;
 	private int mouseY;
 	protected String name;
@@ -43,7 +44,7 @@ public class GuiButton extends Gui implements IRenderable {
 	private Font jfont;
 	private TrueTypeFont font;
 	private int trimColor;
-	/** time when button should stop being rendered as "pushed" after it is clicked (175 milis after it is clicked, by default) */
+	/** time when button should stop being rendered as "pushed" after it is clicked (175 millis after it is clicked, by default) */
 	private long cooldown;
 	private int centerColor;
 
@@ -124,8 +125,9 @@ public class GuiButton extends Gui implements IRenderable {
 		float maxFontSize = widthMaxFontSize > heightMaxFontSize ? heightMaxFontSize : widthMaxFontSize;
 		this.jfont = jfont.deriveFont(jfont.getSize2D()*maxFontSize);
 		this.font = new TrueTypeFont(this.jfont, false);
-		if(buttonImage == null)
-			buttonImage = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+"img"+File.separator+"ButtonTemplate32X.png"));
+		if(GuiButton.buttonImage == null)
+			GuiButton.buttonImage = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+"img"+File.separator+"ButtonTemplate32X.png"));
+		logger.log(Level.ALL, GuiButton.buttonImage.toString());
 	}
 
 	/**
