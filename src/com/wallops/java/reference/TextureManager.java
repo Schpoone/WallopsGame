@@ -24,31 +24,35 @@ public class TextureManager {
 		if(parent.isDirectory())
 			loadDir(parent, true);
 	}
+	
+	private void loadFile(File childFile) {
+		try {
+			ResourcePath child = new ResourcePath(childFile);
+			if(child.getExtension().equalsIgnoreCase("png")||child.getExtension().equals("jpg")) {
+				Texture textureToPut = TextureLoader.getTexture(child.getExtension(), ResourceLoader.getResourceAsStream(child.getName()));
+				if(textureToPut != null) {
+					textureMap.put(child, textureToPut);
+					logger.debug("Successfully loaded "+child.getName()); // verbose intentionally. might switch this to a less visible log level if it's too cluttered.
+				} else
+					logger.warn("Failed to load "+child.getName());
+			}
+		} catch (IOException e) {
+			logger.fatal("Error while loading textures: ",e);
+		}
+	}
 
 	private void loadDir(File parent, boolean recursive) {
-		ResourcePath child;
 		for(File childFile : parent.listFiles()) {
 			if(childFile.isFile()) {
-				try {
-					child = new ResourcePath(childFile);
-					if(child.getExtension().equalsIgnoreCase("png")||child.getExtension().equals("jpg")) {
-						Texture textureToPut = TextureLoader.getTexture(child.getExtension(), ResourceLoader.getResourceAsStream(child.getName()));
-						if(textureToPut != null) {
-							textureMap.put(child, textureToPut);
-							logger.debug("Successfully loaded "+child.getName()); // verbose intentionally. might switch this to a less visible log level if it's too cluttered.
-						} else
-							logger.warn("Failed to load "+child.getName());
-					}
-				} catch (IOException e) {
-					logger.fatal("Error while loading textures: ",e);
-				}
-
+				loadFile(childFile);
 			} else if(childFile.isDirectory() && recursive)
 				loadDir(childFile, recursive);
 		} 
 	}
 
 	public Texture getTexture(ResourcePath path) {
+		if(!textureMap.containsKey(path))
+			loadFile(new File(path.getAbsolutePath()));
 		return textureMap.get(path);
 	}
 

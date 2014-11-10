@@ -15,7 +15,10 @@ public class ResourcePath {
 	private boolean inJar;
 	private boolean directory;
 	private boolean file;
-
+	
+	/**
+	 * Equivalent to "src"+File.separator+"com"+File.separator+"wallops"+File.separator+"resources"+File.separator
+	 */
 	public static final String resourceDir = "src"+File.separator+"com"+File.separator+"wallops"+File.separator+"resources"+File.separator;
 	public static final File resourceDirFile = new File(resourceDir);
 	
@@ -54,6 +57,17 @@ public class ResourcePath {
 	
 	public boolean isFile() {
 		return file;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		ResourcePath otherPath = (ResourcePath) other;
+		return path.equals(otherPath.path);
+	}
+	
+	@Override
+	public int hashCode() {
+		return path.hashCode();
 	}
 
 }

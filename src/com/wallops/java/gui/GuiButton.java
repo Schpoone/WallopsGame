@@ -2,19 +2,14 @@ package com.wallops.java.gui;
 
 import java.awt.Font;
 import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-import org.newdawn.slick.util.ResourceLoader;
 
 import com.wallops.java.event.Game;
 import com.wallops.java.reference.MouseHandler;
@@ -35,7 +30,7 @@ public class GuiButton extends Gui implements IRenderable {
 	protected static Texture buttonImage;
 	private int[][] coords;
 	private float[] tCoords;
-	private java.util.logging.Logger logger;
+	private Logger logger;
 	private int mouseX;
 	private int mouseY;
 	protected String name;
@@ -127,7 +122,6 @@ public class GuiButton extends Gui implements IRenderable {
 		this.font = new TrueTypeFont(this.jfont, false);
 		if(GuiButton.buttonImage == null)
 			GuiButton.buttonImage = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+"img"+File.separator+"ButtonTemplate32X.png"));
-		logger.log(Level.ALL, GuiButton.buttonImage.toString());
 	}
 
 	/**
