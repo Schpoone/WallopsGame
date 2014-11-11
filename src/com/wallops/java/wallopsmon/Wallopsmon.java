@@ -95,8 +95,8 @@ public abstract class Wallopsmon {
 		name = n;
 		type1 = t1;
 		type2 = t2;
-		mainImage = Game.textureManager.getTexture(new ResourcePath(ResourcePath.imgDir+"wallopsmon"+File.separator + name + ".jpg"));
-		shinyImage = Game.textureManager.getTexture(new ResourcePath(ResourcePath.imgDir+"wallopsmon"+File.separator +"Shiny" + name + ".jpg"));
+		mainImage = Game.textureManager.getTexture(new ResourcePath(ResourcePath.wallopsmonImgDir+"wallopsmon"+File.separator + name + ".jpg"));
+		shinyImage = Game.textureManager.getTexture(new ResourcePath(ResourcePath.wallopsmonImgDir+"wallopsmon"+File.separator +"Shiny" + name + ".jpg"));
 
 		if (Math.random()*8192 < 1)
 			shiny = true;
