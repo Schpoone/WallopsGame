@@ -20,6 +20,7 @@ public class ResourcePath {
 	 * Equivalent to "src"+File.separator+"com"+File.separator+"wallops"+File.separator+"resources"+File.separator
 	 */
 	public static final String resourceDir = "src"+File.separator+"com"+File.separator+"wallops"+File.separator+"resources"+File.separator;
+	public static final String imgDir = resourceDir+"img"+File.separator;
 	public static final File resourceDirFile = new File(resourceDir);
 	
 	public ResourcePath(File path) {
