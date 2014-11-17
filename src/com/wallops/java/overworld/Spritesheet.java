@@ -4,6 +4,8 @@ import org.newdawn.slick.opengl.Texture;
 
 public abstract class Spritesheet {
 	
+	public static final int SQUARE_SPRITE_DIMEN = 16;
+	
 	private Texture sheet;
 	
 	public Spritesheet() {

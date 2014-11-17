@@ -21,6 +21,7 @@ public class ResourcePath {
 	 */
 	public static final String resourceDir = "src"+File.separator+"com"+File.separator+"wallops"+File.separator+"resources"+File.separator;
 	public static final String imgDir = resourceDir+"img"+File.separator;
+	public static final String overworldImgDir = imgDir+"overworld"+File.separator;
 	public static final String wallopsmonImgDir = imgDir+"wallopsmon"+File.separator;
 	public static final File resourceDirFile = new File(resourceDir);
 	
