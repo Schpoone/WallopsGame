@@ -6,7 +6,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.wallops.java.event.Game;
 import com.wallops.java.reference.ResourcePath;
-import com.wallops.java.reference.TextureManager;
 
 public class PlayerSheet extends Spritesheet {
 	
