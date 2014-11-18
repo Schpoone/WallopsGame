@@ -4,8 +4,12 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.opengl.Texture;
 
 import com.wallops.java.event.Game;
+import com.wallops.java.reference.ResourcePath;
 
 /**
  * A {@linkplain GuiScreen} used for the main menu of the game. Has 3 {@linkplain GuiButton}s, one to play the game, one to open the options menu (to be implemented) and one to quit the game.
@@ -15,6 +19,8 @@ import com.wallops.java.event.Game;
  */
 public class GuiMainMenu extends GuiScreen {
 	
+	protected static Texture background;
+	
 	/**
 	 * Creates a new GuiMainMenu GuiScreen with a reference back to the calling Game Object as specified by GuiScreen's constructor.
 	 * @param game The calling Game Object
@@ -22,6 +28,8 @@ public class GuiMainMenu extends GuiScreen {
 	 */
 	public GuiMainMenu(Game game) {
 		super(game);
+		if (GuiMainMenu.background == null)
+			GuiMainMenu.background = Game.textureManager.getTexture(new ResourcePath(ResourcePath.imgDir+"main_background.png"));
 	}
 
 	/**
@@ -33,6 +41,14 @@ public class GuiMainMenu extends GuiScreen {
 		this.renderables.add(new GuiButton(1F/3F, 1F/3F, 1F/3F, 5F/54F, "Play"));
 		this.renderables.add(new GuiButton(1F/3F, 4F/9F, 1F/3F, 5F/54F, "Options"));
 		this.renderables.add(new GuiButton(1F/3F, 5F/9F, 1F/3F, 5F/54F, "Quit"));
+		if(this.visible) {
+			this.drawTexture(0, 0, this.game.displayWidth, this.game.displayHeight, GuiMainMenu.background);
+			GL11.glDrawBuffer(GL11.GL_BACK);
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GL11.glDisable(GL11.GL_BLEND);
+			GL11.glDrawBuffer(GL11.GL_FRONT_AND_BACK);
+		}
 	}
 	
 	/**
