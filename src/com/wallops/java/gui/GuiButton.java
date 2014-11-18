@@ -121,7 +121,7 @@ public class GuiButton extends Gui implements IRenderable {
 		this.jfont = jfont.deriveFont(jfont.getSize2D()*maxFontSize);
 		this.font = new TrueTypeFont(this.jfont, false);
 		if(GuiButton.buttonImage == null)
-			GuiButton.buttonImage = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+"img"+File.separator+"ButtonTemplate32X.png"));
+			GuiButton.buttonImage = Game.textureManager.getTexture(new ResourcePath(ResourcePath.imgDir+"ButtonTemplate32X.png"));
 	}
 
 	/**
