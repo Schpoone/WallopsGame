@@ -38,7 +38,7 @@ public class GuiButton extends Gui implements IRenderable {
 	private boolean visible;
 	private Font jfont;
 	private TrueTypeFont font;
-	private int trimColor;
+	private int trimColor;//WHAT IS THIS, IT LITERALLY DOES NOTHING
 	/** time when button should stop being rendered as "pushed" after it is clicked (175 millis after it is clicked, by default) */
 	private long cooldown;
 	private int centerColor;
@@ -150,12 +150,10 @@ public class GuiButton extends Gui implements IRenderable {
 		}
 		if(this.visible) {
 			this.drawTexture(this.coords, this.tCoords, GuiButton.buttonImage, this.centerColor);
-			GL11.glDrawBuffer(GL11.GL_BACK);
+			GL11.glDrawBuffer(GL11.GL_FRONT);
 			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			font.drawString(this.x+this.width/2-font.getWidth(this.name)/2, this.y+this.height/2-font.getHeight()/2, this.name, Color.black);
 			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glDrawBuffer(GL11.GL_FRONT_AND_BACK);
 		}
 	}
 
