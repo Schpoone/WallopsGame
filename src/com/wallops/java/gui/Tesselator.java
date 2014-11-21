@@ -49,7 +49,7 @@ public class Tesselator {
 	/** Tells LWJGL what mode to draw in */
 	private int mode;
 	/** a Tesselator instance for drawing shapes */
-	public static final Tesselator instance = new Tesselator(2097152);
+	public static final Tesselator instance = new Tesselator(16384);
 
 
 	public Tesselator(int bufferSize) {
