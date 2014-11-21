@@ -21,7 +21,7 @@ public class Tesselator {
 	/** ByteBuffer used to store reference variables in OpenGL */
 	private ByteBuffer byteBuffer;
 
-	/** same memory as ByteBuffer, but for any specifically int values */
+	/** same memory as ByteBuffer, but for any specifically integer values */
 	private IntBuffer intBuffer;
 
 	/** same memory as ByteBuffer, but for any specifically float values */
