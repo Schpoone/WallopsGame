@@ -155,17 +155,8 @@ public class Tesselator {
 
 			// disable enabled GL states
 			GL11.glDisableClientState(GL11.GL_VERTEX_ARRAY);
-			if(this.hasColor) {
-				GL11.glDisableClientState(GL11.GL_COLOR_ARRAY);
-			}
-
-			if(this.hasBrightness) {
-				GL11.glDisableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
-			}
-			
-			if(this.hasTexture) {
-				GL11.glDisableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
-			}
+			GL11.glDisableClientState(GL11.GL_COLOR_ARRAY);
+			GL11.glDisableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
 		}
 
 		this.reset();
