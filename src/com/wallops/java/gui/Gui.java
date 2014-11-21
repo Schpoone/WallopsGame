@@ -83,7 +83,7 @@ public class Gui {
 		float green = (float)(color >> 8 & 255) / 255.0F;
 		float blue = (float)(color & 255) / 255.0F;
 		Tesselator tess = Tesselator.instance;
-		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor4f(red, green, blue, alpha);
 		tess.startDrawingQuads();
@@ -92,7 +92,7 @@ public class Gui {
 		tess.addVertex((double)x2, (double)y1, 0.0D);
 		tess.addVertex((double)x1, (double)y1, 0.0D);
 		tess.draw();
-		GL11.glDisable(GL11.GL_BLEND);
+		//GL11.glDisable(GL11.GL_BLEND);
 		//GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 	
