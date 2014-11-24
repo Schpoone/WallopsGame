@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
+//you forgot to log off bro 
+//sup
 /**
  * A class used for easily rendering for its subclasses.
  * 
