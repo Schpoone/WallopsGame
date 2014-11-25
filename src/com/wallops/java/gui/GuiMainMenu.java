@@ -44,11 +44,6 @@ public class GuiMainMenu extends GuiScreen {
 		this.renderables.add(new GuiButton(1F/3F, 5F/9F, 1F/3F, 5F/54F, "Quit"));
 		if(this.visible) {
 			this.drawTexture(0, 0, this.game.displayWidth, this.game.displayHeight, GuiMainMenu.background);
-			GL11.glDrawBuffer(GL11.GL_BACK);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glDrawBuffer(GL11.GL_FRONT_AND_BACK);
 		}
 	}
 	
