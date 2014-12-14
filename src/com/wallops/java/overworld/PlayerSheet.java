@@ -18,13 +18,15 @@ public class PlayerSheet extends Spritesheet {
 	public static final int SOUTH = 2;
 	public static final int WEST = 3;
 	
+	private ResourcePath path = new ResourcePath(ResourcePath.overworldImgDir+"player_spritesheet");
+	
 	public PlayerSheet() {
 		super();
 	}
 
 	@Override
 	public void animate(int anim, int dir) {
-		GL11.glTexSubImage2D(GL11.GL_TEXTURE_2D, 5, 1+17*dir, 1+17*anim, 16, 16, GL11.GL_RGB, GL11.GL_UNSIGNED_BYTE, (ByteBuffer)Game.textureManager.getTexture(new ResourcePath(ResourcePath.overworldImgDir+"player_spritesheet")));
+		GL11.glTexSubImage2D(GL11.GL_TEXTURE_2D, 5, 1+17*dir, 1+17*anim, 16, 16, GL11.GL_RGB, GL11.GL_UNSIGNED_BYTE, (ByteBuffer)(Game.textureManager.getTexture(path)));
 	}
 
 }

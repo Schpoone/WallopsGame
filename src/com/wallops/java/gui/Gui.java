@@ -60,7 +60,7 @@ public class Gui {
 	 * @param x2 ending point's x
 	 * @param y2 ending point's y
 	 * @param color the rectangle's color packed into an int
-	 * @see Gui#drawTexture(int, int, int, int, Texture)
+	 * @see #drawTexture(int, int, int, int, Texture)
 	 */
 	public void drawRectangle(int x1, int y1, int x2, int y2, int color) {
 
@@ -98,12 +98,21 @@ public class Gui {
 	
 	/**
 	 * Draws a given {@linkplain Texture} in a given location with a given size. 
+<<<<<<< HEAD
+	 * @param x1 x coordinate of the top-left point of where the Texture should be rendered
+	 * @param y1 y coordinate of the top-left point of where the Texture should be rendered
+	 * @param x2 x coordinate of the bottom-right point of where the Texture should be rendered
+	 * @param y2 y coordinate of the bottom-right point of where the Texture should be rendered
+	 * @param t the Texture to be rendered
+	 * @see #drawRectangle(int, int, int, int, int)
+=======
 	 * @param x1 The x coordinate top-left point of where the {@linkplain Texture} should be rendered
 	 * @param y1 The y coordinate top-left point of where the {@linkplain Texture} should be rendered
 	 * @param x2 The x coordinate bottom-right point of where the {@linkplain Texture} should be rendered
 	 * @param y2 The y coordinate bottom-right point of where the {@linkplain Texture} should be rendered
 	 * @param t The {@linkplain Texture} to be rendered
 	 * @see Gui#drawRectangle(int, int, int, int, int)
+>>>>>>> refs/remotes/WallopsGame/master
 	 */
 	public void drawTexture(int x1, int y1, int x2, int y2, Texture t) {
 
@@ -124,15 +133,77 @@ public class Gui {
 		
 	}
 	
+	/**
+	 * Draws a given {@linkplain Texture} in a given location with a given size.
+	 * The coords array designates a grid of rectangles on the screen, by placing the x coordinates in 
+	 * increasing order in the first int array, then the y coordinates in increasing order in the 
+	 * second array.
+	 * The tCoords array function in a similar fashion, except it designates coordinates on the texture 
+	 * by fractions of the texture's side, and assumes the vertical and horizontal values to be the 
+	 * same.
+	 * @param coords an array of two int arrays, the first holding x coordinates, the second holding y coordinates
+	 * @param tCoords float array of fractions 
+	 * @param t texture to draw
+	 * @throws IllegalArgumentException if coords doesn't have exactly 2 arrays in it, or if those arrays are of different sizes, or if tCoords's size doesn't match their sizes
+	 */
 	public void drawTexture(int[][] coords, float[] tCoords, Texture t) {
+		if(coords.length!=2)
+			throw new IllegalArgumentException("There must be exactly 2 arrays in the coords double array!");
+		if(coords[0].length!=coords[1].length)
+			throw new IllegalArgumentException("Both arrays in the coords double array must be of the same size!");
+		if(coords[0].length!=tCoords.length)
+			throw new IllegalArgumentException("tCoords's size and the size of both the arrays in coords must be the same!");
 		this.drawTexture(coords, tCoords, t, 255,255,255,255);
 	}
 	
+	/**
+	 * Draws a given {@linkplain Texture} in a given location with a given size.
+	 * The coords array designates a grid of rectangles on the screen, by placing the x coordinates in 
+	 * increasing order in the first int array, then the y coordinates in increasing order in the 
+	 * second array.
+	 * The tCoords array function in a similar fashion, except it designates coordinates on the texture 
+	 * by fractions of the texture's side, and assumes the vertical and horizontal values to be the 
+	 * same.
+	 * @param coords an array of two int arrays, the first holding x coordinates, the second holding y coordinates
+	 * @param tCoords float array of fractions 
+	 * @param t texture to draw
+	 * @param color the color to add to the texture, packed into an int
+	 * @throws IllegalArgumentException if coords doesn't have exactly 2 arrays in it, or if those arrays are of different sizes, or if tCoords's size doesn't match their sizes
+	 */
 	public void drawTexture(int[][] coords, float[] tCoords, Texture t, int color) {
+		if(coords.length!=2)
+			throw new IllegalArgumentException("There must be exactly 2 arrays in the coords double array!");
+		if(coords[0].length!=coords[1].length)
+			throw new IllegalArgumentException("Both arrays in the coords double array must be of the same size!");
+		if(coords[0].length!=tCoords.length)
+			throw new IllegalArgumentException("tCoords's size and the size of both the arrays in coords must be the same!");
 		this.drawTexture(coords, tCoords, t, color >> 24 & 255, color >> 16 & 255, color >> 8 & 255, color & 255);
 	}
 
+	/**
+	 * Draws a given {@linkplain Texture} in a given location with a given size.
+	 * The coords array designates a grid of rectangles on the screen, by placing the x coordinates in 
+	 * increasing order in the first int array, then the y coordinates in increasing order in the 
+	 * second array.
+	 * The tCoords array function in a similar fashion, except it designates coordinates on the texture 
+	 * by fractions of the texture's side, and assumes the vertical and horizontal values to be the 
+	 * same.
+	 * @param coords an array of two int arrays, the first holding x coordinates, the second holding y coordinates
+	 * @param tCoords float array of fractions 
+	 * @param t texture to draw
+	 * @param alpha alpha value of the color to add to the texture, between 0 and 255
+	 * @param red red value of the color to add to the texture, between 0 and 255
+	 * @param green green value of the color to add to the texture, between 0 and 255
+	 * @param blue blue value of the color to add to the texture, between 0 and 255
+	 * @throws IllegalArgumentException if coords doesn't have exactly 2 arrays in it, or if those arrays are of different sizes, or if tCoords's size doesn't match their sizes
+	 */
 	public void drawTexture(int[][] coords, float[] tCoords, Texture t, int alpha, int red, int green, int blue) {
+		if(coords.length!=2)
+			throw new IllegalArgumentException("There must be exactly 2 arrays in the coords double array!");
+		if(coords[0].length!=coords[1].length)
+			throw new IllegalArgumentException("Both arrays in the coords double array must be of the same size!");
+		if(coords[0].length!=tCoords.length)
+			throw new IllegalArgumentException("tCoords's size and the size of both the arrays in coords must be the same!");
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -170,5 +241,21 @@ public class Gui {
 				tess.addVertexTex(x1, y2, 0.0D, u1, v2);
 			}
 		tess.draw();
+	}
+	
+	/**
+	 * draws a wireframe rectangle by designating its opposite corners' coordinates and its color
+	 * @param x1 starting point's x
+	 * @param y1 starting point's y
+	 * @param x2 ending point's x
+	 * @param y2 ending point's y
+	 * @param color color of the wireframe, packed into an int
+	 * @see #drawRectangle(int, int, int, int, int)
+	 */
+	public void drawWireRectangle(int x1, int y1, int x2, int y2, int color) {
+		int currentMode = GL11.glGetInteger(GL11.GL_POLYGON_MODE);
+		GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+		this.drawRectangle(x1, y1, x2, y2, color);
+		GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, currentMode);
 	}
 }
