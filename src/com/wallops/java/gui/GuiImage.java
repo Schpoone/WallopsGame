@@ -1,6 +1,7 @@
 package com.wallops.java.gui;
 
 import com.wallops.java.event.Game;
+import com.wallops.java.reference.ResourcePath;
 
 /**
  * A {@linkplain Gui} used to render colors, and later images, onto the screen easily in 2D.
@@ -15,6 +16,7 @@ public class GuiImage extends Gui implements IRenderable {
 	protected int height;
 	private boolean visible;
 	private int color;
+	private ResourcePath path;
 
 	/**
 	 * Creates a new GuiImage with specified ratio between the Display's dimension and its own, the color, packed to an int, to display, and sets it to be visible.
@@ -29,7 +31,7 @@ public class GuiImage extends Gui implements IRenderable {
 	public GuiImage(float xScale, float yScale, float widthScale, float heightScale, int color) {
 		this((int)(xScale*Game.game.displayWidth), (int)(yScale*Game.game.displayHeight), (int)(widthScale*Game.game.displayWidth), (int)(heightScale*Game.game.displayHeight), color);
 	}
-	
+
 	/**
 	 * Creates a new GuiImage with specified x and y coordinates, width and height, the color, packed to an int, to display, and sets it to be visible.
 	 * @param x The x coordinate of this image
@@ -43,7 +45,7 @@ public class GuiImage extends Gui implements IRenderable {
 	public GuiImage(int x, int y, int width, int height, int color) {
 		this(x,y,width,height,color,true);
 	}
-	
+
 	/**
 	 * Creates a new GuiImage with specified x and y coordinates, width and height, the color, packed to an int, to display, and a custom visibility.
 	 * @param x The x coordinate of this image
@@ -62,12 +64,29 @@ public class GuiImage extends Gui implements IRenderable {
 		this.height = height;
 		this.color = color;
 		this.visible = visible;
+		this.path = null;
+	}
+	
+	public GuiImage(float xScale, float yScale, float widthScale, float heightScale, ResourcePath path) {
+		this((int)(xScale*Game.game.displayWidth), (int)(yScale*Game.game.displayHeight), (int)(widthScale*Game.game.displayWidth), (int)(heightScale*Game.game.displayHeight),path);
+	}
+
+	public GuiImage(int x, int y, int width, int height, ResourcePath path) {
+		this.x=x;
+		this.y=y;
+		this.width=width;
+		this.height=height;
+		this.path=path;
+		this.visible = true;
 	}
 
 	@Override
 	public void render() {
 		if(this.visible)
-			this.drawRectangle(this.x, this.y, this.x+this.width, this.y+this.height, color);
+			if(this.path!=null)
+				this.drawTexture(x, y, x+width, y+height, Game.textureManager.getTexture(path));
+			else
+				this.drawRectangle(this.x, this.y, this.x+this.width, this.y+this.height, color);
 	}
 
 	/**

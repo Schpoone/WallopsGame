@@ -36,11 +36,10 @@ public class GuiMainMenu extends GuiScreen {
 	@Override
 	public void initGui() {
 		super.initGui();
-		this.renderables.add(new Tiler(new ResourcePath(ResourcePath.overworldImgDir + "tallgrasstile.jpg")));
+		this.renderables.add(new GuiImage(0F,0F,1F,1F,new ResourcePath(ResourcePath.imgDir+"main_background.png")));
 		this.renderables.add(new GuiButton(1F/3F, 1F/3F, 1F/3F, 5F/54F, "Play"));
 		this.renderables.add(new GuiButton(1F/3F, 4F/9F, 1F/3F, 5F/54F, "Options"));
 		this.renderables.add(new GuiButton(1F/3F, 5F/9F, 1F/3F, 5F/54F, "Quit"));
-		
 	}
 	
 	/**
@@ -49,15 +48,15 @@ public class GuiMainMenu extends GuiScreen {
 	@Override
 	public void buttonClicked(GuiButton clickedButton) {
 		if(clickedButton.getName().equalsIgnoreCase("play")) {
-			game.logger.debug("Starting game from "+this.getClass().getSimpleName()+"\'s \"Play\" button");
+			Game.logger.debug("Starting game from "+this.getClass().getSimpleName()+"\'s \"Play\" button");
 			game.setScreen(new GuiBattleScreen(game));
 		}
 		if(clickedButton.getName().equalsIgnoreCase("options")) {
-			game.logger.debug("Opening options menu from "+this.getClass().getSimpleName()+"\'s \"Options\" button.");
+			Game.logger.debug("Opening options menu from "+this.getClass().getSimpleName()+"\'s \"Options\" button.");
 			//open the option gui screen!
 		}
 		if(clickedButton.getName().equalsIgnoreCase("quit")) {
-			game.logger.debug("Close requested from "+this.getClass().getSimpleName()+"\'s \"Quit\" button.");
+			Game.logger.debug("Close requested from "+this.getClass().getSimpleName()+"\'s \"Quit\" button.");
 			this.game.shutdown();
 		}
 	}
