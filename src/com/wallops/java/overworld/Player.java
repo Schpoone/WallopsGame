@@ -11,12 +11,13 @@ import com.wallops.java.wallopsmon.Wallopsmon;
 public class Player {
 	
 	private Texture sprite;
-	private Spritesheet animations;
+	private SpritesheetLoader animations;
 	private Location loc;
 	private Pokedex dex;
 	private Wallopsmon[] team;
 	private Backpack pack;
 	//player card
+	//player will have an array of animations
 	
 	public Player() {
 		sprite = Game.textureManager.getTexture(new ResourcePath(ResourcePath.resourceDir+File.separator+"img"+File.separator+"overworld"+File.separator+"walking_spritesheet.jpg"));
@@ -31,7 +32,7 @@ public class Player {
 		return sprite;
 	}
 
-	public Spritesheet getAnimations() {
+	public SpritesheetLoader getAnimations() {
 		return animations;
 	}
 
@@ -43,7 +44,7 @@ public class Player {
 		this.sprite = sprite;
 	}
 
-	public void setAnimations(Spritesheet animations) {
+	public void setAnimations(SpritesheetLoader animations) {
 		this.animations = animations;
 	}
 
