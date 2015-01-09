@@ -9,6 +9,8 @@ import com.wallops.java.reference.ResourcePath;
 public class SpritesheetLoader {
 	
 	public static final int SQUARE_SPRITE_DIMEN = 16;
+	public static final String WALKING_SPRITES = "walking_spritesheet";
+	public static final String BIKING_SPRITES = "biking_spritesheet";
 	
 	private Texture sheet;
 	

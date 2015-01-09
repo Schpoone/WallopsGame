@@ -5,10 +5,10 @@ import com.wallops.java.gui.IRenderable;
 
 public class Animation implements IRenderable {
 	
-	private GuiImage[][] anim;
+	private GuiImage[] anim;
 	
 	public Animation(String animName) {
-		anim = new GuiImage[4][];
+		
 	}
 	
 	@Override
