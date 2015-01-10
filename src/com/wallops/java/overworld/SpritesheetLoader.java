@@ -18,19 +18,11 @@ public class SpritesheetLoader {
 		this.sheet = null;
 	}
 	
-	public SpritesheetLoader(String path) {
-		this.sheet = Game.textureManager.getTexture(new ResourcePath(path));
-	}
-
-	public Texture getSheet() {
-		return sheet;
-	}
-
-	public void setSheet(Texture sheet) {
-		this.sheet = sheet;
+	public void loadSheet(String sheet) {
+		this.sheet = Game.textureManager.getTexture(new ResourcePath(ResourcePath.overworldImgDir+sheet));
 	}
 	
-	public GuiImage getSprite(int r, int c) {
+	public GuiImage[] getAnimation(int direction) {
 		return null;
 	}
 	
