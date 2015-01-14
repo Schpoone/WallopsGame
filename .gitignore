@@ -9,5 +9,5 @@
 !/README.md
 
 # also ignore this stuff
-/**/.DS_Store
+**/.DS_Store
 /bin
