@@ -23,10 +23,11 @@ public class SpritesheetLoader {
 		this.sheet = Game.textureManager.getTexture(new ResourcePath(ResourcePath.overworldImgDir+sheet));
 	}
 	
-	public Texture[] getAnimation(int direction) {
-		Texture[] anim = new Texture[this.sheet.getTextureWidth()/SpritesheetLoader.SQUARE_SPRITE_DIMEN];
+	public Animation getAnimation(int direction) {
+		Texture[] frames = new Texture[this.sheet.getTextureWidth()/SpritesheetLoader.SQUARE_SPRITE_DIMEN];
 		//get the frames for a certain direction
 		//store each frame in the array
+		Animation anim = new Animation(frames);
 		return anim;
 	}
 	
