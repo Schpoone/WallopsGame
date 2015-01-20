@@ -31,9 +31,4 @@ public class SpritesheetLoader {
 		return anim;
 	}
 	
-	public Texture getHoldFrame(int direction) {
-		//get the first frame in the direction
-		return null;
-	}
-	
 }

@@ -28,6 +28,11 @@ public class Animation {
 		this.anim = anim;
 	}
 	
+	public Texture getHoldFrame(int direction) {
+		//get the first frame in the direction
+		return null;
+	}
+	
 	//right now, this class is pretty useless
 	
 }
