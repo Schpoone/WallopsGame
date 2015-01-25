@@ -10,7 +10,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.wallops.java.gui.GuiMainMenu;
 import com.wallops.java.gui.GuiScreen;
-import com.wallops.java.overworld.SpritesheetLoader;
 import com.wallops.java.reference.MouseHandler;
 import com.wallops.java.reference.TextureManager;
 
@@ -33,7 +32,6 @@ public class Game {
 	public static Game game;
 	public static final MouseHandler mouseHandler = new MouseHandler();
 	public static final TextureManager textureManager = new TextureManager();
-	public static final SpritesheetLoader spriteLoader = new SpritesheetLoader();
 
 	/** for funky mac related weirdness that'd have to be dealt with */
 	public static final boolean isRunningOnMac = System.getProperty("os.name").toLowerCase().contains("mac");
